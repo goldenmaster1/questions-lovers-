@@ -253,7 +253,7 @@
       align-items: center;
       gap: 0.35rem;
       cursor: pointer;
-      transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease, box-shadow 0.12s.ease;
+      transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease;
     }
 
     .tab span.icon {
@@ -512,16 +512,16 @@
         </p>
         <ul class="sidecard-list">
           <li>استمع للجواب للنهاية بدون مقاطعة.</li>
-          <li>اسأل: ليش؟ وشو اللي خلاك تحس بهالشكل؟</li>
+          <li>اسأل: ليش؟ وشنو اللي خلاه يحس بهالشكل؟</li>
           <li>شارك من قلبك مثل ما تحب شريكك يشاركك.</li>
-          <li>إذا سؤال كان ثقيل، عدّوه وروحوا للّي بعده.</li>
+          <li>إذا كان السؤال ثقيل، تجاوزوه وروحوا للسؤال اللي بعده.</li>
         </ul>
       </aside>
     </section>
   </main>
 
   <script>
-    // نواة الأسئلة الأساسية لكل قسم
+    // الأسئلة الأساسية لكل قسم
     const questionsData = {
       deep: {
         title: "أسئلة تعارف عميق",
@@ -637,9 +637,9 @@
       }
     };
 
-    // دالة تولّد أسئلة إضافية آليًا حتى نوصل فوق 1000 سؤال
+    // توليد أسئلة إضافية آليًا حتى نوصل فوق 1000 سؤال
     function generateExtraQuestions() {
-      // 1) أسئلة أعمق لتعارف/عميقة جدًا
+      // 1) أسئلة عميقة/تعارف
       var deepIntros = [
         "لو نحچي بصراحة عن",
         "لو نرجع نفتح موضوع",
@@ -691,7 +691,7 @@
         }
       }
 
-      // 2) أسئلة رومانسية/قبل النوم/ذكريات (نولد كمية كبيرة)
+      // 2) رومانسية / قبل النوم / ذكريات
       var romIntros = [
         "لو نحچي شويّة عن",
         "لو نرجع نتذكر",
@@ -732,8 +732,7 @@
               romIntros[r1] +
               " " +
               romScenarios[r2] +
-              " " +
-              "بهذه الفترة: " +
+              " بهذه الفترة: " +
               romTimes[r3] +
               ". شصار بالضبط؟";
             if (count2 < 120) {
@@ -748,7 +747,7 @@
         }
       }
 
-      // 3) أسئلة عن المستقبل وبعد الزعل (تنظيم الحياة والاتفاق)
+      // 3) مستقبلنا / بعد الزعل
       var futIntros = [
         "لو نخطط بهدوء لـ",
         "إذا جلسنا نسوي اتفاق عن",
@@ -787,8 +786,7 @@
               futIntros[f1] +
               " " +
               futTopics[f2] +
-              " " +
-              "من زاوية " +
+              " من زاوية " +
               futAngles[f3] +
               "، شنو رأيك؟";
             if (count3 < 160) {
@@ -800,7 +798,7 @@
           }
         }
       }
-      // الآن صار عدد الأسئلة الكلي فوق الـ 1000 سؤال موزعة على الأقسام
+      // هسه صار عندك أكثر من 1000 سؤال موزعة على الأقسام
     }
 
     generateExtraQuestions();
@@ -823,9 +821,17 @@
       const category = questionsData[categoryKey];
       if (!category) return;
 
+      // العنوان
       listTitle.textContent = category.title;
-      listDescription.textContent = category.description;
 
+      // الوصف + عدد الأسئلة
+      listDescription.textContent =
+        category.description +
+        " — هذا القسم يحتوي " +
+        category.questions.length +
+        " سؤال.";
+
+      // ملء قائمة الأسئلة
       questionsList.innerHTML = "";
       category.questions.forEach(function (q, index) {
         const item = document.createElement("div");
@@ -857,7 +863,8 @@
       const question = category.questions[index];
       currentQuestionEl.textContent = question;
       currentCategoryLabel.textContent = category.title;
-      currentIndexLabel.textContent = "سؤال رقم " + (index + 1) + " من هذا القسم";
+      currentIndexLabel.textContent =
+        "سؤال رقم " + (index + 1) + " من هذا القسم";
       currentCategoryKey = categoryKey;
       currentQuestionIndex = index;
     }
@@ -902,7 +909,11 @@
 
     copyBtn.addEventListener("click", function () {
       const text = currentQuestionEl.textContent.trim();
-      if (!text || text.indexOf("سؤال عشوائي") !== -1 || text.indexOf("اضغط على زر") !== -1) {
+      if (
+        !text ||
+        text.indexOf("سؤال عشوائي") !== -1 ||
+        text.indexOf("اضغط على زر") !== -1
+      ) {
         alert("اختر سؤال أولاً حتى تقدر تنسخه.");
         return;
       }
