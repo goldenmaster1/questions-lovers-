@@ -1,1557 +1,1356 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>مكتبة الأسئلة الرومانسية</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1"
+  />
+  <title>جلسة حب اليوم</title>
   <style>
+    :root {
+      --bg: #050409;
+      --card-bg: rgba(15, 12, 32, 0.96);
+      --card-soft: rgba(255, 255, 255, 0.04);
+      --text-main: #fdfbff;
+      --text-muted: #b4b0c9;
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
+
+      /* ألوان افتراضية، تتغيّر حسب نمط العلاقة */
+      --accent: #ff4b6e;
+      --accent-soft: rgba(255, 75, 110, 0.16);
+      --accent-strong: #ff2b57;
+      --bg-gradient: radial-gradient(circle at top, #1f0a2a 0, #050409 55%, #020008 100%);
+    }
+
+    /* ثيمات حسب نمط العلاقة */
+    body.theme-love {
+      --accent: #ff4b6e;
+      --accent-soft: rgba(255, 75, 110, 0.16);
+      --accent-strong: #ff2b57;
+      --bg-gradient: radial-gradient(circle at top, #2a0a1b 0, #050409 55%, #020008 100%);
+    }
+
+    body.theme-engaged {
+      --accent: #ff9a3c;
+      --accent-soft: rgba(255, 154, 60, 0.16);
+      --accent-strong: #ff7b00;
+      --bg-gradient: radial-gradient(circle at top, #2a190a 0, #050409 55%, #020008 100%);
+    }
+
+    body.theme-married {
+      --accent: #4fd1c5;
+      --accent-soft: rgba(79, 209, 197, 0.16);
+      --accent-strong: #2bb3a7;
+      --bg-gradient: radial-gradient(circle at top, #0a2426 0, #050409 55%, #020008 100%);
+    }
+
+    body.theme-other {
+      --accent: #7b5cff;
+      --accent-soft: rgba(123, 92, 255, 0.18);
+      --accent-strong: #5a3fff;
+      --bg-gradient: radial-gradient(circle at top, #0d0f33 0, #050409 55%, #020008 100%);
+    }
+
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #f9739a, #ec4899);
+      margin: 0;
       min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 1.5rem;
-      color: #1f2933;
+      padding: 16px;
     }
 
-    .app-shell {
+    .app {
       width: 100%;
-      max-width: 1200px;
-    }
-
-    /* ============ شاشة الدخول (مثل الصورة الأولى) ============ */
-
-    .auth-screen {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 70vh;
-    }
-
-    .auth-card {
-      background: #ffd1e1;
-      border-radius: 24px;
-      box-shadow: 0 24px 60px rgba(128, 0, 64, 0.35);
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
-    }
-
-    @media (max-width: 900px) {
-      .auth-card {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .auth-visual {
-      position: relative;
-      padding: 2rem;
-      background: linear-gradient(180deg, #f9739a, #be185d);
-      color: #fee2e2;
       display: flex;
       flex-direction: column;
+      gap: 16px;
+    }
+
+    header {
+      border-radius: 22px;
+      padding: 16px 18px;
+      background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.02)
+        ),
+        rgba(3, 2, 14, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-      min-height: 360px;
+      gap: 16px;
+      backdrop-filter: blur(16px);
     }
 
-    .auth-visual-header {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .auth-visual-hero {
-      flex: 1;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      position: relative;
-      margin-top: 1rem;
-    }
-
-    .cityline {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 120px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.35), transparent);
-      border-radius: 40px 40px 0 0;
-      overflow: hidden;
-    }
-
-    .cityline::before,
-    .cityline::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      width: 180%;
-      height: 160%;
-      background:
-        linear-gradient(#fecdd3 0 0) 10% 20% / 20px 70px no-repeat,
-        linear-gradient(#fecdd3 0 0) 25% 5% / 26px 110px no-repeat,
-        linear-gradient(#fecdd3 0 0) 40% 25% / 22px 80px no-repeat,
-        linear-gradient(#fecdd3 0 0) 60% 0% / 26px 120px no-repeat,
-        linear-gradient(#fecdd3 0 0) 78% 18% / 20px 75px no-repeat,
-        linear-gradient(#fecdd3 0 0) 92% 10% / 22px 95px no-repeat;
-      opacity: 0.7;
-    }
-
-    .couple-silhouette {
-      position: relative;
-      width: 170px;
-      height: 260px;
-      border-radius: 999px 999px 40px 40px;
-      background: radial-gradient(circle at 30% 10%, #fecaca 0, transparent 40%),
-                  #3b0825;
-      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.7);
-    }
-
-    .hot-air-heart {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      width: 70px;
-      height: 70px;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.6), transparent 55%),
-        linear-gradient(135deg, #fecaca, #fb7185);
-      clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0 35%);
-      opacity: 0.95;
-    }
-
-    .hot-air-heart::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 65px;
-      transform: translateX(-50%);
-      width: 6px;
-      height: 18px;
-      background: #fed7e2;
-      border-radius: 3px;
-    }
-
-    .auth-visual-footer {
-      font-size: 0.9rem;
-      opacity: 0.85;
-      margin-top: 1.2rem;
-    }
-
-    .auth-form-side {
-      padding: 2.4rem 2.4rem 2rem 2.4rem;
-      background: #ffe4f0;
+    header .title-block {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      justify-content: center;
+      gap: 4px;
     }
 
-    .auth-tagline {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #be185d;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0.03em;
     }
 
-    .auth-title {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #be185d;
-      margin-top: 0.2rem;
+    header p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-muted);
     }
 
-    .auth-subtitle {
-      font-size: 0.9rem;
-      color: #6b7280;
-      margin-bottom: 0.75rem;
-    }
-
-    .auth-field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .auth-field label {
-      font-size: 0.8rem;
-      color: #6b7280;
-    }
-
-    .input-shell {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
+    .session-badge {
+      padding: 6px 10px;
       border-radius: 999px;
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      padding: 0.45rem 0.75rem;
-      box-shadow: 0 4px 14px rgba(248, 113, 170, 0.18);
-    }
-
-    .input-shell span.icon {
-      font-size: 1rem;
-      opacity: 0.75;
-    }
-
-    .input-shell input {
-      border: none;
-      outline: none;
-      flex: 1;
-      font-size: 0.86rem;
-      background: transparent;
-    }
-
-    .auth-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      align-items: center;
-      margin-top: 0.3rem;
-    }
-
-    .auth-note {
-      margin-top: 0.5rem;
-      font-size: 0.77rem;
-      color: #6b7280;
-      line-height: 1.6;
-    }
-
-    .social-row {
-      margin-top: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.8rem;
-      color: #6b7280;
-    }
-
-    .social-row::before,
-    .social-row::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: rgba(148, 163, 184, 0.6);
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 0.4rem;
-      margin-top: 0.4rem;
-    }
-
-    .social-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background: #ffffff;
+      font-size: 11px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      box-shadow: 0 3px 8px rgba(148, 163, 184, 0.5);
+      gap: 6px;
+      color: var(--text-muted);
     }
 
-    .secondary-link {
-      font-size: 0.78rem;
-      color: #be185d;
-      margin-top: 0.4rem;
+    .session-badge span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #07f59a;
+      box-shadow: 0 0 10px rgba(7, 245, 154, 0.9);
     }
 
-    .btn-primary {
-      padding: 0.55rem 1.1rem;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #ec4899, #fb7185);
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+      gap: 16px;
+    }
+
+    /* أقسام */
+    .panel {
+      background: var(--card-bg);
+      border-radius: 22px;
+      padding: 16px 16px 14px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+    }
+
+    .panel + .panel {
+      margin-top: 12px;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .panel-header .hint {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* زر جلسة حب اليوم */
+    .love-session-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .love-session-btn {
+      position: relative;
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 16px 20px;
+      font-size: 16px;
+      font-weight: 600;
       color: #fff;
-      font-size: 0.86rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      border: none;
       cursor: pointer;
-      box-shadow: 0 10px 24px rgba(190, 24, 93, 0.4);
-      transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.1s ease;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(190, 24, 93, 0.55);
-      filter: brightness(1.03);
-    }
-
-    .btn-primary:active {
-      transform: translateY(0);
-      box-shadow: 0 5px 14px rgba(190, 24, 93, 0.35);
-      filter: brightness(0.97);
-    }
-
-    .btn-secondary {
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
-      background: #ffffff;
-      color: #1f2937;
-      font-size: 0.82rem;
-      font-weight: 500;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      transition: background 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease;
-      cursor: pointer;
-    }
-
-    .btn-secondary:hover {
-      background: #f9fafb;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(148, 163, 184, 0.3);
-    }
-
-    .btn-secondary:active {
-      transform: translateY(0);
-      box-shadow: none;
-    }
-
-    /* ============ شاشة التطبيق (Dashboard مثل الصورة الثانية) ============ */
-
-    .app-screen {
-      display: none;
-    }
-
-    .dashboard {
-      background: #f3f4ff;
-      border-radius: 24px;
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
       overflow: hidden;
-      display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      min-height: 520px;
+      text-align: center;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+      background: linear-gradient(
+        120deg,
+        #ff4b6e,
+        #ff9a3c,
+        #ffd06f,
+        #4fd1c5,
+        #7b5cff,
+        #ff4b6e
+      );
+      background-size: 260% 260%;
+      animation: gradientMove 10s ease-in-out infinite alternate;
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.55);
     }
 
-    @media (max-width: 900px) {
-      .dashboard {
-        grid-template-columns: 1fr;
-      }
+    .love-session-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top,
+        rgba(255, 255, 255, 0.2),
+        transparent 65%
+      );
+      opacity: 0.6;
+      pointer-events: none;
     }
 
-    .sidebar {
-      background: linear-gradient(180deg, #4f46e5, #8b5cf6);
-      color: #e5e7eb;
-      padding: 1.4rem 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
+    .love-session-btn span.label-main {
+      display: block;
+      margin-bottom: 4px;
     }
 
-    .brand {
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .brand span {
-      font-size: 1.4rem;
-      margin-left: 0.25rem;
-    }
-
-    .side-menu {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      margin-top: 0.4rem;
-    }
-
-    .side-item {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.45rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.87rem;
-      cursor: pointer;
-      opacity: 0.9;
-      transition: background 0.12s ease, transform 0.12s ease;
-    }
-
-    .side-item span.icon {
-      font-size: 1rem;
-    }
-
-    .side-item.active,
-    .side-item:hover {
-      background: rgba(248, 250, 252, 0.16);
-      transform: translateX(-2px);
-    }
-
-    .sidebar-footer {
-      margin-top: auto;
-      font-size: 0.75rem;
-      opacity: 0.85;
-    }
-
-    .logout {
-      margin-top: 0.5rem;
-      padding: 0.4rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.4);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.8rem;
-      cursor: pointer;
-    }
-
-    .dashboard-main {
-      padding: 1.4rem 1.6rem;
-      background: #f9fafb;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .top-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .top-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #111827;
-    }
-
-    .top-title span.name {
-      color: #4f46e5;
-    }
-
-    .search-shell {
-      flex: 1;
-      min-width: 180px;
-      max-width: 280px;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: #ffffff;
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      padding: 0.35rem 0.7rem;
-      font-size: 0.8rem;
-      color: #6b7280;
-    }
-
-    .search-shell input {
-      border: none;
-      outline: none;
-      flex: 1;
-      font-size: 0.8rem;
-      background: transparent;
-    }
-
-    .avatar-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: #ffffff;
-      border-radius: 999px;
-      padding: 0.25rem 0.6rem;
-      border: 1px solid #e5e7eb;
-      font-size: 0.8rem;
-    }
-
-    .avatar-circle {
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #ec4899, #8b5cf6);
-    }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.9fr);
-      gap: 1rem;
-    }
-
-    @media (max-width: 900px) {
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .main-card {
-      background: linear-gradient(135deg, #6366f1, #ec4899);
-      border-radius: 18px;
-      padding: 1.1rem 1.2rem;
-      color: #e5e7ff;
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 1rem;
-      min-height: 180px;
-    }
-
-    @media (max-width: 700px) {
-      .main-card {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .main-card h2 {
-      font-size: 1.1rem;
-      margin-bottom: 0.3rem;
-    }
-
-    .question-display {
-      font-size: 1rem;
-      line-height: 1.8;
-      margin-top: 0.4rem;
-    }
-
-    .main-card-footer {
-      margin-top: 0.7rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      font-size: 0.78rem;
+    .love-session-btn span.label-sub {
+      display: block;
+      font-size: 11px;
       opacity: 0.9;
     }
 
-    .pill {
-      padding: 0.2rem 0.7rem;
+    .session-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .session-chip {
+      padding: 5px 9px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.45);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    /* نمط العلاقة */
+    .relationship-mode {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .relationship-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .relationship-btn {
+      border-radius: 999px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.01);
+      color: var(--text-muted);
+      font-size: 12px;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-      font-size: 0.76rem;
+      gap: 6px;
+      transition: background 0.18s ease, color 0.18s ease,
+        border-color 0.18s ease, transform 0.1s;
     }
 
-    .pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
+    .relationship-btn span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-soft);
     }
 
-    .main-card-controls {
-      align-self: stretch;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 0.6rem;
+    .relationship-btn.active {
+      background: var(--accent-soft);
+      color: #fff;
+      border-color: var(--accent);
+      transform: translateY(-1px);
     }
 
-    .main-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .stats-row {
+    /* الأسئلة + البحث */
+    .question-search-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
-      font-size: 0.78rem;
+      gap: 8px;
+      margin-bottom: 10px;
     }
 
-    .stat-chip {
-      padding: 0.25rem 0.55rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.4);
-    }
-
-    .right-column {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 0.8rem 0.9rem;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 4px 12px rgba(148, 163, 184, 0.18);
-      font-size: 0.86rem;
-    }
-
-    .card-title {
-      font-size: 0.86rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .mode-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .mode-chip {
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      background: #f9fafb;
-      cursor: pointer;
-      font-size: 0.8rem;
-      color: #4b5563;
-      transition: background 0.12s ease, color 0.12s ease, box-shadow 0.12s ease;
-    }
-
-    .mode-chip.active {
-      background: linear-gradient(135deg, #6366f1, #ec4899);
-      color: #ffffff;
-      box-shadow: 0 4px 10px rgba(129, 140, 248, 0.5);
-      border-color: transparent;
-    }
-
-    .card small {
-      font-size: 0.75rem;
-      color: #6b7280;
-    }
-
-    .toggle-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 0.25rem;
-      font-size: 0.8rem;
-    }
-
-    .toggle {
-      width: 34px;
-      height: 18px;
-      border-radius: 999px;
-      background: #e5e7eb;
+    .input-wrapper {
+      flex: 1 1 180px;
       position: relative;
     }
 
-    .toggle::after {
-      content: "";
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      border-radius: 999px;
-      background: #ffffff;
-      top: 1px;
-      right: 1px;
-      box-shadow: 0 1px 4px rgba(148, 163, 184, 0.7);
-    }
-
-    .toggle.on {
-      background: #22c55e;
-    }
-
-    .toggle.on::after {
-      right: auto;
-      left: 1px;
-    }
-
-    .music-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      margin-top: 0.4rem;
-    }
-
-    .music-row button {
-      align-self: flex-start;
-    }
-
-    .music-row audio {
+    .input-wrapper input {
       width: 100%;
-    }
-
-    .ai-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.3rem;
-    }
-
-    .ai-row input[type="text"] {
-      flex: 1;
-      min-width: 140px;
-      padding: 0.35rem 0.6rem;
       border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      font-size: 0.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 7px 12px 7px 38px;
+      background: rgba(10, 8, 26, 0.95);
+      color: var(--text-main);
+      font-size: 12px;
       outline: none;
     }
 
-    .ai-row input[type="text"]:focus {
-      border-color: #6366f1;
+    .input-wrapper input::placeholder {
+      color: rgba(180, 176, 201, 0.7);
     }
 
-    .ai-result {
-      margin-top: 0.4rem;
-      font-size: 0.8rem;
-      color: #4b5563;
-      line-height: 1.7;
+    .input-wrapper .icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      opacity: 0.65;
     }
 
-    .bottom-row {
-      margin-top: 1rem;
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 0.9rem;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 4px 12px rgba(148, 163, 184, 0.18);
+    .select-wrapper {
+      flex: 0 0 150px;
     }
 
-    .category-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 0.7rem;
-    }
-
-    .category-tab {
-      padding: 0.32rem 0.85rem;
+    select {
+      width: 100%;
       border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      background: #f9fafb;
-      font-size: 0.8rem;
-      color: #374151;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 7px 12px;
+      background: rgba(10, 8, 26, 0.95);
+      color: var(--text-main);
+      font-size: 12px;
+      outline: none;
+      appearance: none;
+      background-image: linear-gradient(
+        45deg,
+        transparent 50%,
+        rgba(255, 255, 255, 0.7) 50%
+      );
+      background-position: calc(100% - 14px) center;
+      background-size: 8px 8px;
+      background-repeat: no-repeat;
+    }
+
+    .smart-question-btn {
+      flex: 0 0 170px;
+      border-radius: 999px;
+      border: none;
+      padding: 7px 12px;
+      background: radial-gradient(circle at top left, var(--accent-strong), var(--accent));
+      color: #fff;
+      font-size: 12px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-      transition: background 0.12s ease, color 0.12s ease, box-shadow 0.12s ease;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     }
 
-    .category-tab span.icon {
-      font-size: 1rem;
+    .smart-question-btn span.icon {
+      font-size: 14px;
     }
 
-    .category-tab.active {
-      background: linear-gradient(135deg, #ec4899, #f97316);
-      color: #ffffff;
-      border-color: transparent;
-      box-shadow: 0 6px 14px rgba(249, 115, 22, 0.4);
-    }
-
-    .questions-header {
+    .questions-list {
+      max-height: 360px;
+      overflow: auto;
+      padding-right: 4px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 0.5rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 6px;
     }
 
-    .questions-header h3 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #111827;
-    }
-
-    .questions-header p {
-      font-size: 0.8rem;
-      color: #6b7280;
-    }
-
-    .questions-panel {
-      max-height: 260px;
-      overflow-y: auto;
-      padding-right: 0.2rem;
-    }
-
-    .questions-panel::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .questions-panel::-webkit-scrollbar-thumb {
-      background: rgba(148, 163, 184, 0.8);
-      border-radius: 999px;
-    }
-
-    .question-item {
-      background: #f9fafb;
-      border-radius: 10px;
-      padding: 0.55rem 0.7rem;
-      margin-bottom: 0.4rem;
-      font-size: 0.86rem;
-      color: #111827;
-      display: flex;
-      gap: 0.45rem;
-      border: 1px solid #e5e7eb;
-      cursor: pointer;
-      transition: background 0.12s ease, box-shadow 0.12s ease;
-    }
-
-    .question-item:hover {
-      background: #ffffff;
-      box-shadow: 0 3px 8px rgba(148, 163, 184, 0.35);
-    }
-
-    .question-bullet {
-      font-size: 0.9rem;
-      color: #ec4899;
-      margin-top: 0.1rem;
+    .question-card {
+      position: relative;
+      border-radius: 16px;
+      padding: 10px 10px 9px;
+      background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.01)
+        ),
+        rgba(5, 4, 16, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .question-text {
-      line-height: 1.7;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .question-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .question-tag {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .question-mode-label {
+      opacity: 0.9;
+    }
+
+    .empty-state {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 26px 10px 20px;
+    }
+
+    /* موسيقى الجلسة */
+    .music-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .music-btn {
+      border-radius: 16px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(4, 6, 18, 0.96);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 12px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+        border-color 0.12s ease;
+    }
+
+    .music-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .music-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .music-icon.youtube {
+      background: #ff0000;
+    }
+
+    .music-icon.spotify {
+      background: #1db954;
+    }
+
+    .music-icon.soundcloud {
+      background: #ff7700;
+    }
+
+    .music-icon.deezer {
+      background: #0c98ff;
+    }
+
+    .music-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .music-text span.label {
+      font-weight: 500;
+    }
+
+    .music-text span.sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* LoveBoard */
+    .loveboard-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.5fr);
+      gap: 12px;
+    }
+
+    .loveboard-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .loveboard-btn {
+      border-radius: 16px;
+      padding: 9px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(5, 6, 18, 0.96);
+      color: var(--text-main);
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      transition: background 0.14s, transform 0.08s, border-color 0.14s;
+    }
+
+    .loveboard-btn span.left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .loveboard-btn span.icon {
+      font-size: 16px;
+    }
+
+    .loveboard-btn.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .loveboard-content {
+      border-radius: 18px;
+      padding: 10px 12px;
+      background: linear-gradient(
+          115deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.06)
+        ),
+        rgba(5, 5, 20, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      min-height: 120px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .loveboard-content h3 {
+      margin: 0 0 6px;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    .loveboard-list {
+      margin: 0;
+      padding-left: 1.1em;
+    }
+
+    .loveboard-list li {
+      margin-bottom: 4px;
+    }
+
+    /* الحساب وتسجيل الخروج */
+    .account-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .logout-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .logout-btn {
+      border-radius: 999px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.02);
+      color: #ff6b81;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logout-btn span.icon {
+      font-size: 14px;
+    }
+
+    .logout-note {
+      font-size: 11px;
+    }
+
+    /* حوار التأكيد */
+    .dialog-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    .dialog-backdrop.open {
+      display: flex;
+    }
+
+    .dialog {
+      background: #080819;
+      border-radius: 18px;
+      padding: 16px 18px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .dialog h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .dialog p {
+      margin: 0 0 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .btn-secondary,
+    .btn-primary {
+      border-radius: 999px;
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-main);
+    }
+
+    .btn-primary {
+      background: var(--accent-strong);
+      color: #fff;
+      border-color: var(--accent-strong);
+    }
+
+    footer {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* حركات */
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .loveboard-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .question-search-row {
+        flex-direction: column;
+      }
+
+      .smart-question-btn,
+      .select-wrapper {
+        flex: 1 1 auto;
+      }
+
+      .questions-list {
+        max-height: 320px;
+      }
     }
   </style>
 </head>
-<body>
-  <main class="app-shell">
-
-    <!-- ================= شاشة الدخول ================= -->
-    <section id="auth-screen" class="auth-screen">
-      <div class="auth-card">
-        <!-- الجانب الأيسر: الرسمة الرومانسية -->
-        <div class="auth-visual">
-          <div class="auth-visual-header">
-            meetlove
-          </div>
-
-          <div class="auth-visual-hero">
-            <div class="hot-air-heart"></div>
-            <div class="couple-silhouette"></div>
-            <div class="cityline"></div>
-          </div>
-
-          <div class="auth-visual-footer">
-            مساحة آمنة ولطيفة لتبادل الأسئلة العميقة والرومانسية بين شخصين
-            يجمعهما حب حقيقي. ابدآ من هنا، ودعوا الحديث يأخذكما إلى أماكن أجمل.
-          </div>
-        </div>
-
-        <!-- الجانب الأيمن: نموذج الدخول -->
-        <div class="auth-form-side">
-          <div class="auth-tagline">Romantic Q&A Space</div>
-          <div class="auth-title">Welcome</div>
-          <div class="auth-subtitle">
-            أدخل بياناتك للدخول إلى مكتبة الأسئلة الرومانسية، أو استخدم الموقع بدون بريد.
-          </div>
-
-          <form id="login-form">
-            <div class="auth-field">
-              <label for="login-name">الاسم أو اسمكما (اختياري)</label>
-              <div class="input-shell">
-                <span class="icon">👤</span>
-                <input id="login-name" type="text" placeholder="مثال: أحمد & سارة">
-              </div>
-            </div>
-
-            <div class="auth-field">
-              <label for="login-email">البريد الإلكتروني</label>
-              <div class="input-shell">
-                <span class="icon">📧</span>
-                <input id="login-email" type="email" placeholder="example@mail.com" required>
-              </div>
-            </div>
-
-            <div class="auth-actions">
-              <button type="submit" class="btn-primary">تسجيل الدخول</button>
-              <button type="button" id="skip-login-btn" class="btn-secondary">الدخول بدون بريد</button>
-            </div>
-
-            <p class="auth-note">
-              لا يتم إرسال رسائل أو مشاركة بياناتك. يتم حفظ الاسم والبريد داخل المتصفح
-              على هذا الجهاز فقط، لتظهر لك تحية لطيفة في كل زيارة.
-            </p>
-
-            <div class="social-row">
-              <span>أو استخدمه مباشرة كمساحة أسئلة بينكما</span>
-            </div>
-
-            <div class="social-icons">
-              <div class="social-btn">💬</div>
-              <div class="social-btn">❤️</div>
-              <div class="social-btn">🎧</div>
-            </div>
-
-            <div class="secondary-link">
-              لا تملك حسابًا؟ يكفي أن تستخدم الأسئلة مباشرة مع من تحب.
-            </div>
-          </form>
+<body class="theme-love">
+  <div class="app">
+    <header>
+      <div class="title-block">
+        <h1>جلسة حب اليوم</h1>
+        <p>أسئلة عميقة، أجواء ناعمة، وموسيقى تناسب علاقتكم.</p>
+      </div>
+      <div>
+        <div class="session-badge">
+          <span class="dot"></span>
+          <span>جلسة اليوم جاهزة للبداية الآن</span>
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- ================= شاشة التطبيق (Dashboard) ================= -->
-    <section id="app-screen" class="app-screen">
-      <div class="dashboard">
-        <!-- ==== Sidebar ==== -->
-        <aside class="sidebar">
-          <div class="brand">
-            <span>💗</span> LoveBoard
+    <main>
+      <!-- العمود الأيسر: الجلسة والأسئلة -->
+      <div>
+        <!-- جلسة حب اليوم -->
+        <section class="panel">
+          <div class="panel-header">
+            <h2>جلسة حب اليوم</h2>
+            <span class="hint">لون الزر متغير دائماً لأجواء مختلفة</span>
           </div>
 
-          <div class="side-menu">
-            <div class="side-item active">
-              <span class="icon">🏠</span>
-              <span>الرئيسية</span>
+          <div class="love-session-wrapper">
+            <button id="loveSessionBtn" class="love-session-btn">
+              <span class="label-main">ابدأ جلسة حب اليوم</span>
+              <span class="label-sub">اضغط لتحسين الجو، وتغيير الألوان، وتجهيز الأسئلة المناسبة لكم.</span>
+            </button>
+
+            <div class="session-meta-row">
+              <span class="session-chip">مدة مقترحة: 30 – 45 دقيقة</span>
+              <span class="session-chip">يفضل إطفاء الإشعارات أثناء الجلسة</span>
             </div>
-            <div class="side-item">
-              <span class="icon">❓</span>
-              <span>الأسئلة</span>
-            </div>
-            <div class="side-item">
-              <span class="icon">💞</span>
-              <span>أنماط العلاقة</span>
-            </div>
-            <div class="side-item">
-              <span class="icon">🎵</span>
-              <span>الموسيقى</span>
+
+            <!-- نمط العلاقة -->
+            <div class="relationship-mode">
+              <div class="panel-header" style="margin-bottom: 4px;">
+                <h2>نمط العلاقة</h2>
+                <span class="hint">اختيار النمط يغيّر الأسئلة والثيم بالكامل</span>
+              </div>
+              <div class="relationship-buttons">
+                <button
+                  class="relationship-btn active"
+                  data-mode="love"
+                >
+                  <span class="dot"></span>
+                  حب / تعارف
+                </button>
+                <button class="relationship-btn" data-mode="engaged">
+                  <span class="dot"></span>
+                  مخطوبين
+                </button>
+                <button class="relationship-btn" data-mode="married">
+                  <span class="dot"></span>
+                  متزوجين
+                </button>
+                <button class="relationship-btn" data-mode="other">
+                  <span class="dot"></span>
+                  علاقة خاصة أخرى
+                </button>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div class="sidebar-footer">
-            <div>مساحة خاصة بقلوبكما.</div>
-            <div id="logout-btn" class="logout">
-              <span>🚪</span>
-              <span>تسجيل خروج</span>
-            </div>
-          </div>
-        </aside>
-
-        <!-- ==== Main ====- -->
-        <section class="dashboard-main">
-          <div class="top-header">
-            <div class="top-title">
-              مرحبًا، <span class="name" id="user-name-placeholder">صاحب هذا القلب الجميل</span> 💗
-            </div>
-            <div class="search-shell">
-              <span>🔍</span>
-              <input type="text" placeholder="ابحث في الأسئلة (بحث شكلي فقط)">
-            </div>
-            <div class="avatar-chip">
-              <div class="avatar-circle"></div>
-              <span>جلسة حب اليوم</span>
-            </div>
+        <!-- قسم الأسئلة -->
+        <section class="panel">
+          <div class="panel-header">
+            <h2>أسئلة الجلسة</h2>
+            <span class="hint">ابحث، فلتر، أو أنشئ سؤال ذكي جديد</span>
           </div>
 
-          <div class="dashboard-grid">
-            <!-- الكرت الرئيسي -->
-            <section class="main-card">
-              <div>
-                <h2>سؤال اليوم بينكما</h2>
-                <div id="current-question" class="question-display">
-                  اضغط على "سؤال عشوائي" لبدء الحديث.
-                </div>
-                <div class="main-card-footer">
-                  <div class="pill">
-                    <span class="pill-dot"></span>
-                    <span id="current-category-label">لم يتم اختيار قسم بعد</span>
-                  </div>
-                  <div id="current-index-label">—</div>
-                </div>
-              </div>
-              <div class="main-card-controls">
-                <div class="main-buttons">
-                  <button class="btn-primary" id="random-all-btn">
-                    <span>سؤال عشوائي من كل الأقسام</span>
-                    <span>🎲</span>
-                  </button>
-                  <button class="btn-secondary" id="random-category-btn">
-                    <span>سؤال من القسم الحالي</span>
-                    <span>✨</span>
-                  </button>
-                  <button class="btn-secondary" id="copy-btn">
-                    <span>نسخ السؤال</span>
-                    <span>📋</span>
-                  </button>
-                </div>
-                <div class="stats-row">
-                  <div class="stat-chip" id="stat-total">عدد الأسئلة الكلي: —</div>
-                  <div class="stat-chip" id="stat-category">عدد أسئلة القسم الحالي: —</div>
-                </div>
-              </div>
-            </section>
+          <div class="question-search-row">
+            <div class="input-wrapper">
+              <span class="icon">🔍</span>
+              <input
+                id="searchInput"
+                type="text"
+                placeholder="ابحث عن سؤال معيّن (مثلاً: خوف، ثقة، زواج...)"
+              />
+            </div>
 
-            <!-- العمود الأيمن (كروت التحكم) -->
-            <section class="right-column">
-              <div class="card">
-                <div class="card-title">
-                  <span>نمط العلاقة</span>
-                  <small id="mode-description">اختر ما يناسبكما</small>
-                </div>
-                <div class="mode-chips">
-                  <button class="mode-chip active" data-mode="engaged">مخطوبان</button>
-                  <button class="mode-chip" data-mode="married">زوجان</button>
-                  <button class="mode-chip" data-mode="inlove">محبّان</button>
-                  <button class="mode-chip" data-mode="quiz">اختبار لطيف</button>
-                </div>
-              </div>
+            <div class="select-wrapper">
+              <select id="categorySelect">
+                <option value="all">كل الأنواع</option>
+                <option value="حب">حب</option>
+                <option value="رومانسي">رومانسي</option>
+                <option value="جريء">جريء</option>
+                <option value="قلق">قلق</option>
+                <option value="عام">عام</option>
+              </select>
+            </div>
 
-              <div class="card">
-                <div class="card-title">
-                  <span>موسيقى الجلسة</span>
-                  <small>اختر أغنية من جهازك</small>
-                </div>
-                <div class="music-row">
-                  <button id="choose-music-btn" class="btn-secondary">
-                    <span>اختيار أغنية</span>
-                    <span>🎵</span>
-                  </button>
-                  <input type="file" id="music-file-input" accept="audio/*" style="display:none">
-                  <audio id="music-player" controls style="display:none;"></audio>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-title">
-                  <span>إنشاء سؤال ذكي</span>
-                  <small>اختر موضوعًا وسيُنشأ سؤال مناسب</small>
-                </div>
-                <div class="ai-row">
-                  <input id="ai-topic" type="text" placeholder="مثال: الغيرة، المستقبل، السفر">
-                  <button id="ai-generate-btn" class="btn-secondary">
-                    <span>إنشاء</span>
-                    <span>✨</span>
-                  </button>
-                </div>
-                <div id="ai-result" class="ai-result"></div>
-              </div>
-            </section>
+            <button id="smartQuestionBtn" class="smart-question-btn">
+              <span class="icon">✨</span>
+              <span>سؤال ذكي من الذكاء الاصطناعي</span>
+            </button>
           </div>
 
-          <!-- الأسفل: تبويبات + قائمة الأسئلة -->
-          <section class="bottom-row">
-            <div class="category-tabs">
-              <button class="category-tab active" data-category="deep">
-                <span class="icon">🌙</span>
-                <span>تعارف عميق</span>
-              </button>
-              <button class="category-tab" data-category="romantic">
-                <span class="icon">❤️</span>
-                <span>رومانسية</span>
-              </button>
-              <button class="category-tab" data-category="future">
-                <span class="icon">📅</span>
-                <span>مستقبلنا معًا</span>
-              </button>
-              <button class="category-tab" data-category="memories">
-                <span class="icon">📸</span>
-                <span>ذكريات ومواقف</span>
-              </button>
-              <button class="category-tab" data-category="bedtime">
-                <span class="icon">😴</span>
-                <span>قبل النوم</span>
-              </button>
-              <button class="category-tab" data-category="after">
-                <span class="icon">🤝</span>
-                <span>بعد الزعل</span>
-              </button>
-              <button class="category-tab" data-category="verydeep">
-                <span class="icon">💭</span>
-                <span>عميقة جدًا</span>
-              </button>
-            </div>
-
-            <div class="questions-header">
-              <div>
-                <h3 id="list-title">أسئلة تعارف عميق</h3>
-                <p id="list-description">
-                  أسئلة تساعدكما على الحديث بصراحة عن شخصياتكما ومشاعركما.
-                </p>
-              </div>
-            </div>
-
-            <div id="questions-panel" class="questions-panel">
-              <div id="questions-list"></div>
-            </div>
-          </section>
+          <div id="questionsList" class="questions-list"></div>
         </section>
       </div>
-    </section>
-  </main>
+
+      <!-- العمود الأيمن: الموسيقى، LoveBoard، الحساب -->
+      <div>
+        <!-- موسيقى الجلسة -->
+        <section class="panel">
+          <div class="panel-header">
+            <h2>موسيقى الجلسة</h2>
+            <span class="hint">اختر منصتك المفضلة للأجواء</span>
+          </div>
+
+          <div class="music-grid">
+            <a
+              href="https://www.youtube.com/"
+              target="_blank"
+              class="music-btn"
+            >
+              <div class="music-icon youtube">▶</div>
+              <div class="music-text">
+                <span class="label">YouTube</span>
+                <span class="sub">قائمة تشغيل رومانسية من اختيارك</span>
+              </div>
+            </a>
+
+            <a
+              href="https://open.spotify.com/"
+              target="_blank"
+              class="music-btn"
+            >
+              <div class="music-icon spotify">♪</div>
+              <div class="music-text">
+                <span class="label">Spotify</span>
+                <span class="sub">أغاني هادئة وخلفية للجلسة</span>
+              </div>
+            </a>
+
+            <a
+              href="https://soundcloud.com/"
+              target="_blank"
+              class="music-btn"
+            >
+              <div class="music-icon soundcloud">☁</div>
+              <div class="music-text">
+                <span class="label">SoundCloud</span>
+                <span class="sub">مقاطع خاصة أو ريمكسات ناعمة</span>
+              </div>
+            </a>
+
+            <a
+              href="https://www.deezer.com/"
+              target="_blank"
+              class="music-btn"
+            >
+              <div class="music-icon deezer">♬</div>
+              <div class="music-text">
+                <span class="label">Deezer</span>
+                <span class="sub">اختار ألبومكم المفضّل معاً</span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- LoveBoard -->
+        <section class="panel">
+          <div class="panel-header">
+            <h2>LoveBoard</h2>
+            <span class="hint">كل الأزرار مفعلّة وتغيّر محتوى اللوحة</span>
+          </div>
+
+          <div class="loveboard-layout">
+            <div class="loveboard-buttons">
+              <button
+                class="loveboard-btn active"
+                data-board="memories"
+              >
+                <span class="left">
+                  <span class="icon">🖼️</span>
+                  <span>ذكرياتكم المفضّلة</span>
+                </span>
+                <span>3 أفكار</span>
+              </button>
+
+              <button class="loveboard-btn" data-board="messages">
+                <span class="left">
+                  <span class="icon">💌</span>
+                  <span>رسائل حب قصيرة</span>
+                </span>
+                <span>اقتراحات</span>
+              </button>
+
+              <button class="loveboard-btn" data-board="goals">
+                <span class="left">
+                  <span class="icon">🎯</span>
+                  <span>أهداف مشتركة</span>
+                </span>
+                <span>خطة صغيرة</span>
+              </button>
+
+              <button class="loveboard-btn" data-board="quickgame">
+                <span class="left">
+                  <span class="icon">🎲</span>
+                  <span>لعبة سؤال سريع</span>
+                </span>
+                <span>بضغطة زر</span>
+              </button>
+            </div>
+
+            <div id="loveboardContent" class="loveboard-content">
+              <!-- المحتوى يتغيّر عبر الجافاسكربت -->
+            </div>
+          </div>
+        </section>
+
+        <!-- الحساب وتسجيل الخروج -->
+        <section class="panel">
+          <div class="panel-header">
+            <h2>الحساب</h2>
+            <span class="hint">إدارة الجلسة وتسجيل الخروج بأمان</span>
+          </div>
+
+          <div class="account-wrapper">
+            <div>
+              أنت حالياً في جلسة حب نشطة. يمكنك المتابعة بلا حدود
+              للأسئلة والموسيقى.
+            </div>
+            <div class="logout-row">
+              <span class="logout-note"
+                >عند تسجيل الخروج سيتم إنهاء الجلسة الحالية.</span
+              >
+              <button id="logoutBtn" class="logout-btn">
+                <span class="icon">⏻</span>
+                <span>تسجيل الخروج</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>تم تصميم هذه الصفحة لتعمل بسلاسة على الهاتف والحاسب الشخصي.</footer>
+  </div>
+
+  <!-- حوار تأكيد تسجيل الخروج -->
+  <div id="logoutDialogBackdrop" class="dialog-backdrop">
+    <div class="dialog">
+      <h3>تأكيد تسجيل الخروج</h3>
+      <p>
+        هل أنت متأكد أنك تريد تسجيل الخروج الآن؟ سيتم إنهاء جلسة الحب
+        الحالية ولن يتم حفظ الأسئلة المختارة.
+      </p>
+      <div class="dialog-actions">
+        <button id="cancelLogoutBtn" class="btn-secondary">
+          إلغاء
+        </button>
+        <button id="confirmLogoutBtn" class="btn-primary">
+          نعم، تسجيل الخروج
+        </button>
+      </div>
+    </div>
+  </div>
 
   <script>
-    // ================== بيانات الأسئلة ==================
-    const questionsData = {
-      deep: {
-        title: "أسئلة تعارف عميق",
-        description: "أسئلة تساعدكما على رؤية أعماق شخصية كل منكما وتعميق الرابط بينكما.",
-        questions: [
-          "ما اللحظة التي شعرت فيها أن وجود شخص ما في حياتك غيّر شيئًا حقيقيًا داخلك؟",
-          "ما أكثر صفة في شخصيتك تشعر أنها أقرب ما تكون إلى حقيقتك؟",
-          "ما الشيء الذي تخشاه في العلاقات أكثر من غيره، ولماذا؟",
-          "متى تشعر أنك مفهوم حقًا من الشخص الآخر؟ ما العلامة بالنسبة لك؟",
-          "كيف تفضّل أن يتعامل معك شريكك عندما تكون حزينًا أو متعبًا؟",
-          "ما الحدود التي لا تقبل أن يتمّ تجاوزها مهما كان الحب بينكما؟",
-          "ما نوع الكلمات التي تلمس قلبك أكثر: كلمات التشجيع، أم الاعتذار، أم الامتنان؟",
-          "ما أكبر قرار اتخذته في حياتك وغيّر مسارك بشكل واضح؟",
-          "ما الشيء الذي لو عرفه شريكك عن ماضيك سيفهمك أكثر اليوم؟",
-          "كيف تعبّر عادة عن ضيقك: بالصمت، أم بالكلام، أم بالابتعاد قليلاً؟",
-          "ما أكثر شيء يجعلك تشعر بالأمان في العلاقة؟",
-          "ما نقطة ضعفك التي يصعب عليك الحديث عنها، ولكنك تتمنى أن تُفهَم؟",
-          "كيف ترى نفسك بعد خمس سنوات على المستوى الشخصي (بعيدًا عن العمل والمال)؟",
-          "متى تشعر أن قلبك يحتاج إلى حضن أكثر من أي شيء آخر؟",
-          "ما الشيء الذي تحتاجه فعلًا من شريك حياتك ولا تحب أن تطلبه صراحة؟"
-        ]
-      },
-      romantic: {
-        title: "أسئلة رومانسية",
-        description: "أسئلة لطيفة تضيف جوًا من الدفء والكلام الجميل بينكما.",
-        questions: [
-          "كيف تصف شعورك عندما تتلقى رسالة بسيطة من الشخص الذي تحبّه في منتصف يوم مزدحم؟",
-          "ما أكثر طريقة تحب أن يعبّر بها شريكك عن حبه لك؟",
-          "ما الكلمة أو الجملة الرومانسية التي لا تملّ سماعها أبدًا؟",
-          "لو كان للحب بينكما لون معيّن، فما اللون الذي تختاره ولماذا؟",
-          "ما الذكرى الرومانسية الصغيرة التي لا ينساها قلبك مهما مرّ الوقت؟",
-          "كيف تفضّل أن يكون أول ساعة تقضيانها معًا بعد يوم طويل ومتعب؟",
-          "لو استطعت أن تهدي شريكك شعورًا واحدًا دائمًا، فما هو هذا الشعور؟",
-          "ما الأغنية التي تشعر أنها تعبّر عن قصّة حبكما أكثر من غيرها؟",
-          "ما أكثر تفصيل بسيط في ملامح أو حركات شريكك تحبّه كثيرًا؟",
-          "لو كتب شريكك رسالة حب قصيرة لك الآن، ما الجملة الأولى التي تتمنّى قراءتها؟",
-          "هل تصدّق أن الحب يكبر بالتفاصيل الصغيرة اليومية أكثر من اللحظات الكبيرة؟ ولماذا؟",
-          "ما أكثر موقف رومانسي فاجأت به شخصًا تحبّه أو فاجأك هو به؟",
-          "لو كان بإمكانك أن تعيش يومًا واحدًا مثاليًا مع شريك حياتك، كيف سيكون من الصباح حتى المساء؟",
-          "ما معنى كلمة (الاهتمام) بالنسبة لك في الحب؟",
-          "ما أكثر لحظة تشعر فيها أن وجود الشريك نعمة حقيقية في حياتك؟"
-        ]
-      },
-      future: {
-        title: "أسئلة عن مستقبلنا معًا",
-        description: "أسئلة تساعدكما على الحديث عن البيت، والحياة، والأحلام المشتركة.",
-        questions: [
-          "كيف تتخيّل شكل علاقتكما بعد عشر سنوات إن شاء الله؟",
-          "ما المبادئ الثلاثة التي تتمنّى أن يقوم عليها بيتكما مهما تغيّرت الظروف؟",
-          "كيف تفضّل أن يتمّ حلّ الخلافات الكبيرة بينكما في المستقبل؟",
-          "ما الصورة التي تأتي إلى ذهنك عندما تسمع كلمة (استقرار)؟",
-          "ما نوع الجو الذي تحب أن يسود في منزلكم: هادئ، مرح، مليء بالزيارات، أم ماذا؟",
-          "كيف ترى تقسيم المسؤوليات بين الزوجين في البيت والحياة اليومية؟",
-          "ما الشيء الذي ترى أنه ضروري أن تتفقا عليه قبل الزواج أو بداية الحياة المشتركة؟",
-          "لو مررتما بضائقة مادية، ما أول شيء تحرص على الحفاظ عليه في حياتكما؟",
-          "ما الحلم المشترك الذي تتمنّى أن تحقّقاه معًا ولو بعد سنوات طويلة؟",
-          "هل تفضّل جلسة عائلية أسبوعية ثابتة؟ وكيف تتخيّل أجواءها؟",
-          "ما حدود تدخّل الآخرين التي تراها صحية في حياتكما المشتركة؟",
-          "كيف تودّ أن تتعامل مع اختلاف الطباع بينكما عندما يظهر بوضوح بعد الزواج؟",
-          "ما الشيء الذي لو حافظتما عليه لن تخاف على علاقتكما مهما حصل؟",
-          "كيف تخطّطان للتوازن بين العمل، والأسرة، والوقت الخاص بينكما؟",
-          "ما نوع الدعم الذي تحتاجه من شريك حياتك عندما تفكّر بمستقبلك؟"
-        ]
-      },
-      memories: {
-        title: "أسئلة ذكريات ومواقف",
-        description: "أسئلة تعيدكما إلى اللحظات الجميلة وتكشف ما تعنيه كل لحظة في قلوبكما.",
-        questions: [
-          "ما أجمل ذكرى عاطفية مررت بها في حياتك حتى الآن؟",
-          "هل تتذكّر موقفًا بسيطًا جدًا، لكنه بقي في قلبك لسنوات؟ ما هو؟",
-          "ما اللحظة التي شعرت فيها أن شخصًا ما وقف إلى جانبك بطريقة لا تُنسى؟",
-          "ما أكثر موقف طريف تتذكّره وتتمنى لو كان موثّقًا بالصوت أو الصورة؟",
-          "هل مررت بيوم شعرت فيه أنّ وجود شخص معيّن بجانبك أنقذك معنويًا؟ كيف كان ذلك؟",
-          "ما العادة الجميلة القديمة التي كنت تتمنّى أن تستمرّ لكنها توقفت؟",
-          "ما أول هدية عاطفية حقيقية تلقيتها في حياتك؟ وكيف كان شعورك؟",
-          "هل تتذكّر موقفًا جعلك تقول في نفسك: (هذا الإنسان حقيقي ولا يشبه الآخرين)؟",
-          "ما أكثر يوم تشتاق إلى أن تعيشه مرة أخرى كما كان؟",
-          "هل هناك كلمة أو جملة سمعتها في الماضي وما زالت تلمس قلبك كلما تذكرتها؟",
-          "ما موقف الاعتذار الذي تقدّره كثيرًا، إمّا قدّمته أنت أو قُدّم لك؟",
-          "هل احتفظت يومًا برسالة أو ورقة أو شيء بسيط لأنّه يرتبط بذكرى معيّنة؟ ما قصته؟",
-          "ما أطرف موقف بينك وبين شخص تحبّه لا يمكن أن يُنسى؟",
-          "هل تفضّل الحديث عن ذكريات الطفولة، أم ذكريات الحب، أم كليهما؟ ولماذا؟",
-          "ما ذكرى مؤلمة تعلّمت منها شيئًا جعل حياتك أفضل فيما بعد؟"
-        ]
-      },
-      bedtime: {
-        title: "أسئلة قبل النوم",
-        description: "أسئلة هادئة لختم اليوم بحوار لطيف وشعور مريح.",
-        questions: [
-          "ما أجمل شيء حدث معك اليوم وجعلك تشعر بالامتنان؟",
-          "لو اختصرت يومك اليوم في كلمة واحدة، فماذا ستكون؟",
-          "ما الفكرة التي لا تريد أن تذهب إلى النوم وهي تثقل قلبك؟",
-          "ما الشيء البسيط الذي تتمنّى أن يحدث غدًا ليكون يومك ألطف؟",
-          "لمن تشعر برغبة في الدعاء الآن من قلبك؟",
-          "ما الجملة التي تتمنّى أن تسمعها قبل أن تغمض عينيك هذا المساء؟",
-          "هل تشعر اليوم أنّك أقرب إلى حلم معيّن في حياتك أم أبعد؟ ولماذا؟",
-          "ما الصورة أو الذكرى التي تحب أن تكون آخر ما يمرّ في ذهنك قبل النوم؟",
-          "ما أكثر شعور تودّ أن تستيقظ عليه غدًا: طمأنينة، حماس، أمل، أم ماذا؟",
-          "إن كان بإمكانك حذف موقف واحد من هذا اليوم، فما هو ولماذا؟",
-          "ما الشيء الذي تقول لنفسك بسببه الآن: (الحمد لله رغم كل شيء)؟",
-          "لو كتبت رسالة قصيرة لنفسك لتقرؤها غدًا صباحًا، ماذا ستكتب؟",
-          "هل تشعر أنّك كنت لطيفًا مع نفسك اليوم؟ أم كنت قاسيًا عليها؟",
-          "ما الدعاء الذي تكرّره كثيرًا في هذه الفترة قبل النوم؟",
-          "ما القرار الصغير الذي تستطيع اتخاذه غدًا لتحسين حياتك قليلًا؟"
-        ]
-      },
-      after: {
-        title: "أسئلة بعد الزعل والمصالحة",
-        description: "أسئلة تهدّئ الجو بعد الخلاف وتساعد على الفهم بدلاً من التراكم.",
-        questions: [
-          "عندما تتذكّر آخر خلاف مررت به مع شخص تحبّه، ما أكثر شيء آلمك فعلًا؟",
-          "ما الجملة التي لو سمعتها من شريكك بعد الزعل لخفّفت عنك كثيرًا؟",
-          "هل تشعر أنّك تميل إلى الصمت أم إلى الكلام الكثير عند الغضب؟ ولماذا؟",
-          "ما التصرف الذي لا تقبل أن يحدث في وقت الغضب مهما حدث بينكما؟",
-          "كيف تفضّل أن يكون الاعتذار: بالكلمات، أم بالفعل، أم بكليهما معًا؟",
-          "ما الفرق بين أن تكون مجروحًا، وبين أن تكون فقط منزعجًا؟ كيف تميّز بينهما؟",
-          "ما الشيء الذي لا تحب أن يُقال لك أبدًا وأنت غاضب؟",
-          "ما أول خطوة بسيطة يمكن القيام بها بعد الزعل لتليين القلوب؟",
-          "كيف تعرف أن الخلاف بينكما انتهى فعلًا ولم يبقَ شيء في القلوب؟",
-          "هل ترى أنّ الصراحة الكاملة بعد الخلاف مفيدة دائمًا، أم يجب اختيار الكلمات بعناية؟",
-          "ما الجملة التي تتمنّى أن تحفظها أنت وشريكك لتذكّركما بحقيقة حبكما في وقت الزعل؟",
-          "ما أكثر خطأ تكرّر في علاقاتك السابقة وتتمنى ألّا يتكرر بينكما الآن؟",
-          "هل تشعر أنّك تسمع لتفهم، أم تسمع لتردّ فقط في وقت النقاش الحاد؟",
-          "كيف تحب أن يبدأ أحدكما حديث الصلح بعد خلاف طويل؟",
-          "ما الشيء الذي تتعهّد لنفسك ألّا تفعله مرة أخرى في وقت الغضب مهما حصل؟"
-        ]
-      },
-      verydeep: {
-        title: "أسئلة عميقة جداً",
-        description: "أسئلة تحتاج إلى هدوء وصدق، لليالي الحديث الطويل بين شخصين يحبّان بعضهما.",
-        questions: [
-          "هل تشعر أنّك تحبّ نفسك بما يكفي لتسمح للآخر أن يحبّك بطريقة صحية؟ ولماذا؟",
-          "ما الجرح القديم الذي تشعر أنه ما زال يؤثر على طريقة حبّك أو ثقتك؟",
-          "هل تخاف من تغيّر مشاعر الحب مع الزمن؟ أم تؤمن أنّه يتطوّر ولا يختفي؟",
-          "ما الجزء من شخصيتك الذي تخشى أن يراه الآخر فيظنّ أنك شخص مختلف؟",
-          "هل تشعر أحيانًا أنّك تحتاج إلى من يفهم صمتك أكثر مما يفهم كلامك؟",
-          "متى تشعر أنّك لست على حقيقتك في العلاقة، ومتى تشعر أنك أنت تمامًا؟",
-          "هل تعتقد أنّ الحب وحده يكفي لنجاح العلاقة، أم يحتاج إلى أشياء أخرى أساسية؟",
-          "ما السؤال الذي تودّ أن تسأله لنفسك منذ زمن، لكنّك تتجنّبه؟",
-          "إن نظرت إلى حياتك من الخارج، ما أكثر شيء تفتخر أنّك تجاوزته؟",
-          "ما الفكرة أو القناعة التي إن تغيّرت داخلك ستتغيّر أشياء كثيرة في حياتك؟",
-          "كيف تفرّق بين أن تبقى لأنّك تحب، وأن تبقى لأنّك تعوّدت؟",
-          "ما حدود التضحية في الحب بالنسبة لك؟ أين تقف وتقول: إلى هنا يكفي؟",
-          "هل تثق أنّك تستحقّ علاقة هادئة وسليمة فعلًا؟ أم تشك في ذلك أحيانًا؟",
-          "ما المعنى الأعمق لكلمة (شريك حياة) في نظرك؟",
-          "إذا كان لقلبك رسالة واحدة يريد أن يقولها الآن، فماذا ستكون؟"
-        ]
-      }
+    // بيانات الأسئلة حسب نمط العلاقة + نوع السؤال
+    const questionBank = {
+      love: [
+        {
+          text: "شنو أكثر شي خلاچ / خلاك تحبني من البداية؟",
+          category: "حب",
+        },
+        {
+          text: "إذا اليوم آخر ساعة نكعد بيها سوى، شنو أول شي حاب تقوله لي؟",
+          category: "رومانسي",
+        },
+        {
+          text: "أكو شي تخاف تقوله إلي لأن تخاف أزعل؟ شنو هو؟",
+          category: "قلق",
+        },
+        {
+          text: "سؤال جريء: شنو أكثر موقف خلّاك تغار عليّ بصراحة؟",
+          category: "جريء",
+        },
+        {
+          text: "تتخيل مستقبلنا بعد خمس سنين شلون؟ أحچي بالتفصيل.",
+          category: "عام",
+        },
+      ],
+      engaged: [
+        {
+          text: "شنو أكثر شي متحمس / متحمسة له بيوم الخطوبة أو الزواج؟",
+          category: "حب",
+        },
+        {
+          text: "إذا صار اختلاف بين أهلك وأهلي، شنو أول مبدأ تمشي عليه؟",
+          category: "قلق",
+        },
+        {
+          text: "وين تتمنى تكون أول سفرة بعد الزواج؟ وليش هذا المكان بالذات؟",
+          category: "رومانسي",
+        },
+        {
+          text: "سؤال جريء: أكو عادة تتمنى أغيّرها قبل الزواج؟ تكلم بصراحة.",
+          category: "جريء",
+        },
+        {
+          text: "شنو أهم 3 أشياء لازم نحافظ عليها حتى علاقتنا تبقى قوية؟",
+          category: "عام",
+        },
+      ],
+      married: [
+        {
+          text: "شنو أجمل ذكرى بينا بعد الزواج لحد هسه؟",
+          category: "حب",
+        },
+        {
+          text: "إذا نرجع لأول يوم التقينا، شنو الشي الوحيد اللي كنت رح تغيّره؟",
+          category: "عام",
+        },
+        {
+          text: "أكو موضوع نخاف نحچي بيه كل مرة ونأجله؟ ليش؟",
+          category: "قلق",
+        },
+        {
+          text: "سؤال جريء: برأيك شنو أكثر نقطة ضعف عندي تأثر على زواجنا؟",
+          category: "جريء",
+        },
+        {
+          text: "شنو طقس رومانسي بسيط تحب نثبّته كعادة أسبوعية بينا؟",
+          category: "رومانسي",
+        },
+      ],
+      other: [
+        {
+          text: "شنو تعريفك الشخصي لـ (علاقة صحية)؟",
+          category: "عام",
+        },
+        {
+          text: "شنو الحدود اللي تحب نرسمها حتى نحترم بعض ونعرف حقوقنا؟",
+          category: "قلق",
+        },
+        {
+          text: "سؤال جريء: شنو أكثر شي يخوفك من فكرة الارتباط بشكل عام؟",
+          category: "جريء",
+        },
+        {
+          text: "أول 3 صفات لازم تكون موجودة بأي شخص تريد تكمل ويا حياتك؟",
+          category: "حب",
+        },
+        {
+          text: "شنو نوع اللحظات اللي تحس بيها إنك مفهوم 100٪ من الشخص المقابل؟",
+          category: "رومانسي",
+        },
+      ],
     };
 
-    // ============ أدوات مساعدة للأسئلة العشوائية ============
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-    }
+    // بنك خاص للأسئلة الذكية (ممكن تغيره أو تربطه بـ ChatGPT)
+    const smartQuestionPool = [
+      "لو تكدر ترجع بالوقت، لأي مرحلة من حياتك تريد نرجع ونعيشها سوى من جديد؟",
+      "شنو الشي اللي تتمنى ألاحظه بيك بدون ما تضطر تحچي عنه؟",
+      "إذا نكتب كتاب عن قصتنا، شنو راح يكون عنوان أول فصل؟",
+      "شنو السر الصغير اللي تحس ما حد بالعالم يفهمه غيري؟",
+      "أكو موقف بسيط مني، بس ظل بالگلب عندك لليوم؟ شنو هو؟",
+    ];
 
-    let currentCategoryKey = "deep";
-    let currentQuestionIndex = null;
-    let currentMode = "engaged";
-    const categoryPools = {};
-    let globalPool = [];
+    let currentMode = "love";
 
-    function resetCategoryPool(categoryKey) {
-      const category = questionsData[categoryKey];
-      if (!category) return;
-      const pool = [];
-      for (let i = 0; i < category.questions.length; i++) pool.push(i);
-      shuffle(pool);
-      categoryPools[categoryKey] = pool;
-    }
+    const questionsListEl = document.getElementById("questionsList");
+    const searchInputEl = document.getElementById("searchInput");
+    const categorySelectEl = document.getElementById("categorySelect");
+    const loveSessionBtnEl = document.getElementById("loveSessionBtn");
+    const relationshipButtons = document.querySelectorAll(".relationship-btn");
+    const smartQuestionBtnEl = document.getElementById("smartQuestionBtn");
 
-    function resetGlobalPool() {
-      globalPool = [];
-      const keys = Object.keys(questionsData);
-      keys.forEach(key => {
-        const cat = questionsData[key];
-        cat.questions.forEach((_, index) => {
-          globalPool.push({ categoryKey: key, index });
-        });
+    const loveboardContentEl =
+      document.getElementById("loveboardContent");
+    const loveboardButtons = document.querySelectorAll(".loveboard-btn");
+
+    const logoutBtnEl = document.getElementById("logoutBtn");
+    const logoutDialogBackdropEl = document.getElementById(
+      "logoutDialogBackdrop"
+    );
+    const cancelLogoutBtnEl =
+      document.getElementById("cancelLogoutBtn");
+    const confirmLogoutBtnEl =
+      document.getElementById("confirmLogoutBtn");
+
+    function renderQuestions() {
+      const allQuestions = questionBank[currentMode] || [];
+      const term = (searchInputEl.value || "").trim().toLowerCase();
+      const selectedCategory = categorySelectEl.value;
+
+      const filtered = allQuestions.filter((q) => {
+        const matchText = q.text.toLowerCase().includes(term);
+        const matchCategory =
+          selectedCategory === "all" ||
+          q.category === selectedCategory;
+        return matchText && matchCategory;
       });
-      shuffle(globalPool);
-    }
 
-    // ============ عناصر DOM ============
+      questionsListEl.innerHTML = "";
 
-    const authScreen = document.getElementById("auth-screen");
-    const appScreen = document.getElementById("app-screen");
-    const loginForm = document.getElementById("login-form");
-    const loginNameInput = document.getElementById("login-name");
-    const loginEmailInput = document.getElementById("login-email");
-    const skipLoginBtn = document.getElementById("skip-login-btn");
-    const logoutBtn = document.getElementById("logout-btn");
-    const userNamePlaceholder = document.getElementById("user-name-placeholder");
-
-    const currentQuestionEl = document.getElementById("current-question");
-    const currentCategoryLabel = document.getElementById("current-category-label");
-    const currentIndexLabel = document.getElementById("current-index-label");
-    const randomAllBtn = document.getElementById("random-all-btn");
-    const randomCategoryBtn = document.getElementById("random-category-btn");
-    const copyBtn = document.getElementById("copy-btn");
-    const statTotal = document.getElementById("stat-total");
-    const statCategory = document.getElementById("stat-category");
-
-    const categoryTabs = document.querySelectorAll(".category-tab");
-    const listTitle = document.getElementById("list-title");
-    const listDescription = document.getElementById("list-description");
-    const questionsList = document.getElementById("questions-list");
-
-    const modeChips = document.querySelectorAll(".mode-chip");
-    const modeDescriptionEl = document.getElementById("mode-description");
-    const modeDescriptions = {
-      engaged: "نمط المخطوبين: مناسبة للحديث عن المستقبل وبناء البيت المشترك.",
-      married: "نمط المتزوجين: يركّز على تجديد المشاعر وسط مسؤوليات الحياة اليومية.",
-      inlove: "نمط المحبّين: لأي حب صادق يريد أن يزداد قربًا ودفئًا.",
-      quiz: "نمط الاختبار: استخدم الأسئلة كاختبار لطيف لمعرفة فهمكما لبعض."
-    };
-
-    const chooseMusicBtn = document.getElementById("choose-music-btn");
-    const musicFileInput = document.getElementById("music-file-input");
-    const musicPlayer = document.getElementById("music-player");
-
-    const aiTopicInput = document.getElementById("ai-topic");
-    const aiGenerateBtn = document.getElementById("ai-generate-btn");
-    const aiResult = document.getElementById("ai-result");
-
-    // ============ شاشة الدخول / الخروج ============
-    function showAuthScreen() {
-      authScreen.style.display = "flex";
-      appScreen.style.display = "none";
-    }
-
-    function showAppScreen(name) {
-      authScreen.style.display = "none";
-      appScreen.style.display = "block";
-      if (name && name.trim() !== "") {
-        userNamePlaceholder.textContent = name.trim();
-      } else {
-        userNamePlaceholder.textContent = "صاحب هذا القلب الجميل";
+      if (!filtered.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent =
+          "لا توجد أسئلة مطابقة لبحثك حالياً في هذا النمط. جرّب كلمة مختلفة أو نوع سؤال آخر.";
+        questionsListEl.appendChild(empty);
+        return;
       }
-    }
 
-    (function initAuth() {
-      const savedEmail = localStorage.getItem("rq_email");
-      const savedName = localStorage.getItem("rq_name");
-      if (savedEmail || savedName) {
-        showAppScreen(savedName || "");
-      } else {
-        showAuthScreen();
-      }
-    })();
+      filtered.forEach((q) => {
+        const card = document.createElement("article");
+        card.className = "question-card";
 
-    if (loginForm) {
-      loginForm.addEventListener("submit", e => {
-        e.preventDefault();
-        const email = loginEmailInput.value.trim();
-        const name = loginNameInput.value.trim();
-        if (!email) {
-          alert("يرجى إدخال بريد إلكتروني.");
-          return;
-        }
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-          alert("صيغة البريد الإلكتروني غير صحيحة.");
-          return;
-        }
-        localStorage.setItem("rq_email", email);
-        localStorage.setItem("rq_name", name);
-        showAppScreen(name);
-      });
-    }
-
-    if (skipLoginBtn) {
-      skipLoginBtn.addEventListener("click", () => {
-        const name = loginNameInput.value.trim();
-        localStorage.removeItem("rq_email");
-        if (name) {
-          localStorage.setItem("rq_name", name);
-        } else {
-          localStorage.removeItem("rq_name");
-        }
-        showAppScreen(name || "");
-      });
-    }
-
-    if (logoutBtn) {
-      logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("rq_email");
-        localStorage.removeItem("rq_name");
-        loginEmailInput.value = "";
-        loginNameInput.value = "";
-        showAuthScreen();
-      });
-    }
-
-    // ============ عرض الأسئلة في القائمة ============
-    function updateStats() {
-      // عدد الأسئلة الكلي
-      let total = 0;
-      Object.values(questionsData).forEach(cat => {
-        total += cat.questions.length;
-      });
-      if (statTotal) {
-        statTotal.textContent = "عدد الأسئلة الكلي: " + total;
-      }
-      const cat = questionsData[currentCategoryKey];
-      if (statCategory && cat) {
-        statCategory.textContent = "أسئلة هذا القسم: " + cat.questions.length;
-      }
-    }
-
-    function renderQuestions(categoryKey) {
-      const category = questionsData[categoryKey];
-      if (!category) return;
-      listTitle.textContent = category.title;
-      listDescription.textContent = category.description;
-      questionsList.innerHTML = "";
-      category.questions.forEach((q, index) => {
-        const item = document.createElement("div");
-        item.className = "question-item";
-        const bullet = document.createElement("div");
-        bullet.className = "question-bullet";
-        bullet.textContent = "➤";
         const text = document.createElement("div");
         text.className = "question-text";
-        text.textContent = q;
-        item.appendChild(bullet);
-        item.appendChild(text);
-        item.addEventListener("click", () => {
-          setCurrentQuestion(categoryKey, index);
-        });
-        questionsList.appendChild(item);
+        text.textContent = q.text;
+
+        const meta = document.createElement("div");
+        meta.className = "question-meta";
+
+        const tag = document.createElement("span");
+        tag.className = "question-tag";
+        tag.textContent = q.category;
+
+        const modeLabel = document.createElement("span");
+        modeLabel.className = "question-mode-label";
+        modeLabel.textContent = labelForMode(currentMode);
+
+        meta.appendChild(tag);
+        meta.appendChild(modeLabel);
+
+        card.appendChild(text);
+        card.appendChild(meta);
+
+        questionsListEl.appendChild(card);
       });
-      updateStats();
     }
 
-    function setCurrentQuestion(categoryKey, index) {
-      const category = questionsData[categoryKey];
-      if (!category) return;
-      const question = category.questions[index];
-      currentQuestionEl.textContent = question;
-      currentCategoryLabel.textContent = category.title;
-      currentIndexLabel.textContent = "سؤال رقم " + (index + 1) + " من هذا القسم";
-      currentCategoryKey = categoryKey;
-      currentQuestionIndex = index;
-      updateStats();
-    }
-
-    function getRandomFromCategory(categoryKey) {
-      const category = questionsData[categoryKey];
-      if (!category) return;
-      if (!categoryPools[categoryKey] || categoryPools[categoryKey].length === 0) {
-        resetCategoryPool(categoryKey);
+    function labelForMode(modeKey) {
+      switch (modeKey) {
+        case "love":
+          return "نمط: حب / تعارف";
+        case "engaged":
+          return "نمط: مخطوبين";
+        case "married":
+          return "نمط: متزوجين";
+        case "other":
+          return "نمط: علاقة خاصة";
+        default:
+          return "";
       }
-      const pool = categoryPools[categoryKey];
-      const index = pool.pop();
-      setCurrentQuestion(categoryKey, index);
     }
 
-    function getRandomFromAll() {
-      if (!globalPool || globalPool.length === 0) {
-        resetGlobalPool();
+    // تغيير ثيم الموقع حسب نمط العلاقة
+    function applyThemeForMode(modeKey) {
+      document.body.classList.remove(
+        "theme-love",
+        "theme-engaged",
+        "theme-married",
+        "theme-other"
+      );
+      switch (modeKey) {
+        case "love":
+          document.body.classList.add("theme-love");
+          break;
+        case "engaged":
+          document.body.classList.add("theme-engaged");
+          break;
+        case "married":
+          document.body.classList.add("theme-married");
+          break;
+        case "other":
+          document.body.classList.add("theme-other");
+          break;
       }
-      if (!globalPool || globalPool.length === 0) return;
-      const pair = globalPool.pop();
-      setCurrentQuestion(pair.categoryKey, pair.index);
     }
 
-    // تبويبات الأقسام
-    categoryTabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        const categoryKey = tab.getAttribute("data-category");
-        currentCategoryKey = categoryKey;
-        categoryTabs.forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
-        renderQuestions(categoryKey);
+    // زر جلسة حب اليوم – تغيير أجواء بسيطة عند كل ضغطة
+    function boostSessionVisuals() {
+      // نحرك الزر شويه للأعلى ونضيف لمعان خفيف، ثم نرجعه
+      loveSessionBtnEl.style.transform = "translateY(-2px) scale(1.01)";
+      loveSessionBtnEl.style.boxShadow =
+        "0 22px 40px rgba(0,0,0,0.7)";
+      setTimeout(() => {
+        loveSessionBtnEl.style.transform = "";
+        loveSessionBtnEl.style.boxShadow =
+          "0 16px 30px rgba(0,0,0,0.55)";
+      }, 220);
+    }
+
+    loveSessionBtnEl.addEventListener("click", () => {
+      boostSessionVisuals();
+    });
+
+    // تغيير نمط العلاقة
+    relationshipButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        relationshipButtons.forEach((b) =>
+          b.classList.remove("active")
+        );
+        btn.classList.add("active");
+        const modeKey = btn.getAttribute("data-mode");
+        currentMode = modeKey;
+        applyThemeForMode(modeKey);
+        renderQuestions();
       });
     });
 
-    // أزرار عشوائي / نسخ
-    if (randomAllBtn) {
-      randomAllBtn.addEventListener("click", () => {
-        getRandomFromAll();
+    // البحث + الفلترة
+    searchInputEl.addEventListener("input", renderQuestions);
+    categorySelectEl.addEventListener("change", renderQuestions);
+
+    // زر السؤال الذكي – حالياً يولد سؤال عشوائي من smartQuestionPool
+    smartQuestionBtnEl.addEventListener("click", async () => {
+      smartQuestionBtnEl.disabled = true;
+      const originalText =
+        smartQuestionBtnEl.textContent || "";
+      smartQuestionBtnEl.textContent = "يتم إنشاء سؤال ذكي...";
+
+      // هنا في مشروع حقيقي:
+      // 1. تستدعي API خاص بالباك-إند.
+      // 2. والباك-إند يتصل بـ ChatGPT ويرجع سؤال.
+      //
+      // مثال (وهمي) للاستخدام من الباك-إند:
+      // const response = await fetch('/api/generate-question', { method: 'POST', body: JSON.stringify({ mode: currentMode }) });
+      // const data = await response.json();
+      // const aiQuestion = data.question;
+
+      // حالياً نستخدم سؤال عشوائي من قائمة محلية:
+      const randomIndex = Math.floor(
+        Math.random() * smartQuestionPool.length
+      );
+      const aiQuestion = smartQuestionPool[randomIndex];
+
+      // نضيف السؤال الجديد مؤقتاً إلى بداية القائمة لهذا النمط تحت نوع "عام"
+      questionBank[currentMode].unshift({
+        text: aiQuestion,
+        category: "عام",
       });
+
+      renderQuestions();
+
+      smartQuestionBtnEl.textContent = originalText;
+      smartQuestionBtnEl.disabled = false;
+    });
+
+    // LoveBoard – محتوى ديناميكي لكل زر
+    function renderLoveboardContent(key) {
+      let html = "";
+      if (key === "memories") {
+        html = `
+          <h3>ذكرياتكم المفضّلة</h3>
+          <p>اقترح أن تختاروا 3 لحظات مهمة وتحكوها بالتفصيل:</p>
+          <ul class="loveboard-list">
+            <li>أول مرة حسّيت إن العلاقة بينكم صارت جدية فعلاً.</li>
+            <li>أكثر موقف صعب مريتوا بيه وطلعتم منه أقوى كفريق.</li>
+            <li>أكثر لحظة ضحك هستيري صارت بينكم وما تنسي للآن.</li>
+          </ul>
+        `;
+      } else if (key === "messages") {
+        html = `
+          <h3>رسائل حب قصيرة</h3>
+          <p>كل واحد يكتب 3 جمل قصيرة ويقراها للثاني:</p>
+          <ul class="loveboard-list">
+            <li>جملة أقدّر بيك (بيچ) شي محد يعرفه غيري.</li>
+            <li>جملة عن شيء تغيّر بحياتي من دخلت حياتي.</li>
+            <li>وعد بسيط حاب توعدني بيه لليومين الجاية.</li>
+          </ul>
+        `;
+      } else if (key === "goals") {
+        html = `
+          <h3>أهداف مشتركة صغيرة</h3>
+          <p>اتفقوا على 3 أهداف قريبة تحققوها خلال الشهر الجاي:</p>
+          <ul class="loveboard-list">
+            <li>هدف عاطفي: مثلاً تخصيص يوم ثابت للجلسة الأسبوعية.</li>
+            <li>هدف شخصي: كل واحد يدعم الثاني بشغلة يريد يطوّرها.</li>
+            <li>هدف عملي / دراسي: إنجاز واضح تحتفلون بيه سوى.</li>
+          </ul>
+        `;
+      } else if (key === "quickgame") {
+        html = `
+          <h3>لعبة سؤال سريع</h3>
+          <p>خذوا 60 ثانية فقط، وجاوبوا عن هذه الأسئلة بسرعة:</p>
+          <ul class="loveboard-list">
+            <li>آخر مرة قلت (أحبك) من قلب، متى وليش؟</li>
+            <li>شي واحد لو اختفى من طبعي اليوم، ترتاح أكثر؟</li>
+            <li>لو أقدر أحققلك رغبة وحدة هسه، شنو تختار؟</li>
+          </ul>
+        `;
+      }
+
+      loveboardContentEl.innerHTML = html;
     }
 
-    if (randomCategoryBtn) {
-      randomCategoryBtn.addEventListener("click", () => {
-        getRandomFromCategory(currentCategoryKey);
-      });
-    }
-
-    if (copyBtn) {
-      copyBtn.addEventListener("click", () => {
-        const text = currentQuestionEl.textContent.trim();
-        if (!text || text.indexOf("اضغط على") !== -1) {
-          alert("اختر سؤالاً أولاً حتى يمكنك نسخه.");
-          return;
-        }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text)
-            .then(() => {
-              alert("تم نسخ السؤال، الصقه في المحادثة مع من تحب.");
-            })
-            .catch(() => {
-              alert("تعذّر النسخ تلقائيًا، انسخ السؤال يدويًا من فضلك.");
-            });
-        } else {
-          alert("المتصفح لا يدعم النسخ التلقائي، انسخ السؤال يدويًا.");
-        }
-      });
-    }
-
-    // أنماط العلاقة
-    if (modeDescriptionEl) {
-      modeDescriptionEl.textContent = modeDescriptions[currentMode];
-    }
-
-    modeChips.forEach(chip => {
-      chip.addEventListener("click", () => {
-        const mode = chip.getAttribute("data-mode");
-        currentMode = mode;
-        modeChips.forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        if (modeDescriptions[mode]) {
-          modeDescriptionEl.textContent = modeDescriptions[mode];
-        }
+    loveboardButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        loveboardButtons.forEach((b) =>
+          b.classList.remove("active")
+        );
+        btn.classList.add("active");
+        const key = btn.getAttribute("data-board");
+        renderLoveboardContent(key);
       });
     });
 
-    // موسيقى
-    if (chooseMusicBtn && musicFileInput && musicPlayer) {
-      chooseMusicBtn.addEventListener("click", () => {
-        musicFileInput.click();
-      });
-      musicFileInput.addEventListener("change", () => {
-        const file = musicFileInput.files[0];
-        if (file) {
-          const url = URL.createObjectURL(file);
-          musicPlayer.src = url;
-          musicPlayer.style.display = "block";
-          musicPlayer.play().catch(() => {});
-        }
-      });
-    }
+    // تسجيل الخروج مع حوار تأكيد
+    logoutBtnEl.addEventListener("click", () => {
+      logoutDialogBackdropEl.classList.add("open");
+    });
 
-    // مولّد سؤال بسيط (ذكاء اصطناعي وهمي داخل الموقع)
-    if (aiGenerateBtn && aiTopicInput && aiResult) {
-      aiGenerateBtn.addEventListener("click", () => {
-        const rawTopic = aiTopicInput.value.trim();
-        const topic = rawTopic || "مشاعركما";
-        const templates = [
-          `ما أكثر ما يثير فيك مشاعر ${topic} في علاقتكما، وكيف تفضّل أن يتعامل شريكك مع ذلك؟`,
-          `على مقياس من 1 إلى 10، كيف تقيّم تأثير موضوع ${topic} على استقرار علاقتكما؟ ولماذا؟`,
-          `ما السؤال الذي تخشى أن تطرحه حول ${topic}، لكنّك تشعر أن الوقت حان للحديث عنه؟`,
-          `لو كان بإمكانك تغيير شيء واحد مرتبط بموضوع ${topic} بينكما، فما هو هذا الشيء؟`
-        ];
-        const randomIndex = Math.floor(Math.random() * templates.length);
-        const q = templates[randomIndex];
-        aiResult.textContent = q;
-        currentQuestionEl.textContent = q;
-        currentCategoryLabel.textContent = "سؤال مُنشأ حسب اختياركما";
-        currentIndexLabel.textContent = "سؤال خاص وفق الموضوع الذي أدخلته";
-      });
-    }
+    cancelLogoutBtnEl.addEventListener("click", () => {
+      logoutDialogBackdropEl.classList.remove("open");
+    });
+
+    confirmLogoutBtnEl.addEventListener("click", () => {
+      logoutDialogBackdropEl.classList.remove("open");
+      // في مشروع حقيقي: هنا تستدعي منطق تسجيل الخروج الحقيقي
+      alert("تم تسجيل خروجك من جلسة الحب. يمكنك العودة وبدء جلسة جديدة في أي وقت.");
+    });
 
     // تهيئة أولية
-    renderQuestions(currentCategoryKey);
-    resetGlobalPool();
-    updateStats();
+    applyThemeForMode(currentMode);
+    renderQuestions();
+    renderLoveboardContent("memories");
   </script>
 </body>
 </html>
