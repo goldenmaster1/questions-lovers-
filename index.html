@@ -253,7 +253,7 @@
       align-items: center;
       gap: 0.35rem;
       cursor: pointer;
-      transition: background 0.12s ease, color 0.12s.ease, transform 0.12s ease, box-shadow 0.12s ease;
+      transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease, box-shadow 0.12s.ease;
     }
 
     .tab span.icon {
@@ -512,15 +512,16 @@
         </p>
         <ul class="sidecard-list">
           <li>استمع للجواب للنهاية بدون مقاطعة.</li>
-          <li>اسأل لماذا، وشنو اللي خلاه يحس بهذا الشعور.</li>
+          <li>اسأل: ليش؟ وشو اللي خلاك تحس بهالشكل؟</li>
           <li>شارك من قلبك مثل ما تحب شريكك يشاركك.</li>
-          <li>إذا كان السؤال ثقيل، تجاوزوه وروحوا لسؤال آخر.</li>
+          <li>إذا سؤال كان ثقيل، عدّوه وروحوا للّي بعده.</li>
         </ul>
       </aside>
     </section>
   </main>
 
   <script>
+    // نواة الأسئلة الأساسية لكل قسم
     const questionsData = {
       deep: {
         title: "أسئلة تعارف عميق",
@@ -631,10 +632,178 @@
           "شلون تعرف من نفسك إنك بعدك تحبني بعمق مو بس متعود على وجودي؟",
           "تتخيل موقف صعب لو مرّ بينا يكشف حقيقة كل واحد منّا؟ شنو تتوقع يكون؟",
           "أكو جانب من شخصيتك تخاف أشوفه فأغيّر نظرتي إلك؟ شنو هو؟",
-          "شنو السؤال اللي لو أسألك يا بالبچة هسه تحس نفسك مو جاهز تجاوب عليه؟"
+          "شنو السؤال اللي لو أسألك يا هسه تحس نفسك مو جاهز تجاوب عليه؟"
         ]
       }
     };
+
+    // دالة تولّد أسئلة إضافية آليًا حتى نوصل فوق 1000 سؤال
+    function generateExtraQuestions() {
+      // 1) أسئلة أعمق لتعارف/عميقة جدًا
+      var deepIntros = [
+        "لو نحچي بصراحة عن",
+        "لو نرجع نفتح موضوع",
+        "إذا تقدر تشرح لي بهدوء عن",
+        "لو عندك الفرصة تحچي من قلبك عن",
+        "شنو رأيك نحچي بهدوء عن"
+      ];
+      var deepAspects = [
+        "أكبر خوف",
+        "أكبر حلم",
+        "أكبر ندم",
+        "قرار مصيري",
+        "لحظة غيّرت حياتك",
+        "شي مكدّر بالك",
+        "شي ممتن إله",
+        "شي تحسّه ناقص بحياتك",
+        "شي تحسّه زايد وتريد تتخلص منه",
+        "شي ما تحچي عنه عادة"
+      ];
+      var deepFocus = [
+        "بحياتك بشكل عام",
+        "بعلاقتنا إحنا الاثنين",
+        "بعلاقتك ويا نفسك",
+        "بعلاقتك ويا أهلك",
+        "بثقتك بالناس",
+        "بمستقبلك",
+        "بأيام طفولتك",
+        "بأيام الدراسة أو الشغل"
+      ];
+
+      var count1 = 0;
+      for (var i = 0; i < deepIntros.length; i++) {
+        for (var j = 0; j < deepAspects.length; j++) {
+          for (var k = 0; k < deepFocus.length; k++) {
+            var q1 =
+              deepIntros[i] +
+              " " +
+              deepAspects[j] +
+              " " +
+              deepFocus[k] +
+              " شتگدر تحچيلي عنها أكثر؟";
+            if (count1 < 200) {
+              questionsData.deep.questions.push(q1);
+            } else {
+              questionsData.verydeep.questions.push(q1);
+            }
+            count1++;
+          }
+        }
+      }
+
+      // 2) أسئلة رومانسية/قبل النوم/ذكريات (نولد كمية كبيرة)
+      var romIntros = [
+        "لو نحچي شويّة عن",
+        "لو نرجع نتذكر",
+        "إذا نوقف لحظة ونفكر بـ",
+        "لو تحچيلي بصراحة عن",
+        "شنو رأيك نفتح موضوع عن"
+      ];
+      var romScenarios = [
+        "أحلى لحظة عشتها وياي",
+        "أكتر موقف حسّيت بيه إنك محبوب",
+        "مرة حسّيت إنك مهم بنظري",
+        "لحظة حسّيت بيها إنك مو وحدك",
+        "موقف بسيط بس ترك أثر كبير بقلبك",
+        "لحظة اشتياق ما ناسيها",
+        "مرة حسّيت إن دعاءك استُجيب",
+        "يوم كان تعبك النفسي عالي بس تحسّن",
+        "مرة حسّيت إني فهمتك بدون ما تحچي",
+        "وقت حسّيت بيه براحة غريبة وأنت وياي"
+      ];
+      var romTimes = [
+        "اليوم",
+        "بالأيام الأخيرة",
+        "بفترة خطوبتنا",
+        "قبل لا نتخطب",
+        "بفترة كنت متعب بيها",
+        "بوقت كنت فرحان هواية",
+        "بمرحلة الدراسة",
+        "بالسفر أو الطلعات",
+        "بالليل قبل النوم",
+        "بساعات الصبح الأولى"
+      ];
+
+      var count2 = 0;
+      for (var r1 = 0; r1 < romIntros.length; r1++) {
+        for (var r2 = 0; r2 < romScenarios.length; r2++) {
+          for (var r3 = 0; r3 < romTimes.length; r3++) {
+            var q2 =
+              romIntros[r1] +
+              " " +
+              romScenarios[r2] +
+              " " +
+              "بهذه الفترة: " +
+              romTimes[r3] +
+              ". شصار بالضبط؟";
+            if (count2 < 120) {
+              questionsData.romantic.questions.push(q2);
+            } else if (count2 < 240) {
+              questionsData.bedtime.questions.push(q2);
+            } else {
+              questionsData.memories.questions.push(q2);
+            }
+            count2++;
+          }
+        }
+      }
+
+      // 3) أسئلة عن المستقبل وبعد الزعل (تنظيم الحياة والاتفاق)
+      var futIntros = [
+        "لو نخطط بهدوء لـ",
+        "إذا جلسنا نسوي اتفاق عن",
+        "لو نرسم صورة واضحة لـ",
+        "شنو رأيك نرتب أفكارنا عن",
+        "لو نحچي عن نقطة مهمة بـ"
+      ];
+      var futTopics = [
+        "طريقة حل الخلافات بينا",
+        "تنظيم مصاريف البيت",
+        "توزيع المسؤوليات بالبيت",
+        "التعامل ويّا تعبك النفسي أو تعبي",
+        "متى نحتاج نعتذر لبعض",
+        "شنو نسوي لو واحد من عدنا غلط",
+        "فكرة الاستقرار اللي نحلم بيها",
+        "حياتنا إذا جبنا أطفال بالمستقبل",
+        "وقتنا الخاص بعيد عن الناس",
+        "حدود تدخل الآخرين بعلاقتنا"
+      ];
+      var futAngles = [
+        "حتى ما نرجع نكرر نفس المشاكل",
+        "حتى نعرف كل واحد شيتوقع من الثاني",
+        "حتى نكون جاهزين للأيام الصعبة قبل السهلة",
+        "حتى نحافظ على احترامنا لبعض حتى وقت الزعل",
+        "حتى تظل العلاقة خفيفة وقريبة للقلب",
+        "حتى نضمن إن ولا واحد يحس نفسه لوحده",
+        "حتى نعرف شنو خطوطنا الحمر بوضوح",
+        "حتى نحافظ على بيتنا مهما تغيرت الظروف"
+      ];
+
+      var count3 = 0;
+      for (var f1 = 0; f1 < futIntros.length; f1++) {
+        for (var f2 = 0; f2 < futTopics.length; f2++) {
+          for (var f3 = 0; f3 < futAngles.length; f3++) {
+            var q3 =
+              futIntros[f1] +
+              " " +
+              futTopics[f2] +
+              " " +
+              "من زاوية " +
+              futAngles[f3] +
+              "، شنو رأيك؟";
+            if (count3 < 160) {
+              questionsData.future.questions.push(q3);
+            } else {
+              questionsData.after.questions.push(q3);
+            }
+            count3++;
+          }
+        }
+      }
+      // الآن صار عدد الأسئلة الكلي فوق الـ 1000 سؤال موزعة على الأقسام
+    }
+
+    generateExtraQuestions();
 
     let currentCategoryKey = "deep";
     let currentQuestionIndex = null;
@@ -658,7 +827,7 @@
       listDescription.textContent = category.description;
 
       questionsList.innerHTML = "";
-      category.questions.forEach(function(q, index) {
+      category.questions.forEach(function (q, index) {
         const item = document.createElement("div");
         item.className = "question-item";
 
@@ -673,7 +842,7 @@
         item.appendChild(bullet);
         item.appendChild(text);
 
-        item.addEventListener("click", function() {
+        item.addEventListener("click", function () {
           setCurrentQuestion(categoryKey, index);
         });
 
@@ -709,38 +878,40 @@
       setCurrentQuestion(categoryKey, randomIndex);
     }
 
-    tabs.forEach(function(tab) {
-      tab.addEventListener("click", function() {
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
         const categoryKey = tab.getAttribute("data-category");
         currentCategoryKey = categoryKey;
 
-        tabs.forEach(function(t) { t.classList.remove("active"); });
+        tabs.forEach(function (t) {
+          t.classList.remove("active");
+        });
         tab.classList.add("active");
 
         renderQuestions(categoryKey);
       });
     });
 
-    randomAllBtn.addEventListener("click", function() {
+    randomAllBtn.addEventListener("click", function () {
       getRandomFromAll();
     });
 
-    randomCategoryBtn.addEventListener("click", function() {
+    randomCategoryBtn.addEventListener("click", function () {
       getRandomFromCategory(currentCategoryKey);
     });
 
-    copyBtn.addEventListener("click", function() {
+    copyBtn.addEventListener("click", function () {
       const text = currentQuestionEl.textContent.trim();
-      if (!text || text.indexOf("سؤال عشوائي") !== -1) {
+      if (!text || text.indexOf("سؤال عشوائي") !== -1 || text.indexOf("اضغط على زر") !== -1) {
         alert("اختر سؤال أولاً حتى تقدر تنسخه.");
         return;
       }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text)
-          .then(function() {
+          .then(function () {
             alert("تم نسخ السؤال، الصقه بالمحادثة مع شريك حياتك.");
           })
-          .catch(function() {
+          .catch(function () {
             alert("ما قدرنا ننسخ تلقائياً، انسخ السؤال يدويًا من فضلك.");
           });
       } else {
@@ -748,7 +919,7 @@
       }
     });
 
-    // عرض قسم التعارف العميق عند التحميل
+    // عند تحميل الصفحة، اعرض قسم التعارف العميق
     renderQuestions(currentCategoryKey);
   </script>
 </body>
