@@ -990,104 +990,134 @@
 
   <script>
     // بيانات الأسئلة حسب نمط العلاقة + نوع السؤال
+    // تم تكبير البنك لكل نمط حتى يصير عندك عدد كبير من الأسئلة
     const questionBank = {
       love: [
-        {
-          text: "شنو أكثر شي خلاچ / خلاك تحبني من البداية؟",
-          category: "حب",
-        },
-        {
-          text: "إذا اليوم آخر ساعة نكعد بيها سوى، شنو أول شي حاب تقوله لي؟",
-          category: "رومانسي",
-        },
-        {
-          text: "أكو شي تخاف تقوله إلي لأن تخاف أزعل؟ شنو هو؟",
-          category: "قلق",
-        },
-        {
-          text: "سؤال جريء: شنو أكثر موقف خلّاك تغار عليّ بصراحة؟",
-          category: "جريء",
-        },
-        {
-          text: "تتخيل مستقبلنا بعد خمس سنين شلون؟ أحچي بالتفصيل.",
-          category: "عام",
-        },
+        { text: "شنو أكثر شي خلاچ / خلاك تحبني من البداية؟", category: "حب" },
+        { text: "شنو أكثر حركة بسيطة مني تخلي ابتسامتك تطلع بدون ما تحس؟", category: "حب" },
+        { text: "من تسمع اسمي، أول إحساس يجي بقلبك شنو؟", category: "حب" },
+        { text: "أكو موقف واحد حسيت بيه إنو لازم ما أطلع من حياتك أبد؟ شنو هو؟", category: "حب" },
+        { text: "لو توصف مشاعرك تجاهي بثلاث كلمات، شنو تختار؟", category: "حب" },
+        { text: "شنو أكتر شي تحسني فهِمتك بيه أكثر من أي شخص ثاني؟", category: "حب" },
+
+        { text: "لو نخطط لموعد مثالي بسيط، وين تاخذني وليش؟", category: "رومانسي" },
+        { text: "شنو الأغنية اللي تحسها قريبة على علاقتنا إذا تسمعها تتذكرني؟", category: "رومانسي" },
+        { text: "تحب لحظات السهر والدردشة لو القعدة الهادية قبل النوم؟", category: "رومانسي" },
+        { text: "لو نكتب رسالة حب نفتحهة بعد خمس سنين، شنو أول جملة تكتبها؟", category: "رومانسي" },
+        { text: "شنو نوع المفاجآت الرومانسية اللي تحبها أكثر شي؟", category: "رومانسي" },
+
+        { text: "أكو شي تخاف تقوله إلي لأن تخاف أزعل؟ شنو هو؟", category: "قلق" },
+        { text: "شنو أكبر خوف داخلك من ناحية علاقتنا وحاب نواجهه سوى؟", category: "قلق" },
+        { text: "لمن أزعل، شنو أكثر تصرف مني يأذيك وتتمنى ما أكرره؟", category: "قلق" },
+        { text: "لو بيوم من الأيام حسيت بعدنا عن بعض، شنو تحب أسوي أول خطوة؟", category: "قلق" },
+
+        { text: "سؤال جريء: شنو أكثر موقف خلاك تغار عليّ بصراحة؟", category: "جريء" },
+        { text: "سؤال جريء: أي تصرف بسيط من غيري يخليك تنزعج حتى لو ما تبين؟", category: "جريء" },
+        { text: "سؤال جريء: شنو الحد اللي إذا أحد تجاوزه عليّ تعتبره تعدي علينا إحنا الثنين؟", category: "جريء" },
+
+        { text: "تتخيل مستقبلنا بعد خمس سنين شلون؟ احچي لي بالتفصيل.", category: "عام" },
+        { text: "شنو حلم تحب نحققه سوى حتى لو كان بسيط أو غريب؟", category: "عام" }
       ],
+
       engaged: [
-        {
-          text: "شنو أكثر شي متحمس / متحمسة له بيوم الخطوبة أو الزواج؟",
-          category: "حب",
-        },
-        {
-          text: "إذا صار اختلاف بين أهلك وأهلي، شنو أول مبدأ تمشي عليه؟",
-          category: "قلق",
-        },
-        {
-          text: "وين تتمنى تكون أول سفرة بعد الزواج؟ وليش هذا المكان بالذات؟",
-          category: "رومانسي",
-        },
-        {
-          text: "سؤال جريء: أكو عادة تتمنى أغيّرها قبل الزواج؟ تكلم بصراحة.",
-          category: "جريء",
-        },
-        {
-          text: "شنو أهم 3 أشياء لازم نحافظ عليها حتى علاقتنا تبقى قوية؟",
-          category: "عام",
-        },
+        { text: "شنو أكثر شي متحمس / متحمسة له بيوم الخطوبة أو الزواج؟", category: "حب" },
+        { text: "من تتخيلني ببدلة / فستان الزواج، شنو أول إحساس يجيك؟", category: "حب" },
+        { text: "شنو اللحظة اللي حسيت بيها إنو خطوبتنا قرار صحيح 100٪؟", category: "حب" },
+        { text: "لو بعد عشر سنين تتذكر فترة الخطوبة، شنو تحب تتذكر أكثر؟", category: "حب" },
+        { text: "شنو أكبر فرق حسيته بين قبل الخطوبة وبعدها؟", category: "حب" },
+
+        { text: "وين تتمنى تكون أول سفرة بعد الزواج؟ وليش هذا المكان بالذات؟", category: "رومانسي" },
+        { text: "شنو فكرة شهر عسل مثالية بالنسبة إلك؟", category: "رومانسي" },
+        { text: "تحب سهراتنا تكون بالبيت بأجواء هادية لو طلعة برا؟", category: "رومانسي" },
+        { text: "شنو طقس رومانسي بسيط تحب نبلّش بيه من هسه ونستمر عليه بعد الزواج؟", category: "رومانسي" },
+        { text: "لو أجهزلك مفاجأة بعد كتب الكتاب، شنو تتمنى تكون؟", category: "رومانسي" },
+
+        { text: "إذا صار اختلاف بين أهلك وأهلي، شنو أول مبدأ تمشي عليه؟", category: "قلق" },
+        { text: "أكثر شي يخوفك من بداية الحياة الزوجية شنو؟", category: "قلق" },
+        { text: "من نختلف على رأي مهم، تحب نأجل القرار لو نحله بنفس اليوم؟", category: "قلق" },
+        { text: "شنو الحدود اللي تحب نخليها بين حياتنا الخاصة وبين تدخل الآخرين؟", category: "قلق" },
+
+        { text: "سؤال جريء: أكو عادة تتمنى أغيّرها قبل الزواج؟ تكلم بصراحة.", category: "جريء" },
+        { text: "سؤال جريء: تحس نفسك جاهز مسؤولية بيت وعائلة لو بعد تحتاج وقت؟", category: "جريء" },
+        { text: "سؤال جريء: أكثر شي تخاف تخسره لو خربت هالعلاقة شنو هو؟", category: "جريء" },
+
+        { text: "شنو أهم 3 أشياء لازم نحافظ عليها حتى علاقتنا تبقى قوية؟", category: "عام" },
+        { text: "شلون تتخيل تقسيم المسؤوليات بيناتنا من مصاريف وبيت ودراسة أو شغل؟", category: "عام" },
+        { text: "شنو قيمة أو مبدأ تحب يكون أساس لبيتنا من أول يوم زواج؟", category: "عام" }
       ],
+
       married: [
-        {
-          text: "شنو أجمل ذكرى بينا بعد الزواج لحد هسه؟",
-          category: "حب",
-        },
-        {
-          text: "إذا نرجع لأول يوم التقينا، شنو الشي الوحيد اللي كنت رح تغيّره؟",
-          category: "عام",
-        },
-        {
-          text: "أكو موضوع نخاف نحچي بيه كل مرة ونأجله؟ ليش؟",
-          category: "قلق",
-        },
-        {
-          text: "سؤال جريء: برأيك شنو أكثر نقطة ضعف عندي تأثر على زواجنا؟",
-          category: "جريء",
-        },
-        {
-          text: "شنو طقس رومانسي بسيط تحب نثبّته كعادة أسبوعية بينا؟",
-          category: "رومانسي",
-        },
+        { text: "شنو أجمل ذكرى بينا بعد الزواج لحد هسه؟", category: "حب" },
+        { text: "شنو اللحظة اللي حسيت بيها إنو أنا سند حقيقي إلك؟", category: "حب" },
+        { text: "شنو تصرف بسيط مني يخليك تحس إنّك محبوب حتى لو ما أكول شي؟", category: "حب" },
+        { text: "لو نعيد يوم زواجنا، شنو الشي الوحيد اللي تبقيه مثل ما هو؟", category: "حب" },
+        { text: "أكو عادة حلوة اكتسبتها بعد الزواج تحب تشكرني عليها؟", category: "حب" },
+
+        { text: "شنو طقس رومانسي أسبوعي تحب نثبّته ونلتزم بيه؟", category: "رومانسي" },
+        { text: "تحب نسافر وحدنا بين فترة وفترة لو تفضل لمّة العائلة أكثر؟", category: "رومانسي" },
+        { text: "شنو نوع المفاجآت الزوجية اللي تفرحك أكثر شي؟", category: "رومانسي" },
+        { text: "شنو أكثر لحظة حضن حسيت بيه بأمان حقيقي وياي؟", category: "رومانسي" },
+        { text: "لو نسوي ليلة خاصة ننسى بيها كل المسؤوليات، شنو برنامجك؟", category: "رومانسي" },
+
+        { text: "أكو موضوع نخاف نحچي بيه كل مرة ونأجله؟ ليش؟", category: "قلق" },
+        { text: "شنو أكثر شي يزعجك لما نزعل وتتمنى أوقفه؟", category: "قلق" },
+        { text: "لو حسيت ضغط البيت والشغل زاد، شنو الدعم اللي تنتظره مني؟", category: "قلق" },
+        { text: "هل تحس إن الوقت اللي نقضيه سوى كافي أو تحتاج وقت أكثر؟", category: "قلق" },
+
+        { text: "سؤال جريء: برأيك شنو أكثر نقطة ضعف عندي تأثر على زواجنا؟", category: "جريء" },
+        { text: "سؤال جريء: أكو شي تفتقده من نفسك قبل الزواج وتحس فقدته شوي؟", category: "جريء" },
+        { text: "سؤال جريء: لو نقيّم زواجنا من ١ إلى ١٠، شكد تعطيه وشلون نرفعه أكثر؟", category: "جريء" },
+
+        { text: "شنو حلم مشترك تحب نشتغل عليه كزوجين خلال السنة الجاية؟", category: "عام" },
+        { text: "شنو قرار مشترك أخذناه وحسيت إنه غيّر حياتنا للأفضل؟", category: "عام" },
+        { text: "شنو الشي اللي تتمنى يبقى ثابت بيناتنا حتى لو مرّت سنين طويلة؟", category: "عام" }
       ],
+
       other: [
-        {
-          text: "شنو تعريفك الشخصي لـ (علاقة صحية)؟",
-          category: "عام",
-        },
-        {
-          text: "شنو الحدود اللي تحب نرسمها حتى نحترم بعض ونعرف حقوقنا؟",
-          category: "قلق",
-        },
-        {
-          text: "سؤال جريء: شنو أكثر شي يخوفك من فكرة الارتباط بشكل عام؟",
-          category: "جريء",
-        },
-        {
-          text: "أول 3 صفات لازم تكون موجودة بأي شخص تريد تكمل ويا حياتك؟",
-          category: "حب",
-        },
-        {
-          text: "شنو نوع اللحظات اللي تحس بيها إنك مفهوم 100٪ من الشخص المقابل؟",
-          category: "رومانسي",
-        },
-      ],
+        { text: "شنو تعريفك الشخصي لـ (علاقة صحية)؟", category: "عام" },
+        { text: "شنو نوع العلاقة اللي تحسها تناسب شخصيتك أكثر؟ رسمية، صداقة عميقة، حب هادي؟", category: "عام" },
+        { text: "شنو أكثر قيمة تحب تبنى عليها أي علاقة تدخلها؟", category: "عام" },
+        { text: "تحب العلاقة تكون فيها مساحة حرية كبيرة لو تفضّل القرب اليومي؟", category: "عام" },
+        { text: "شنو الشي اللي لو موجود بالعلاقة يخليك تتمسك بيها مهما تصير مشاكل؟", category: "عام" },
+
+        { text: "أول 3 صفات لازم تكون موجودة بأي شخص تريد تكمل ويا حياتك؟", category: "حب" },
+        { text: "شنو نوع الاهتمام اللي يلمس قلبك أكثر شي من الشخص المقابل؟", category: "حب" },
+        { text: "لو تفكر بعلاقة مثالية بالنسبة إلك، شنو أكثر شي تشوفه فيها؟", category: "حب" },
+        { text: "أكو موقف مرّ بحياتك خليك تغير نظرتك للحب؟ شنو كان؟", category: "حب" },
+        { text: "شنو حدود الغيرة المقبولة بالنسبة إلك بأي علاقة؟", category: "حب" },
+
+        { text: "شنو الحدود اللي تحب نرسمها حتى نحترم بعض ونعرف حقوقنا؟", category: "قلق" },
+        { text: "شنو أكبر خوف عندك من فكرة الارتباط أو التعلّق؟", category: "قلق" },
+        { text: "لو حسيت الواحد ده يبتعد، شنو رد فعلك الطبيعي؟ تقرّب لو تبعد؟", category: "قلق" },
+        { text: "شنو الأشياء اللي ما تحب أحد يحاسبك عليها مهما كان قريب؟", category: "قلق" },
+
+        { text: "سؤال جريء: أكو علاقة قديمة بعدها تأثر على قراراتك اليوم؟", category: "جريء" },
+        { text: "سؤال جريء: شنو أكثر خطأ سويته بعلاقة سابقة وتخاف تكرره؟", category: "جريء" },
+        { text: "سؤال جريء: تحب الشخص يواجهك بالحقيقة حتى لو توجع لو يجامل مشاعرك؟", category: "جريء" },
+
+        { text: "شنو نوع اللحظات اللي تحس بيها إنك مفهوم 100٪ من الشخص المقابل؟", category: "رومانسي" },
+        { text: "لو تقرر تفتح قلبك لشخص واحد فقط، شنو لازم يسوي حتى يوصل لهالمرحلة؟", category: "رومانسي" },
+        { text: "شنو نوع الكلام أو الرسائل اللي تفتحلك نفسك تحچي بصراحة؟", category: "رومانسي" }
+      ]
     };
 
-    // بنك خاص للأسئلة الذكية (ممكن تغيره أو تربطه بـ ChatGPT)
+    // بنك خاص للأسئلة الذكية (ممكن تغيره أو تربطه بـ ChatGPT من الباك-إند)
     const smartQuestionPool = [
       "لو تكدر ترجع بالوقت، لأي مرحلة من حياتك تريد نرجع ونعيشها سوى من جديد؟",
       "شنو الشي اللي تتمنى ألاحظه بيك بدون ما تضطر تحچي عنه؟",
       "إذا نكتب كتاب عن قصتنا، شنو راح يكون عنوان أول فصل؟",
       "شنو السر الصغير اللي تحس ما حد بالعالم يفهمه غيري؟",
       "أكو موقف بسيط مني، بس ظل بالگلب عندك لليوم؟ شنو هو؟",
+      "لو أطلب منك تختار صورة واحدة تمثل علاقتنا، شنو راح تكون؟",
+      "شنو أكثر سؤال نفسي يدور ببالك بس نادر تسألني عنه؟",
+      "إذا نخطط لليوم المثالي سوي، شنو أول نشاط تكتبه بالقائمة؟",
+      "لو تكدر تغيّر شعور واحد مرّيت بيه قبل، شنو هو وليش؟",
+      "شنو الشي اللي يخليك تحس إنك بأمان تام وأنا يمك؟",
+      "شنو أكثر موقف دعمتك بيه وما راح تنساه إلي؟",
+      "لو فجأة الدنيا تطفي وكلشي يوقف ساعة، شنو تحب نسوي بهالساعة سوا؟",
+      "من تسمع كلمة حب، أول صورة أو ذكرى تخطر ببالك شنو هي؟",
+      "شنو الشي اللي تحس لازم أقوله لك اليوم بس ما تعرف شلون تطلبه؟",
+      "شنو أكثر لحظة تمنيت بها أكون يمك بس ما كنت؟"
     ];
 
     let currentMode = "love";
@@ -1099,18 +1129,13 @@
     const relationshipButtons = document.querySelectorAll(".relationship-btn");
     const smartQuestionBtnEl = document.getElementById("smartQuestionBtn");
 
-    const loveboardContentEl =
-      document.getElementById("loveboardContent");
+    const loveboardContentEl = document.getElementById("loveboardContent");
     const loveboardButtons = document.querySelectorAll(".loveboard-btn");
 
     const logoutBtnEl = document.getElementById("logoutBtn");
-    const logoutDialogBackdropEl = document.getElementById(
-      "logoutDialogBackdrop"
-    );
-    const cancelLogoutBtnEl =
-      document.getElementById("cancelLogoutBtn");
-    const confirmLogoutBtnEl =
-      document.getElementById("confirmLogoutBtn");
+    const logoutDialogBackdropEl = document.getElementById("logoutDialogBackdrop");
+    const cancelLogoutBtnEl = document.getElementById("cancelLogoutBtn");
+    const confirmLogoutBtnEl = document.getElementById("confirmLogoutBtn");
 
     function renderQuestions() {
       const allQuestions = questionBank[currentMode] || [];
@@ -1120,8 +1145,7 @@
       const filtered = allQuestions.filter((q) => {
         const matchText = q.text.toLowerCase().includes(term);
         const matchCategory =
-          selectedCategory === "all" ||
-          q.category === selectedCategory;
+          selectedCategory === "all" || q.category === selectedCategory;
         return matchText && matchCategory;
       });
 
@@ -1206,14 +1230,11 @@
 
     // زر جلسة حب اليوم – تغيير أجواء بسيطة عند كل ضغطة
     function boostSessionVisuals() {
-      // نحرك الزر شويه للأعلى ونضيف لمعان خفيف، ثم نرجعه
       loveSessionBtnEl.style.transform = "translateY(-2px) scale(1.01)";
-      loveSessionBtnEl.style.boxShadow =
-        "0 22px 40px rgba(0,0,0,0.7)";
+      loveSessionBtnEl.style.boxShadow = "0 22px 40px rgba(0,0,0,0.7)";
       setTimeout(() => {
         loveSessionBtnEl.style.transform = "";
-        loveSessionBtnEl.style.boxShadow =
-          "0 16px 30px rgba(0,0,0,0.55)";
+        loveSessionBtnEl.style.boxShadow = "0 16px 30px rgba(0,0,0,0.55)";
       }, 220);
     }
 
@@ -1224,9 +1245,7 @@
     // تغيير نمط العلاقة
     relationshipButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        relationshipButtons.forEach((b) =>
-          b.classList.remove("active")
-        );
+        relationshipButtons.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         const modeKey = btn.getAttribute("data-mode");
         currentMode = modeKey;
@@ -1242,29 +1261,16 @@
     // زر السؤال الذكي – حالياً يولد سؤال عشوائي من smartQuestionPool
     smartQuestionBtnEl.addEventListener("click", async () => {
       smartQuestionBtnEl.disabled = true;
-      const originalText =
-        smartQuestionBtnEl.textContent || "";
+      const originalText = smartQuestionBtnEl.textContent || "";
       smartQuestionBtnEl.textContent = "يتم إنشاء سؤال ذكي...";
 
-      // هنا في مشروع حقيقي:
-      // 1. تستدعي API خاص بالباك-إند.
-      // 2. والباك-إند يتصل بـ ChatGPT ويرجع سؤال.
-      //
-      // مثال (وهمي) للاستخدام من الباك-إند:
-      // const response = await fetch('/api/generate-question', { method: 'POST', body: JSON.stringify({ mode: currentMode }) });
-      // const data = await response.json();
-      // const aiQuestion = data.question;
-
-      // حالياً نستخدم سؤال عشوائي من قائمة محلية:
-      const randomIndex = Math.floor(
-        Math.random() * smartQuestionPool.length
-      );
+      const randomIndex = Math.floor(Math.random() * smartQuestionPool.length);
       const aiQuestion = smartQuestionPool[randomIndex];
 
       // نضيف السؤال الجديد مؤقتاً إلى بداية القائمة لهذا النمط تحت نوع "عام"
       questionBank[currentMode].unshift({
         text: aiQuestion,
-        category: "عام",
+        category: "عام"
       });
 
       renderQuestions();
@@ -1323,9 +1329,7 @@
 
     loveboardButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        loveboardButtons.forEach((b) =>
-          b.classList.remove("active")
-        );
+        loveboardButtons.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         const key = btn.getAttribute("data-board");
         renderLoveboardContent(key);
