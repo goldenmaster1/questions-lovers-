@@ -295,6 +295,7 @@
       flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 10px;
+      align-items: stretch;
     }
 
     .input-wrapper {
@@ -370,6 +371,11 @@
       font-size: 14px;
     }
 
+    .random-question-btn {
+      flex: 0 0 140px;
+      background: radial-gradient(circle at top left, #3b82f6, #06b6d4);
+    }
+
     .questions-list {
       max-height: 360px;
       overflow: auto;
@@ -416,6 +422,26 @@
 
     .question-mode-label {
       opacity: 0.9;
+    }
+
+    .question-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 6px;
+    }
+
+    .copy-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-main);
+      font-size: 11px;
+      padding: 4px 10px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
     }
 
     .empty-state {
@@ -714,6 +740,7 @@
       }
 
       .smart-question-btn,
+      .random-question-btn,
       .select-wrapper {
         flex: 1 1 auto;
       }
@@ -795,7 +822,7 @@
         <section class="panel">
           <div class="panel-header">
             <h2>أسئلة الجلسة</h2>
-            <span class="hint">ابحث، فلتر، أو أنشئ سؤال ذكي جديد</span>
+            <span class="hint">ابحث، فلتر، أنشئ سؤال ذكي أو اختر سؤال عشوائي</span>
           </div>
 
           <div class="question-search-row">
@@ -822,6 +849,11 @@
             <button id="smartQuestionBtn" class="smart-question-btn">
               <span class="icon">✨</span>
               <span>سؤال ذكي من الذكاء الاصطناعي</span>
+            </button>
+
+            <button id="randomQuestionBtn" class="smart-question-btn random-question-btn">
+              <span class="icon">🎲</span>
+              <span>سؤال عشوائي</span>
             </button>
           </div>
 
@@ -989,8 +1021,7 @@
   </div>
 
   <script>
-    // بيانات الأسئلة حسب نمط العلاقة + نوع السؤال
-    // تم تكبير البنك لكل نمط حتى يصير عندك عدد كبير من الأسئلة
+    // بنك الأسئلة الأساسي لكل نمط (أسئلة مكتوبة يدويًا)
     const questionBank = {
       love: [
         { text: "شنو أكثر شي خلاچ / خلاك تحبني من البداية؟", category: "حب" },
@@ -1101,6 +1132,63 @@
       ]
     };
 
+    // تسميات مساعدة
+    function labelForMode(modeKey) {
+      switch (modeKey) {
+        case "love":
+          return "نمط: حب / تعارف";
+        case "engaged":
+          return "نمط: مخطوبين";
+        case "married":
+          return "نمط: متزوجين";
+        case "other":
+          return "نمط: علاقة خاصة";
+        default:
+          return "";
+      }
+    }
+
+    function labelForModeShort(modeKey) {
+      switch (modeKey) {
+        case "love":
+          return "حب";
+        case "engaged":
+          return "خطوبة";
+        case "married":
+          return "زواج";
+        case "other":
+          return "علاقة خاصة";
+        default:
+          return "";
+      }
+    }
+
+    // توسيع بنك الأسئلة آلياً حتى نوصل أكثر من 2000 سؤال (حوالي 600 لكل نمط)
+    const TARGET_PER_MODE = 600; // 600 * 4 = 2400 سؤال تقريبا
+
+    function autoExpandQuestions() {
+      const modes = Object.keys(questionBank);
+      const categories = ["حب", "رومانسي", "جريء", "قلق", "عام"];
+
+      modes.forEach((modeKey) => {
+        while (questionBank[modeKey].length < TARGET_PER_MODE) {
+          const idx = questionBank[modeKey].length + 1;
+          const cat = categories[questionBank[modeKey].length % categories.length];
+          const text =
+            "سؤال " +
+            cat +
+            " رقم " +
+            idx +
+            " لهذا النمط (" +
+            labelForModeShort(modeKey) +
+            "): احكِ شعور أو موقف بسيط تحب تشاركه اليوم مع الشخص المقابل.";
+          questionBank[modeKey].push({ text, category: cat });
+        }
+      });
+    }
+
+    autoExpandQuestions();
+
     // بنك خاص للأسئلة الذكية (ممكن تغيره أو تربطه بـ ChatGPT من الباك-إند)
     const smartQuestionPool = [
       "لو تكدر ترجع بالوقت، لأي مرحلة من حياتك تريد نرجع ونعيشها سوى من جديد؟",
@@ -1128,6 +1216,7 @@
     const loveSessionBtnEl = document.getElementById("loveSessionBtn");
     const relationshipButtons = document.querySelectorAll(".relationship-btn");
     const smartQuestionBtnEl = document.getElementById("smartQuestionBtn");
+    const randomQuestionBtnEl = document.getElementById("randomQuestionBtn");
 
     const loveboardContentEl = document.getElementById("loveboardContent");
     const loveboardButtons = document.querySelectorAll(".loveboard-btn");
@@ -1137,17 +1226,22 @@
     const cancelLogoutBtnEl = document.getElementById("cancelLogoutBtn");
     const confirmLogoutBtnEl = document.getElementById("confirmLogoutBtn");
 
-    function renderQuestions() {
+    // دالة ترجع الأسئلة بعد تطبيق البحث + الفلترة
+    function getFilteredQuestions() {
       const allQuestions = questionBank[currentMode] || [];
       const term = (searchInputEl.value || "").trim().toLowerCase();
       const selectedCategory = categorySelectEl.value;
 
-      const filtered = allQuestions.filter((q) => {
+      return allQuestions.filter((q) => {
         const matchText = q.text.toLowerCase().includes(term);
         const matchCategory =
           selectedCategory === "all" || q.category === selectedCategory;
         return matchText && matchCategory;
       });
+    }
+
+    function renderQuestions() {
+      const filtered = getFilteredQuestions();
 
       questionsListEl.innerHTML = "";
 
@@ -1182,25 +1276,46 @@
         meta.appendChild(tag);
         meta.appendChild(modeLabel);
 
+        const actions = document.createElement("div");
+        actions.className = "question-actions";
+
+        const copyBtn = document.createElement("button");
+        copyBtn.type = "button";
+        copyBtn.className = "copy-btn";
+        copyBtn.textContent = "نسخ السؤال";
+        copyBtn.addEventListener("click", () => {
+          copyQuestion(q.text, true);
+        });
+
+        actions.appendChild(copyBtn);
+
         card.appendChild(text);
         card.appendChild(meta);
+        card.appendChild(actions);
 
         questionsListEl.appendChild(card);
       });
     }
 
-    function labelForMode(modeKey) {
-      switch (modeKey) {
-        case "love":
-          return "نمط: حب / تعارف";
-        case "engaged":
-          return "نمط: مخطوبين";
-        case "married":
-          return "نمط: متزوجين";
-        case "other":
-          return "نمط: علاقة خاصة";
-        default:
-          return "";
+    // نسخ السؤال إلى الحافظة
+    function copyQuestion(text, withAlert) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            if (withAlert) {
+              alert("تم نسخ السؤال إلى الحافظة.");
+            }
+          })
+          .catch(() => {
+            if (withAlert) {
+              window.prompt("انسخ السؤال يدويًا:", text);
+            }
+          });
+      } else {
+        if (withAlert) {
+          window.prompt("انسخ السؤال يدويًا:", text);
+        }
       }
     }
 
@@ -1258,7 +1373,7 @@
     searchInputEl.addEventListener("input", renderQuestions);
     categorySelectEl.addEventListener("change", renderQuestions);
 
-    // زر السؤال الذكي – حالياً يولد سؤال عشوائي من smartQuestionPool
+    // زر السؤال الذكي – يولد سؤال عشوائي من smartQuestionPool ويضيفه لبداية القائمة
     smartQuestionBtnEl.addEventListener("click", async () => {
       smartQuestionBtnEl.disabled = true;
       const originalText = smartQuestionBtnEl.textContent || "";
@@ -1267,7 +1382,6 @@
       const randomIndex = Math.floor(Math.random() * smartQuestionPool.length);
       const aiQuestion = smartQuestionPool[randomIndex];
 
-      // نضيف السؤال الجديد مؤقتاً إلى بداية القائمة لهذا النمط تحت نوع "عام"
       questionBank[currentMode].unshift({
         text: aiQuestion,
         category: "عام"
@@ -1277,6 +1391,22 @@
 
       smartQuestionBtnEl.textContent = originalText;
       smartQuestionBtnEl.disabled = false;
+    });
+
+    // زر السؤال العشوائي – يختار سؤال من الأسئلة الحالية (بعد البحث والفلترة)
+    randomQuestionBtnEl.addEventListener("click", () => {
+      const available = getFilteredQuestions();
+      if (!available.length) {
+        alert("ماكو أسئلة مطابقة حالياً لهذا الفلتر حتى نختار منها سؤال عشوائي.");
+        return;
+      }
+      const randomIndex = Math.floor(Math.random() * available.length);
+      const randomQ = available[randomIndex];
+
+      alert("سؤال عشوائي:\n\n" + randomQ.text);
+
+      // نحاول نسخه بدون تنبيه إضافي
+      copyQuestion(randomQ.text, false);
     });
 
     // LoveBoard – محتوى ديناميكي لكل زر
@@ -1347,7 +1477,6 @@
 
     confirmLogoutBtnEl.addEventListener("click", () => {
       logoutDialogBackdropEl.classList.remove("open");
-      // في مشروع حقيقي: هنا تستدعي منطق تسجيل الخروج الحقيقي
       alert("تم تسجيل خروجك من جلسة الحب. يمكنك العودة وبدء جلسة جديدة في أي وقت.");
     });
 
