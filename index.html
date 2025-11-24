@@ -87,6 +87,21 @@
       font-size: 1.1rem;
     }
 
+    .music-bar {
+      margin-top: 0.4rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: 14px;
+      background: #f9fafb;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .music-btn {
+      align-self: flex-start;
+    }
+
     .layout {
       display: grid;
       grid-template-columns: 1fr;
@@ -220,7 +235,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      transition: background 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease;
+      transition: background 0.12s.ease, transform 0.12s ease, box-shadow 0.12s ease;
     }
 
     .btn-secondary:hover {
@@ -232,6 +247,55 @@
     .btn-secondary:active {
       transform: translateY(0);
       box-shadow: none;
+    }
+
+    .mode-bar {
+      margin-bottom: 1.1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 16px;
+      background: rgba(254, 242, 242, 0.9);
+      border: 1px solid rgba(252, 165, 165, 0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mode-label {
+      font-size: 0.85rem;
+      color: #7f1d1d;
+      font-weight: 600;
+    }
+
+    .mode-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .mode-btn {
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 113, 113, 0.7);
+      background: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #b91c1c;
+      cursor: pointer;
+      transition: background 0.12s ease, color 0.12s ease, box-shadow 0.12s ease, transform 0.12s ease;
+    }
+
+    .mode-btn.active {
+      background: linear-gradient(135deg, #fb7185, #fb923c);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 8px 16px rgba(248, 113, 113, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .mode-description {
+      font-size: 0.8rem;
+      color: #6b7280;
+      line-height: 1.6;
     }
 
     .category-tabs {
@@ -253,7 +317,7 @@
       align-items: center;
       gap: 0.35rem;
       cursor: pointer;
-      transition: background 0.12s ease, color 0.12s ease, transform 0.12s ease, box-shadow 0.12s ease;
+      transition: background 0.12s ease, color 0.12s.ease, transform 0.12s ease, box-shadow 0.12s ease;
     }
 
     .tab span.icon {
@@ -320,6 +384,13 @@
       display: flex;
       gap: 0.6rem;
       align-items: flex-start;
+      transition: box-shadow 0.12s ease, transform 0.12s ease, border-color 0.12s ease;
+    }
+
+    .question-item:hover {
+      box-shadow: 0 4px 10px rgba(148, 163, 184, 0.35);
+      transform: translateY(-1px);
+      border-color: rgba(148, 163, 184, 0.9);
     }
 
     .question-bullet {
@@ -329,6 +400,51 @@
     }
 
     .question-text {
+      line-height: 1.7;
+    }
+
+    .ai-generator {
+      margin-top: 1rem;
+      padding: 0.8rem 0.9rem;
+      border-radius: 14px;
+      background: #fefce8;
+      border: 1px solid rgba(234, 179, 8, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ai-generator label {
+      font-size: 0.8rem;
+      color: #854d0e;
+      font-weight: 600;
+    }
+
+    .ai-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .ai-row input[type="text"] {
+      flex: 1;
+      min-width: 160px;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(202, 138, 4, 0.6);
+      font-size: 0.8rem;
+      outline: none;
+    }
+
+    .ai-row input[type="text"]:focus {
+      border-color: #facc15;
+    }
+
+    .ai-result {
+      font-size: 0.86rem;
+      color: #713f12;
       line-height: 1.7;
     }
 
@@ -401,6 +517,48 @@
       border-radius: 999px;
       background: #22c55e;
     }
+
+    .email-box {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .email-box label {
+      font-size: 0.8rem;
+      color: #e5e7eb;
+    }
+
+    .email-row {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .email-row input[type="email"] {
+      flex: 1;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      font-size: 0.8rem;
+      outline: none;
+    }
+
+    .email-row input[type="email"]:focus {
+      border-color: #f472b6;
+    }
+
+    .email-status {
+      font-size: 0.75rem;
+      color: #cbd5f5;
+    }
+
+    .email-btn {
+      font-size: 0.78rem;
+      padding-inline: 0.8rem;
+    }
   </style>
 </head>
 <body>
@@ -416,7 +574,29 @@
         يزيدون القرب بينهم. كل يوم تقدرون تختارون سؤال، تحچون به بهدوء، تفتّحون مواضيع
         جديدة، وتسوّون ذكريات ما تنعاد ويا أحد غيركم.
       </p>
+
+      <div class="music-bar">
+        <button id="choose-music-btn" class="btn-secondary music-btn">
+          <span>تشغيل أغنية رومانسية من جهازك</span>
+          <span>🎵</span>
+        </button>
+        <input type="file" id="music-file-input" accept="audio/*" style="display:none" />
+        <audio id="music-player" controls style="width: 100%; margin-top: 0.4rem; display: none;"></audio>
+      </div>
     </header>
+
+    <section class="mode-bar">
+      <div class="mode-label">اختر وضع الأسئلة المناسب لعلاقتك:</div>
+      <div class="mode-buttons">
+        <button class="mode-btn active" data-mode="engaged">مخطوبين</button>
+        <button class="mode-btn" data-mode="married">متزوجين</button>
+        <button class="mode-btn" data-mode="inlove">محبين</button>
+        <button class="mode-btn" data-mode="quiz">اختبار</button>
+      </div>
+      <p id="mode-description" class="mode-description">
+        وضع المخطوبين: مناسب للجلسات الهادئة قبل الزواج حتى تتعرفون على بعض أكثر.
+      </p>
+    </section>
 
     <section class="layout">
       <!-- العمود الرئيسي -->
@@ -442,6 +622,18 @@
               <span>نسخ السؤال</span>
               <span>📋</span>
             </button>
+          </div>
+
+          <div class="ai-generator">
+            <label for="ai-topic">جرّب توليد سؤال جديد بطريقة ذكية داخل الموقع:</label>
+            <div class="ai-row">
+              <input id="ai-topic" type="text" placeholder="اكتب موضوع السؤال (مثلاً: الغيرة، المستقبل، السفر)" />
+              <button id="ai-generate-btn" class="btn-secondary">
+                <span>توليد سؤال</span>
+                <span>✨</span>
+              </button>
+            </div>
+            <p id="ai-result" class="ai-result"></p>
           </div>
         </section>
 
@@ -518,6 +710,15 @@
           <li>شارك من قلبك مثل ما تحب شريكك يشاركك.</li>
           <li>إذا كان السؤال ثقيل، تجاوزوه وروحوا للسؤال اللي بعده.</li>
         </ul>
+
+        <div class="email-box">
+          <label for="user-email">تريد تحتفظ ببريدك لتستخدمه بهدوء بعدين؟</label>
+          <div class="email-row">
+            <input id="user-email" type="email" placeholder="اكتب بريدك الإلكتروني هنا" />
+            <button id="save-email-btn" class="btn-secondary email-btn">حفظ</button>
+          </div>
+          <small id="email-status" class="email-status"></small>
+        </div>
       </aside>
     </section>
   </main>
@@ -638,6 +839,16 @@
         ]
       }
     };
+
+    // دالة بسيطة لخلط المصفوفات
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+    }
 
     // توليد أسئلة إضافية آليًا حتى نوصل فوق 1000 سؤال
     function generateExtraQuestions() {
@@ -807,7 +1018,36 @@
 
     let currentCategoryKey = "deep";
     let currentQuestionIndex = null;
+    let currentMode = "engaged";
 
+    // مخازن الأسئلة العشوائية بدون تكرار
+    const categoryPools = {};
+    let globalPool = [];
+
+    function resetCategoryPool(categoryKey) {
+      const category = questionsData[categoryKey];
+      if (!category) return;
+      const pool = [];
+      for (let i = 0; i < category.questions.length; i++) {
+        pool.push(i);
+      }
+      shuffle(pool);
+      categoryPools[categoryKey] = pool;
+    }
+
+    function resetGlobalPool() {
+      globalPool = [];
+      const keys = Object.keys(questionsData);
+      keys.forEach(function (key) {
+        const category = questionsData[key];
+        for (let i = 0; i < category.questions.length; i++) {
+          globalPool.push({ categoryKey: key, index: i });
+        }
+      });
+      shuffle(globalPool);
+    }
+
+    // عناصر الواجهة
     const tabs = document.querySelectorAll(".tab");
     const listTitle = document.getElementById("list-title");
     const listDescription = document.getElementById("list-description");
@@ -818,6 +1058,108 @@
     const randomAllBtn = document.getElementById("random-all-btn");
     const randomCategoryBtn = document.getElementById("random-category-btn");
     const copyBtn = document.getElementById("copy-btn");
+
+    const modeButtons = document.querySelectorAll(".mode-btn");
+    const modeDescriptionEl = document.getElementById("mode-description");
+    const modeDescriptions = {
+      engaged: "وضع المخطوبين: مناسب للجلسات الهادئة قبل الزواج حتى تتعرفون على بعض أكثر.",
+      married: "وضع المتزوجين: مثالي للحديث عن الروتين، المسؤوليات، وتجديد الرومانسية بين الزوجين.",
+      inlove: "وضع المحبين: يناسب أي اثنين بعلاقة جدية يريدون يزيدون القرب والكلام الحلو.",
+      quiz: "وضع الاختبار: تقدرون تستعملون الأسئلة كاختبار معرفة وفهم لبعض بطريقة لطيفة."
+    };
+
+    if (modeDescriptionEl) {
+      modeDescriptionEl.textContent = modeDescriptions[currentMode];
+    }
+
+    modeButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const mode = btn.getAttribute("data-mode");
+        currentMode = mode;
+        modeButtons.forEach(function (b) {
+          b.classList.remove("active");
+        });
+        btn.classList.add("active");
+        if (modeDescriptions[mode]) {
+          modeDescriptionEl.textContent = modeDescriptions[mode];
+        }
+      });
+    });
+
+    // موسيقى رومانسية من جهاز المستخدم
+    const chooseMusicBtn = document.getElementById("choose-music-btn");
+    const musicFileInput = document.getElementById("music-file-input");
+    const musicPlayer = document.getElementById("music-player");
+
+    if (chooseMusicBtn && musicFileInput && musicPlayer) {
+      chooseMusicBtn.addEventListener("click", function () {
+        musicFileInput.click();
+      });
+
+      musicFileInput.addEventListener("change", function () {
+        const file = musicFileInput.files[0];
+        if (file) {
+          const url = URL.createObjectURL(file);
+          musicPlayer.src = url;
+          musicPlayer.style.display = "block";
+          musicPlayer.play().catch(function () {});
+        }
+      });
+    }
+
+    // حفظ البريد الإلكتروني محليًا
+    const emailInput = document.getElementById("user-email");
+    const saveEmailBtn = document.getElementById("save-email-btn");
+    const emailStatus = document.getElementById("email-status");
+
+    if (emailInput && emailStatus) {
+      const savedEmail = localStorage.getItem("romanticQuestionsEmail");
+      if (savedEmail) {
+        emailInput.value = savedEmail;
+        emailStatus.textContent = "تم استرجاع بريدك المحفوظ على هذا الجهاز.";
+      }
+    }
+
+    if (saveEmailBtn && emailInput && emailStatus) {
+      saveEmailBtn.addEventListener("click", function () {
+        const email = emailInput.value.trim();
+        if (!email) {
+          emailStatus.textContent = "اكتب بريدك أولاً.";
+          return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          emailStatus.textContent = "صيغة البريد لا تبدو صحيحة.";
+          return;
+        }
+        localStorage.setItem("romanticQuestionsEmail", email);
+        emailStatus.textContent = "تم حفظ بريدك على هذا الجهاز فقط.";
+      });
+    }
+
+    // مولّد سؤال بسيط داخل الموقع
+    const aiTopicInput = document.getElementById("ai-topic");
+    const aiGenerateBtn = document.getElementById("ai-generate-btn");
+    const aiResult = document.getElementById("ai-result");
+
+    if (aiGenerateBtn && aiTopicInput && aiResult && currentQuestionEl && currentCategoryLabel && currentIndexLabel) {
+      aiGenerateBtn.addEventListener("click", function () {
+        const rawTopic = aiTopicInput.value.trim();
+        const topic = rawTopic || "مشاعركم";
+        const templates = [
+          `لو نحچي بصراحة عن موضوع ${topic} بينكم، شنو أكثر شي تحسون يحتاج يتغيّر؟`,
+          `على مقياس من 1 إلى 10، شكد تحسون ${topic} يأثر على علاقتكم؟ وليش؟`,
+          `شنو الشي اللي يخليك ترتاح أو تتعب أكثر بخصوص ${topic}؟`,
+          `إذا تگدر تغيّر شغلة وحدة بـ ${topic} حتى تصير ألطف بينكم، شنو تختار؟`
+        ];
+        const randomIndex = Math.floor(Math.random() * templates.length);
+        const q = templates[randomIndex];
+        aiResult.textContent = q;
+        currentQuestionEl.textContent = q;
+        currentCategoryLabel.textContent = "سؤال مولّد داخل الموقع";
+        currentIndexLabel.textContent = "سؤال خاص حسب الموضوع الذي اخترته";
+      });
+    }
 
     function renderQuestions(categoryKey) {
       const category = questionsData[categoryKey];
@@ -874,17 +1216,22 @@
     function getRandomFromCategory(categoryKey) {
       const category = questionsData[categoryKey];
       if (!category) return;
-      const randomIndex = Math.floor(Math.random() * category.questions.length);
-      setCurrentQuestion(categoryKey, randomIndex);
+
+      if (!categoryPools[categoryKey] || categoryPools[categoryKey].length === 0) {
+        resetCategoryPool(categoryKey);
+      }
+      const pool = categoryPools[categoryKey];
+      const index = pool.pop();
+      setCurrentQuestion(categoryKey, index);
     }
 
     function getRandomFromAll() {
-      const keys = Object.keys(questionsData);
-      const randomCategoryIndex = Math.floor(Math.random() * keys.length);
-      const categoryKey = keys[randomCategoryIndex];
-      const category = questionsData[categoryKey];
-      const randomIndex = Math.floor(Math.random() * category.questions.length);
-      setCurrentQuestion(categoryKey, randomIndex);
+      if (!globalPool || globalPool.length === 0) {
+        resetGlobalPool();
+      }
+      if (!globalPool || globalPool.length === 0) return;
+      const pair = globalPool.pop();
+      setCurrentQuestion(pair.categoryKey, pair.index);
     }
 
     tabs.forEach(function (tab) {
@@ -901,39 +1248,46 @@
       });
     });
 
-    randomAllBtn.addEventListener("click", function () {
-      getRandomFromAll();
-    });
+    if (randomAllBtn) {
+      randomAllBtn.addEventListener("click", function () {
+        getRandomFromAll();
+      });
+    }
 
-    randomCategoryBtn.addEventListener("click", function () {
-      getRandomFromCategory(currentCategoryKey);
-    });
+    if (randomCategoryBtn) {
+      randomCategoryBtn.addEventListener("click", function () {
+        getRandomFromCategory(currentCategoryKey);
+      });
+    }
 
-    copyBtn.addEventListener("click", function () {
-      const text = currentQuestionEl.textContent.trim();
-      if (
-        !text ||
-        text.indexOf("سؤال عشوائي") !== -1 ||
-        text.indexOf("اضغط على زر") !== -1
-      ) {
-        alert("اختر سؤال أولاً حتى تقدر تنسخه.");
-        return;
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text)
-          .then(function () {
-            alert("تم نسخ السؤال، الصقه بالمحادثة أو الدردشة مع الشخص اللي تحبه.");
-          })
-          .catch(function () {
-            alert("ما قدرنا ننسخ تلقائياً، انسخ السؤال يدويًا من فضلك.");
-          });
-      } else {
-        alert("المتصفح لا يدعم النسخ التلقائي، انسخ السؤال يدويًا.");
-      }
-    });
+    if (copyBtn) {
+      copyBtn.addEventListener("click", function () {
+        const text = currentQuestionEl.textContent.trim();
+        if (
+          !text ||
+          text.indexOf("سؤال عشوائي") !== -1 ||
+          text.indexOf("اضغط على زر") !== -1
+        ) {
+          alert("اختر سؤال أولاً حتى تقدر تنسخه.");
+          return;
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text)
+            .then(function () {
+              alert("تم نسخ السؤال، الصقه بالمحادثة أو الدردشة مع الشخص الذي تحبه.");
+            })
+            .catch(function () {
+              alert("ما قدرنا ننسخ تلقائياً، انسخ السؤال يدويًا من فضلك.");
+            });
+        } else {
+          alert("المتصفح لا يدعم النسخ التلقائي، انسخ السؤال يدويًا.");
+        }
+      });
+    }
 
-    // عند تحميل الصفحة، اعرض قسم التعارف العميق
+    // عند تحميل الصفحة
     renderQuestions(currentCategoryKey);
+    resetGlobalPool();
   </script>
 </body>
 </html>
