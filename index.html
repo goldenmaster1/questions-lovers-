@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>جلسة حب اليوم</title>
   <style>
     :root {
-      --bg: #050409;
-      --bg-soft: #0d0a1a;
+      /* ألوان أساسية (وضع ليلي افتراضي) */
+      --bg-main: radial-gradient(circle at top left, #17132e 0, #050409 45%, #020108 100%);
       --card-bg: rgba(15, 12, 32, 0.96);
       --card-soft: rgba(255, 255, 255, 0.04);
       --text-main: #fdfbff;
@@ -18,9 +18,38 @@
       --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.4);
       --radius-lg: 22px;
       --radius-md: 16px;
+
+      /* ألوان القوائم (بحث, select, القوائم المنبثقة) */
+      --menu-bg: rgba(18, 14, 40, 0.9);
+      --menu-border: rgba(255, 255, 255, 0.12);
+      --menu-text: #e4ddff;
+
+      /* قوائم الأسئلة */
+      --list-bg: rgba(4, 3, 12, 0.9);
+      --list-item-bg: rgba(255, 255, 255, 0.03);
+      --list-item-border: rgba(255, 255, 255, 0.05);
     }
 
-    /* ثيمات حسب نمط العلاقة (يمكن تجاوزها عبر المخصص) */
+    /* وضع نهاري */
+    :root[data-theme="light"] {
+      --bg-main: radial-gradient(circle at top left, #fff7fb 0, #f7f3ff 40%, #ebe6ff 100%);
+      --card-bg: #fef9ff;
+      --card-soft: rgba(0, 0, 0, 0.02);
+      --text-main: #241533;
+      --text-muted: #6e5f8c;
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      --shadow-soft: 0 12px 32px rgba(0, 0, 0, 0.12);
+
+      --menu-bg: #f5ecff;
+      --menu-border: rgba(82, 51, 135, 0.25);
+      --menu-text: #3f295d;
+
+      --list-bg: #f6f0ff;
+      --list-item-bg: #ffffff;
+      --list-item-border: rgba(63, 41, 93, 0.15);
+    }
+
+    /* ثيمات حسب نمط العلاقة */
     :root[data-mode="love"] {
       --accent: #ff4a8d;
       --accent-2: #ffb84a;
@@ -46,7 +75,7 @@
       margin: 0;
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #17132e 0, #050409 45%, #020108 100%);
+      background: var(--bg-main);
       color: var(--text-main);
       direction: rtl;
     }
@@ -127,6 +156,12 @@
       margin-top: 0.15rem;
     }
 
+    .top-bar-small-buttons {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
     .theme-toggle-btn {
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.2);
@@ -140,6 +175,11 @@
       gap: 0.35rem;
       white-space: nowrap;
       transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    [data-theme="light"] .theme-toggle-btn {
+      border-color: rgba(59, 39, 99, 0.2);
+      background: rgba(255,255,255,0.7);
     }
 
     .theme-toggle-btn:hover {
@@ -168,7 +208,7 @@
       background: var(--card-bg);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
       padding: 1rem 1.1rem;
     }
 
@@ -216,6 +256,11 @@
       background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.07), transparent 55%);
       transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
       cursor: pointer;
+    }
+
+    [data-theme="light"] .music-dropzone {
+      background: #f6ecff;
+      border-color: rgba(76, 41, 114, 0.25);
     }
 
     .music-dropzone-inner {
@@ -292,6 +337,11 @@
       font-size: 0.82rem;
     }
 
+    [data-theme="light"] .music-meta {
+      background: #ffffff;
+      border-color: rgba(82, 51, 135, 0.2);
+    }
+
     .music-title-row {
       display: flex;
       flex-wrap: wrap;
@@ -339,6 +389,11 @@
       align-items: center;
       justify-content: center;
       transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+    }
+
+    [data-theme="light"] .music-icon-btn {
+      border-color: rgba(75, 49, 118, 0.3);
+      background: rgba(255,255,255,0.8);
     }
 
     .music-icon-btn[disabled] {
@@ -488,11 +543,11 @@
 
     .loveboard-btn {
       border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: var(--menu-bg);
+      border: 1px solid var(--menu-border);
       padding: 0.55rem 0.6rem;
       font-size: 0.8rem;
-      color: var(--text-main);
+      color: var(--menu-text);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -506,8 +561,12 @@
 
     .loveboard-btn:hover {
       background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.16);
+      border-color: var(--accent);
       transform: translateY(-1px);
+    }
+
+    [data-theme="light"] .loveboard-btn:hover {
+      background: #fff3ff;
     }
 
     .loveboard-tag {
@@ -554,6 +613,12 @@
       transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
     }
 
+    [data-theme="light"] .logout-btn {
+      border-color: rgba(128, 76, 125, 0.35);
+      background: #ffe6f0;
+      color: #a33663;
+    }
+
     .logout-btn:hover {
       background: rgba(255, 80, 120, 0.12);
       border-color: rgba(255, 80, 120, 0.4);
@@ -583,8 +648,9 @@
       display: inline-flex;
       gap: 0.4rem;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--menu-bg);
       padding: 0.2rem;
+      border: 1px solid var(--menu-border);
     }
 
     .relation-mode-btn {
@@ -594,7 +660,7 @@
       font-size: 0.78rem;
       cursor: pointer;
       background: transparent;
-      color: var(--text-muted);
+      color: var(--menu-text);
       transition: background 0.15s ease, color 0.15s ease;
     }
 
@@ -615,9 +681,11 @@
 
     .pill-muted {
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      border: 1px solid var(--menu-border);
       padding: 0.2rem 0.7rem;
       font-size: 0.75rem;
+      background: var(--menu-bg);
+      color: var(--menu-text);
     }
 
     /* ===== شريط مؤقت الجلسة ===== */
@@ -625,14 +693,15 @@
     .session-timer-banner {
       margin-bottom: 0.6rem;
       border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.12);
+      background: var(--menu-bg);
+      border: 1px solid var(--menu-border);
       padding: 0.35rem 0.75rem;
       font-size: 0.78rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 0.5rem;
+      color: var(--menu-text);
     }
 
     /* ===== أسئلة الجلسة ===== */
@@ -676,14 +745,15 @@
       gap: 0.4rem;
       padding: 0.45rem 0.7rem;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--menu-bg);
+      border: 1px solid var(--menu-border);
+      color: var(--menu-text);
     }
 
     .search-wrapper input {
       border: none;
       background: transparent;
-      color: var(--text-main);
+      color: var(--menu-text);
       font-size: 0.8rem;
       flex: 1;
     }
@@ -692,15 +762,19 @@
       color: rgba(180, 176, 201, 0.7);
     }
 
+    [data-theme="light"] .search-wrapper input::placeholder {
+      color: rgba(81, 55, 124, 0.6);
+    }
+
     .search-wrapper input:focus {
       outline: none;
     }
 
     .mini-select {
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text-main);
+      border: 1px solid var(--menu-border);
+      background: var(--menu-bg);
+      color: var(--menu-text);
       font-size: 0.8rem;
       padding: 0.35rem 0.55rem;
       min-width: 120px;
@@ -721,9 +795,18 @@
       white-space: nowrap;
     }
 
+    [data-theme="light"] .btn-soft {
+      background: #f3ebff;
+      color: #332149;
+    }
+
     .btn-soft:hover {
       background: rgba(255, 255, 255, 0.11);
       transform: translateY(-1px);
+    }
+
+    [data-theme="light"] .btn-soft:hover {
+      background: #e7d8ff;
     }
 
     .btn-primary-soft {
@@ -744,9 +827,9 @@
 
     .questions-list {
       margin-top: 0.2rem;
-      background: rgba(4, 3, 12, 0.85);
+      background: var(--list-bg);
       border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
       padding: 0.6rem 0.4rem;
       max-height: 420px;
       overflow: auto;
@@ -757,18 +840,23 @@
       border-radius: 12px;
       padding: 0.55rem 0.55rem;
       margin-bottom: 0.45rem;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: var(--list-item-bg);
+      border: 1px solid var(--list-item-border);
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
       font-size: 0.82rem;
+      color: var(--text-main);
     }
 
     .question-item.highlight {
       border-color: var(--accent);
       box-shadow: 0 0 0 1px rgba(255, 159, 74, 0.5);
       background: radial-gradient(circle at top right, rgba(255, 159, 74, 0.15), rgba(255, 255, 255, 0.02));
+    }
+
+    [data-theme="light"] .question-item.highlight {
+      background: #fff3e8;
     }
 
     .question-top-row {
@@ -796,9 +884,18 @@
       border: 1px solid rgba(255, 255, 255, 0.16);
     }
 
+    [data-theme="light"] .question-tag {
+      border-color: rgba(79, 53, 118, 0.25);
+      background: #f7ecff;
+    }
+
     .question-mode-label {
       font-size: 0.75rem;
       color: rgba(180, 176, 201, 0.9);
+    }
+
+    [data-theme="light"] .question-mode-label {
+      color: rgba(81, 55, 124, 0.8);
     }
 
     .question-actions {
@@ -809,14 +906,15 @@
 
     .badge-counter {
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      border: 1px solid var(--menu-border);
       padding: 0.2rem 0.6rem;
       font-size: 0.75rem;
-      color: var(--text-muted);
+      color: var(--menu-text);
       margin-top: 0.2rem;
       display: inline-flex;
       align-items: center;
       gap: 0.3rem;
+      background: var(--menu-bg);
     }
 
     /* ===== المودالات العامة ===== */
@@ -851,6 +949,13 @@
       overflow: auto;
       transform: translateY(8px);
       transition: transform 0.17s ease;
+      color: var(--text-main);
+    }
+
+    [data-theme="light"] .modal {
+      background: #fdf7ff;
+      border-color: rgba(89, 57, 133, 0.25);
+      color: #26153a;
     }
 
     .modal-backdrop.open .modal {
@@ -893,9 +998,19 @@
       white-space: nowrap;
     }
 
+    [data-theme="light"] .btn-sm {
+      border-color: rgba(89, 57, 133, 0.3);
+      background: #f4e7ff;
+      color: #27163d;
+    }
+
     .btn-sm:hover {
       background: rgba(255, 255, 255, 0.07);
       transform: translateY(-1px);
+    }
+
+    [data-theme="light"] .btn-sm:hover {
+      background: #e7d5ff;
     }
 
     .btn-danger {
@@ -904,8 +1019,10 @@
       color: #ffd7e5;
     }
 
-    .btn-danger:hover {
-      background: rgba(255, 102, 140, 0.22);
+    [data-theme="light"] .btn-danger {
+      background: #ffe0ec;
+      color: #9b234a;
+      border-color: rgba(160, 56, 95, 0.7);
     }
 
     /* مودال رسائل حب سريعة / لعبة سريعة */
@@ -924,6 +1041,12 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       font-size: 0.82rem;
       color: var(--text-main);
+    }
+
+    [data-theme="light"] .short-message-item {
+      background: #ffffff;
+      border-color: rgba(90, 60, 135, 0.22);
+      color: #2a163b;
     }
 
     /* مودال الأهداف المشتركة */
@@ -946,6 +1069,11 @@
       gap: 0.45rem;
     }
 
+    [data-theme="light"] .goal-item {
+      background: #ffffff;
+      border-color: rgba(90, 60, 135, 0.22);
+    }
+
     .goal-label {
       font-size: 0.78rem;
       color: var(--text-muted);
@@ -961,6 +1089,10 @@
       flex: 1;
     }
 
+    [data-theme="light"] .goal-item input {
+      color: #2a163b;
+    }
+
     .goal-item input:focus {
       outline: none;
     }
@@ -973,6 +1105,10 @@
       display: none;
       z-index: 60;
       padding: 1rem;
+    }
+
+    [data-theme="light"] .memories-overlay {
+      background: radial-gradient(circle at top, #fdf7ff 0, #ebe5ff 60%);
     }
 
     .memories-overlay.open {
@@ -992,6 +1128,13 @@
       padding: 1.1rem 1.1rem 0.9rem;
       display: flex;
       flex-direction: column;
+      color: var(--text-main);
+    }
+
+    [data-theme="light"] .memories-panel {
+      background: #fdf7ff;
+      border-color: rgba(93, 64, 140, 0.22);
+      color: #26163b;
     }
 
     .memories-header {
@@ -1024,9 +1167,19 @@
       white-space: nowrap;
     }
 
+    [data-theme="light"] .btn-back {
+      border-color: rgba(89, 59, 137, 0.3);
+      background: #f4e7ff;
+      color: #26143b;
+    }
+
     .btn-back:hover {
       background: rgba(255, 255, 255, 0.1);
       transform: translateY(-1px);
+    }
+
+    [data-theme="light"] .btn-back:hover {
+      background: #e7d5ff;
     }
 
     .memories-list {
@@ -1046,6 +1199,11 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
+    [data-theme="light"] .memory-item {
+      background: #ffffff;
+      border-color: rgba(91, 60, 140, 0.18);
+    }
+
     .memory-label {
       font-size: 0.78rem;
       color: var(--text-muted);
@@ -1063,6 +1221,10 @@
       font-family: inherit;
     }
 
+    [data-theme="light"] .memory-item textarea {
+      color: #29163f;
+    }
+
     .memory-item textarea:focus {
       outline: none;
     }
@@ -1073,6 +1235,10 @@
       margin-top: 0.55rem;
       padding-top: 0.4rem;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    [data-theme="light"] .memories-footer {
+      border-top-color: rgba(94, 65, 140, 0.24);
     }
 
     /* ثيمات / تخصيص ألوان */
@@ -1102,10 +1268,21 @@
       transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
     }
 
+    [data-theme="light"] .theme-preset {
+      border-color: rgba(88, 59, 135, 0.3);
+      background: #f5ebff;
+      color: #2a193e;
+    }
+
     .theme-preset:hover {
       background: rgba(255, 255, 255, 0.08);
       transform: translateY(-1px);
       border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    [data-theme="light"] .theme-preset:hover {
+      background: #e7d5ff;
+      border-color: rgba(88, 59, 135, 0.6);
     }
 
     .theme-preset-main {
@@ -1147,9 +1324,9 @@
       width: 100%;
       margin-top: 0.4rem;
       border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text-main);
+      border: 1px solid var(--menu-border);
+      background: var(--menu-bg);
+      color: var(--menu-text);
       font-size: 0.8rem;
       padding: 0.35rem 0.5rem;
     }
@@ -1201,6 +1378,7 @@
       }
       .top-bar-right {
         width: 100%;
+        justify-content: flex-start;
       }
       .main-session-btn {
         width: 100%;
@@ -1240,10 +1418,16 @@
         <span>ابدأ جلسة حب اليوم</span>
         <div class="main-session-meta">مدة مقترحة: 30 - 45 دقيقة · يفضل إطفاء الإشعارات أثناء الجلسة</div>
       </button>
-      <button class="theme-toggle-btn" id="theme-btn" type="button">
-        <span class="btn-icon">🎨</span>
-        تخصيص الألوان والثيم
-      </button>
+      <div class="top-bar-small-buttons">
+        <button class="theme-toggle-btn" id="daynight-btn" type="button">
+          <span class="btn-icon" id="daynight-icon">☀️</span>
+          <span id="daynight-label">وضع نهاري</span>
+        </button>
+        <button class="theme-toggle-btn" id="theme-btn" type="button">
+          <span class="btn-icon">🎨</span>
+          تخصيص الألوان والثيم
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1410,9 +1594,7 @@
           السؤال الذكي يتم توليده من أنماط جاهزة داخل الصفحة، ويمكن لاحقاً ربطه بـ ChatGPT من خلال خادم خلفي (Backend).
         </div>
 
-        <div class="questions-list" id="questions-list">
-          <!-- يتم ملؤه عبر JavaScript -->
-        </div>
+        <div class="questions-list" id="questions-list"></div>
 
         <div class="badge-counter" id="questions-counter">
           <span id="visible-count">0</span> / <span id="total-count">0</span> سؤال متاح حالياً
@@ -1660,7 +1842,7 @@
       </select>
 
       <div class="modal-body-note">
-        يتم حفظ خيارات الألوان والثيمات تلقائياً على هذا الجهاز، ويمكنك تبديلها في أي وقت. زر الجلسة يدعم أكثر من 30 تدرج مختلف ومئات الألوان عبر وضع الـ RGB العشوائي.
+        يتم حفظ خيارات الألوان والثيمات تلقائياً على هذا الجهاز، ويمكنك تبديلها في أي وقت.
       </div>
     </div>
     <div class="modal-actions">
@@ -2413,9 +2595,15 @@
     });
   })();
 
-  // ===== 7) تخصيص الألوان والثيم + 30 ثيم لزر الجلسة =====
+  // ===== 7) وضع نهاري/ليلي + تخصيص الألوان والثيم + 30 ثيم لزر الجلسة =====
   (function () {
-    const rootStyle = document.documentElement.style;
+    const root = document.documentElement;
+    const rootStyle = root.style;
+
+    const dayNightBtn = document.getElementById("daynight-btn");
+    const dayNightIcon = document.getElementById("daynight-icon");
+    const dayNightLabel = document.getElementById("daynight-label");
+
     const themeBtn = document.getElementById("theme-btn");
     const themeModal = document.getElementById("theme-modal");
     const themeClose = document.getElementById("theme-close");
@@ -2426,44 +2614,33 @@
     const sessionBtnSelect = document.getElementById("session-btn-theme-select");
     const startBtn = document.getElementById("start-session-btn");
 
+    const DAYNIGHT_KEY = "love_app_daynight_v1";
     const THEME_KEY = "love_app_theme_v1";
 
     const THEMES = {
       "romantic-night": {
         accent: "#ff4a8d",
-        accent2: "#ffb84a",
-        bgGradient: "radial-gradient(circle at top left,#251634 0,#050409 55%,#020108 100%)",
-        cardBg: "rgba(15,12,32,0.96)"
+        accent2: "#ffb84a"
       },
       "soft-rose": {
         accent: "#ff7ea3",
-        accent2: "#ffe3b8",
-        bgGradient: "radial-gradient(circle at top left,#3e2234 0,#120714 60%,#050409 100%)",
-        cardBg: "rgba(24,11,26,0.96)"
+        accent2: "#ffe3b8"
       },
       "ocean-love": {
         accent: "#4ad2ff",
-        accent2: "#7effc8",
-        bgGradient: "radial-gradient(circle at top left,#133145 0,#030910 55%,#020108 100%)",
-        cardBg: "rgba(8,18,30,0.96)"
+        accent2: "#7effc8"
       },
       "golden-warm": {
         accent: "#ffb84a",
-        accent2: "#ff7e5f",
-        bgGradient: "radial-gradient(circle at top left,#3b240f 0,#120a05 60%,#050409 100%)",
-        cardBg: "rgba(24,16,8,0.96)"
+        accent2: "#ff7e5f"
       },
       "midnight-blue": {
         accent: "#6a8bff",
-        accent2: "#c2e9ff",
-        bgGradient: "radial-gradient(circle at top left,#111b3c 0,#050816 60%,#020108 100%)",
-        cardBg: "rgba(9,13,30,0.96)"
+        accent2: "#c2e9ff"
       },
       "emerald-heart": {
         accent: "#41f5b0",
-        accent2: "#f9ffb5",
-        bgGradient: "radial-gradient(circle at top left,#10332a 0,#03120f 60%,#020108 100%)",
-        cardBg: "rgba(7,23,19,0.96)"
+        accent2: "#f9ffb5"
       }
     };
 
@@ -2500,25 +2677,54 @@
       "linear-gradient(90deg,#2193b0,#6dd5ed,#fceabb)"
     ];
 
-    function loadThemeState() {
-      const raw = localStorage.getItem(THEME_KEY);
-      if (!raw) return null;
+    function loadJson(key) {
       try {
-        return JSON.parse(raw);
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : null;
       } catch (e) {
         return null;
       }
     }
 
-    let themeState = loadThemeState() || {};
+    // ===== وضع نهاري/ليلي =====
+    function updateDayNightButton(mode) {
+      if (!dayNightIcon || !dayNightLabel) return;
+      if (mode === "light") {
+        dayNightIcon.textContent = "🌙";
+        dayNightLabel.textContent = "وضع ليلي";
+      } else {
+        dayNightIcon.textContent = "☀️";
+        dayNightLabel.textContent = "وضع نهاري";
+      }
+    }
+
+    function applyDayNight(mode) {
+      const value = mode === "light" ? "light" : "dark";
+      root.setAttribute("data-theme", value);
+      updateDayNightButton(value);
+      localStorage.setItem(DAYNIGHT_KEY, value);
+    }
+
+    const savedMode = localStorage.getItem(DAYNIGHT_KEY);
+    applyDayNight(savedMode || "dark");
+
+    if (dayNightBtn) {
+      dayNightBtn.addEventListener("click", () => {
+        const current = root.getAttribute("data-theme") || "dark";
+        const next = current === "dark" ? "light" : "dark";
+        applyDayNight(next);
+      });
+    }
+
+    // ===== تخصيص الألوان والثيم =====
+    let themeState = loadJson(THEME_KEY) || {};
 
     function applyThemeState(state) {
       if (!state) return;
       if (state.accent) rootStyle.setProperty("--accent", state.accent);
       if (state.accent2) rootStyle.setProperty("--accent-2", state.accent2);
-      if (state.cardBg) rootStyle.setProperty("--card-bg", state.cardBg);
-      if (state.bgGradient) document.body.style.background = state.bgGradient;
-      if (typeof state.sessionBtnPresetIndex === "number" && SESSION_BTN_PRESETS[state.sessionBtnPresetIndex]) {
+      if (typeof state.sessionBtnPresetIndex === "number" &&
+          SESSION_BTN_PRESETS[state.sessionBtnPresetIndex]) {
         startBtn.style.backgroundImage = SESSION_BTN_PRESETS[state.sessionBtnPresetIndex];
         sessionBtnSelect.value = String(state.sessionBtnPresetIndex);
       }
@@ -2531,7 +2737,7 @@
     applyThemeState(themeState);
 
     themeBtn.addEventListener("click", () => {
-      accentInput.value = themeState.accent || "#ff4a8d";
+      accentInput.value  = themeState.accent  || "#ff4a8d";
       accent2Input.value = themeState.accent2 || "#ffb84a";
       themeModal.classList.add("open");
     });
@@ -2638,16 +2844,6 @@
       label.textContent = range.value;
     }
 
-    range.addEventListener("input", updateRangeLabel);
-
-    quickBtns.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const v = btn.getAttribute("data-session-min");
-        range.value = v;
-        updateRangeLabel();
-      });
-    });
-
     function formatTime(sec) {
       if (isNaN(sec) || sec < 0) return "0:00";
       const m = Math.floor(sec / 60);
@@ -2701,6 +2897,14 @@
 
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeModal();
+    });
+
+    quickBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const v = btn.getAttribute("data-session-min");
+        range.value = v;
+        updateRangeLabel();
+      });
     });
 
     updateRangeLabel();
