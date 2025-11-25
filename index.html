@@ -6,7 +6,6 @@
   <title>جلسة حب اليوم</title>
   <style>
     :root {
-      /* ألوان أساسية (وضع ليلي افتراضي) */
       --bg-main: radial-gradient(circle at top left, #17132e 0, #050409 45%, #020108 100%);
       --card-bg: rgba(15, 12, 32, 0.96);
       --card-soft: rgba(255, 255, 255, 0.04);
@@ -19,18 +18,15 @@
       --radius-lg: 22px;
       --radius-md: 16px;
 
-      /* ألوان القوائم (بحث, select, القوائم المنبثقة) */
       --menu-bg: rgba(18, 14, 40, 0.9);
       --menu-border: rgba(255, 255, 255, 0.12);
       --menu-text: #e4ddff;
 
-      /* قوائم الأسئلة */
       --list-bg: rgba(4, 3, 12, 0.9);
       --list-item-bg: rgba(255, 255, 255, 0.03);
       --list-item-border: rgba(255, 255, 255, 0.05);
     }
 
-    /* وضع نهاري */
     :root[data-theme="light"] {
       --bg-main: radial-gradient(circle at top left, #fff7fb 0, #f7f3ff 40%, #ebe6ff 100%);
       --card-bg: #fef9ff;
@@ -49,7 +45,6 @@
       --list-item-border: rgba(63, 41, 93, 0.15);
     }
 
-    /* ثيمات حسب نمط العلاقة */
     :root[data-mode="love"] {
       --accent: #ff4a8d;
       --accent-2: #ffb84a;
@@ -223,8 +218,7 @@
       color: var(--text-muted);
     }
 
-    /* ===== موسيقى الجلسة (من الجهاز فقط) ===== */
-
+    /* موسيقى الجلسة */
     .session-music {
       margin-bottom: 1rem;
     }
@@ -528,8 +522,7 @@
       cursor: pointer;
     }
 
-    /* ===== LoveBoard ===== */
-
+    /* LoveBoard */
     .loveboard {
       margin-bottom: 1rem;
     }
@@ -580,8 +573,7 @@
       color: var(--text-muted);
     }
 
-    /* ===== الحساب / تسجيل الخروج ===== */
-
+    /* الحساب */
     .account-card {
       font-size: 0.8rem;
       color: var(--text-muted);
@@ -610,7 +602,7 @@
       color: #ffb6c1;
       font-size: 0.82rem;
       cursor: pointer;
-      transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+      transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s.ease;
     }
 
     [data-theme="light"] .logout-btn {
@@ -625,8 +617,7 @@
       transform: translateY(-1px);
     }
 
-    /* ===== يمين الصفحة: إعدادات الجلسة والأسئلة ===== */
-
+    /* إعدادات الجلسة */
     .session-settings-card {
       margin-bottom: 1rem;
     }
@@ -688,8 +679,7 @@
       color: var(--menu-text);
     }
 
-    /* ===== شريط مؤقت الجلسة ===== */
-
+    /* مؤقت الجلسة */
     .session-timer-banner {
       margin-bottom: 0.6rem;
       border-radius: 999px;
@@ -704,8 +694,7 @@
       color: var(--menu-text);
     }
 
-    /* ===== أسئلة الجلسة ===== */
-
+    /* أسئلة الجلسة */
     .questions-card {
       display: flex;
       flex-direction: column;
@@ -777,7 +766,7 @@
       color: var(--menu-text);
       font-size: 0.8rem;
       padding: 0.35rem 0.55rem;
-      min-width: 120px;
+      min-width: 140px;
     }
 
     .btn-soft {
@@ -825,13 +814,49 @@
       color: var(--text-muted);
     }
 
+    .question-display-wrapper {
+      margin-top: 0.6rem;
+      margin-bottom: 0.4rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.6rem;
+      align-items: stretch;
+    }
+
+    .question-display {
+      border-radius: 18px;
+      background: var(--list-bg);
+      border: 1px solid var(--border-subtle);
+      padding: 1rem 1rem;
+      min-height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .question-display-placeholder {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .question-display-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .question-display-copy-btn {
+      align-self: center;
+      height: fit-content;
+    }
+
     .questions-list {
       margin-top: 0.2rem;
       background: var(--list-bg);
       border-radius: 16px;
       border: 1px solid var(--border-subtle);
       padding: 0.6rem 0.4rem;
-      max-height: 420px;
+      max-height: 360px;
       overflow: auto;
       scroll-behavior: smooth;
     }
@@ -917,8 +942,7 @@
       background: var(--menu-bg);
     }
 
-    /* ===== المودالات العامة ===== */
-
+    /* المودالات العامة */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -1025,7 +1049,6 @@
       border-color: rgba(160, 56, 95, 0.7);
     }
 
-    /* مودال رسائل حب سريعة / لعبة سريعة */
     .short-messages-list {
       display: flex;
       flex-direction: column;
@@ -1049,7 +1072,6 @@
       color: #2a163b;
     }
 
-    /* مودال الأهداف المشتركة */
     .goals-list {
       display: flex;
       flex-direction: column;
@@ -1097,7 +1119,6 @@
       outline: none;
     }
 
-    /* صفحة ذكرياتكم المفضلة */
     .memories-overlay {
       position: fixed;
       inset: 0;
@@ -1241,7 +1262,6 @@
       border-top-color: rgba(94, 65, 140, 0.24);
     }
 
-    /* ثيمات / تخصيص ألوان */
     .theme-section-title {
       font-size: 0.8rem;
       color: var(--text-main);
@@ -1331,7 +1351,6 @@
       padding: 0.35rem 0.5rem;
     }
 
-    /* مؤقت الجلسة داخل المودال */
     .timer-picker {
       margin-bottom: 0.6rem;
     }
@@ -1367,7 +1386,6 @@
       text-align: center;
     }
 
-    /* استجابة الشاشات الصغيرة */
     @media (max-width: 960px) {
       .layout {
         grid-template-columns: minmax(0, 1fr);
@@ -1399,12 +1417,18 @@
       .search-wrapper {
         order: 1;
       }
+      .question-display-wrapper {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .question-display-copy-btn {
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 </head>
 <body>
 <div class="app-shell">
-  <!-- أعلى الصفحة -->
   <div class="top-bar">
     <div class="logo-block">
       <div class="logo-dot"></div>
@@ -1533,18 +1557,16 @@
 
     <!-- العمود الأيمن -->
     <div class="right-col">
-      <!-- شريط مؤقت الجلسة -->
       <div class="session-timer-banner" id="session-timer-banner" style="display:none;">
         <span id="session-timer-text">لم يتم تحديد زمن للجلسة بعد.</span>
         <button class="btn-sm" id="session-timer-stop" type="button">إيقاف المؤقت</button>
       </div>
 
-      <!-- إعدادات الجلسة -->
       <div class="card session-settings-card">
         <div class="session-settings-top">
           <div>
             <div class="card-header-title">جلسة اليوم</div>
-            <div class="session-info-line">اختر نمط العلاقة حتى نضبط الأسئلة والألوان بالكامل.</div>
+            <div class="session-info-line">اختر نمط العلاقة حتى نضبط الأجواء والألوان (ويمكن تطوير الأسئلة حسب النمط لاحقاً).</div>
           </div>
           <div class="relation-modes" id="relation-modes">
             <button class="relation-mode-btn active" data-mode="love" type="button">حب / تعارف</button>
@@ -1554,7 +1576,7 @@
           </div>
         </div>
         <div class="session-settings-bottom">
-          <div class="pill-muted">اختيار نمط العلاقة يغيّر الأسئلة والثيم بالكامل.</div>
+          <div class="pill-muted">تغيير نمط العلاقة يغيّر الثيم والأجواء تلقائياً.</div>
           <div class="pill-muted">يمكنكم التنقل بين الأنماط في أي لحظة أثناء الجلسة.</div>
         </div>
       </div>
@@ -1563,22 +1585,21 @@
       <div class="card questions-card">
         <div class="questions-header">
           <div class="questions-header-title">أسئلة الجلسة</div>
-          <div class="questions-header-badge" id="questions-header-badge">جاهزة لبدء الحديث.</div>
+          <div class="questions-header-badge" id="questions-header-badge">حوالي 2500 سؤال موزعة على خمس خانات.</div>
         </div>
 
         <div class="questions-toolbar">
           <div class="search-wrapper">
             <span style="font-size:0.85rem;">🔍</span>
-            <input type="text" id="search-input" placeholder="ابحث عن سؤال معيّن أو كلمة (مثلاً: غيرة، ثقة، خوف)..." />
+            <input type="text" id="search-input" placeholder="ابحث عن سؤال معيّن أو كلمة (مثلاً: غيرة، ضحك، خوف)..." />
           </div>
           <select class="mini-select" id="tag-filter">
             <option value="all">كل أنواع الأسئلة</option>
-            <option value="love">حب / رومانسية</option>
-            <option value="deep">عميقة</option>
-            <option value="worry">قلق / مخاوف</option>
-            <option value="funny">ضحك / مواقف</option>
-            <option value="daring">جريئة بلطف</option>
-            <option value="daily">يوميات</option>
+            <option value="love">حب / رومانسي</option>
+            <option value="funny">مضحك / ضحك</option>
+            <option value="daring">جريء / صريح بلطف</option>
+            <option value="horror">رعب / غموض</option>
+            <option value="smart">ذكاء / فطنة</option>
           </select>
           <button class="btn-soft" id="random-question-btn" type="button">
             <span class="btn-icon">🎲</span>
@@ -1586,19 +1607,32 @@
           </button>
           <button class="btn-primary-soft" id="ai-question-btn" type="button">
             <span class="btn-icon">✨</span>
-            سؤال ذكي تلقائي
+            سؤال ذكاء اصطناعي
           </button>
         </div>
 
         <div class="questions-ai-hint">
-          السؤال الذكي يتم توليده من أنماط جاهزة داخل الصفحة، ويمكن لاحقاً ربطه بـ ChatGPT من خلال خادم خلفي (Backend).
+          زر "سؤال ذكاء اصطناعي" يولّد سؤالاً جديداً داخل الصفحة (بمنطق مشابه للذكاء الاصطناعي) يختلف عن الأسئلة المخزّنة،
+          ويمكن مستقبلاً ربطه مباشرةً بخادم ChatGPT حقيقي لو حبيت تطوّر الموقع أكثر.
+        </div>
+
+        <div class="question-display-wrapper">
+          <div class="question-display" id="question-display-box">
+            <div class="question-display-placeholder" id="question-display-placeholder">
+              اضغط على "سؤال عشوائي" أو "سؤال ذكاء اصطناعي" ليظهر السؤال هنا وتقدر تنسخه مباشرةً.
+            </div>
+            <div class="question-display-text" id="question-display-text" style="display:none;"></div>
+          </div>
+          <button class="btn-soft question-display-copy-btn" id="question-display-copy" type="button">
+            <span class="btn-icon">📋</span>
+            نسخ النص الظاهر
+          </button>
         </div>
 
         <div class="questions-list" id="questions-list"></div>
 
         <div class="badge-counter" id="questions-counter">
           <span id="visible-count">0</span> / <span id="total-count">0</span> سؤال متاح حالياً
-          <span style="opacity:0.75;">(قابل للتوسعة بسهولة لأكثر من 2000 سؤال)</span>
         </div>
       </div>
     </div>
@@ -1611,7 +1645,7 @@
     <div class="modal-title">تأكيد تسجيل الخروج</div>
     <div class="modal-body">
       هل أنت متأكد من إنك تريد إنهاء جلسة الحب الحالية؟<br>
-      سيتم مسح حالة الجلسة والأسئلة المحدّدة، ولكن لا يتم حفظ أي شيء شخصي في الموقع.
+      سيتم مسح حالة الجلسة والتفضيلات المؤقتة، ولا يتم حفظ أي بيانات شخصية على خادم.
     </div>
     <div class="modal-actions">
       <button class="btn-sm" id="logout-cancel" type="button">إلغاء</button>
@@ -1859,9 +1893,9 @@
     const headerBadge = document.getElementById("questions-header-badge");
 
     const modeMessages = {
-      love: "أسئلة تركّز على التعارف، المشاعر الأولى، ورسم المستقبل.",
-      engaged: "أسئلة تساعدكم على تجهيز علاقتكم للخطوة القادمة بثبات.",
-      married: "أسئلة للراحة، المصارحة، واستعادة الدفء بينكما.",
+      love: "أسئلة موزعة بين حب، ضحك، جرأة خفيفة، رعب، وذكاء.",
+      engaged: "أسئلة لطيفة تساعدكم تبنون حوار ثابت قبل الزواج.",
+      married: "أسئلة للحفاظ على الدفء، الضحك، والمصارحة بعد الزواج.",
       special: "أسئلة مرنة تناسب أي علاقة خاصة لا تشبه غيرها."
     };
 
@@ -1877,76 +1911,212 @@
     });
   })();
 
-  // ===== 2) بنك الأسئلة =====
-  const baseQuestions = [
-    { text: "شنو أكثر قيمة تحب تبني عليها أي علاقة تدخلها؟", tags: ["deep", "love"], modes: ["love", "engaged", "special"] },
-    { text: "شنو الشي اللي يخليك تحس إنك فعلاً محبوب ومقدَّر بالعلاقة؟", tags: ["deep", "love"], modes: ["love", "engaged", "married", "special"] },
-    { text: "إذا توصف إحساسك أول ما شفت شريكك بثلاث كلمات، شنو تختار؟", tags: ["love", "funny"], modes: ["love", "engaged"] },
-    { text: "تحب العلاقة تكون فيها مساحة حرية كبيرة لو تفضل القرب اليومي؟ وليش؟", tags: ["deep"], modes: ["love", "engaged", "special"] },
-    { text: "شنو أول موقف خليك تحس إن هذا الشخص مختلف عن البقية؟", tags: ["deep", "love"], modes: ["love", "engaged", "special"] },
-    { text: "منو الشخص اللي صار تحب تحجيله عن يومك حتى لو التفاصيل بسيطة؟", tags: ["daily", "love"], modes: ["love", "engaged"] },
-    { text: "شنو أكثر نوع من الرسائل يخلي قلبك يهدأ حتى لو انت متوتر؟", tags: ["love", "worry"], modes: ["love", "engaged", "married"] },
-    { text: "إذا كل يوم نبدي بسؤال ثابت بيناتنا، شنو تحب يكون هذا السؤال؟", tags: ["daily", "deep"], modes: ["love", "engaged", "married", "special"] },
-    { text: "شنو تعريفك الشخصي للغيرة الصحية؟ وشنو الخط اللي بعدها تصير مزعجة؟", tags: ["deep", "worry"], modes: ["love", "engaged", "married", "special"] },
-    { text: "شنو أكثر شي بسيط تتمنّى شريكك ما يستهين بيه مهما كان؟", tags: ["deep"], modes: ["love", "engaged", "married"] },
+  // ===== 2) بنك الأسئلة (حوالي 2500 سؤال) + عرضها =====
+  const allQuestions = (function () {
+    const patterns = [
+      "شنو أكثر شيء تحب نكتشفه عن {topic} بيناتنا؟",
+      "لو أسألك سؤال واحد عن {topic} حتى أعرفك بعمق، شنو يكون؟",
+      "شنو أول ذكرى تخطر ببالك لما نسمع كلمة {topic}؟",
+      "شنو حدودك الشخصية بموضوع {topic}؟",
+      "شنو الشي اللي يخوفك أكثر شي بخصوص {topic}؟",
+      "شنو الشي اللي يضحكك إذا صار مرتبط بـ {topic}؟",
+      "شنو موقف حقيقي صار وياك له علاقة بـ {topic} وتتمنى ترويه كل مرة؟",
+      "لو نهتم أكثر بـ {topic} بحياتنا، شنو ممكن يتغيّر؟",
+      "برايك شلون نقدر نحل خلاف لو كان سببه {topic}؟",
+      "شنو الشي اللي تتمنى ما يصير أبداً إذا الموضوع يتعلّق بـ {topic}؟",
+      "شنو سؤال نفسك أسألك إياه عن {topic} بس بعدني ما سألته؟",
+      "شنو الشي اللي يخليك تحس بالفخر إذا نجحنا بفهم {topic} سوا؟",
+      "شنو نوع الكلام اللي تحب تسمعه مني لما الموضوع يكون عن {topic}؟",
+      "شنو أسوأ طريقة ممكن نتعامل بيها مع {topic} وتتمنى نتجنبها؟",
+      "شنو أفضل نصيحة سمعتها بحياتك عن {topic}؟",
+      "لو تصير بينا لعبة أسئلة كاملة عن {topic}، شنو أول سؤال تحب تبدي بيه؟",
+      "شنو أكبر خطأ ممكن نرتكبه إذا استهنّا بموضوع {topic}؟",
+      "شنو أكثر شيء مطمئن بالنسبة إلك إذا صار يحترم {topic}؟",
+      "شنو الشي البسيط اللي نقدر نسويه اليوم حتى نطوّر نظرتنا لـ {topic}؟",
+      "شنو أكثر جانب مجهول بالنسبة إلك بخصوص {topic}؟",
+      "شنو الشي اللي يخليك تحس إن الشخص المقابل فاهم {topic} صح؟",
+      "شنو شيء تتمنى تتعلمه بعد أكثر عن {topic}؟",
+      "شنو شعورك لما أحد يستهين بموضوع {topic}؟",
+      "شنو موقف تتوقع يختبرنا إذا ارتبط بـ {topic}؟",
+      "شنو الشي اللي يخلي {topic} ممتع بدال ما يكون ثقيل؟"
+    ];
 
-    { text: "شنو الشي اللي تتمنى نتفق عليه قبل الزواج حتى نقلل الخلافات بالمستقبل؟", tags: ["deep"], modes: ["engaged"] },
-    { text: "لما تتخيل أول سنة من زواجنا، شنو العادة اللي نفسك تكون ثابتة بيناتنا؟", tags: ["love", "daily"], modes: ["engaged"] },
-    { text: "شنو أكثر خوف عندك من فكرة الزواج، وشنو يساعدك تهدأ من هذا الخوف؟", tags: ["worry", "deep"], modes: ["engaged"] },
-    { text: "إذا نختلف على قرار مهم، شنو الطريقة اللي تحب نتبعها حتى نوصل لنقطة وسط؟", tags: ["deep"], modes: ["engaged", "married"] },
-    { text: "من بين عائلتك، منو تتمنى علاقتي بيه تكون قريبة وليش؟", tags: ["daily"], modes: ["engaged", "married"] },
+    const loveTopics = [
+      "الاهتمام اليومي",
+      "الرسائل الصباحية",
+      "الرسائل الليلية",
+      "المفاجآت الحلوة",
+      "الغيرة اللطيفة",
+      "الثقة بينا",
+      "المصارحة بالمشاعر",
+      "الاحتواء وقت التعب",
+      "الأمان مع الشريك",
+      "نظرات العيون",
+      "مسكة اليد",
+      "الذكريات الأولى بيناتنا",
+      "الاعتذار من القلب",
+      "الهدايا الصغيرة",
+      "الاحتفال بالمناسبات",
+      "الوعود بيناتنا",
+      "الوقت الخاص بيناتنا",
+      "الاهتمام بتفاصيلك",
+      "الكلام الحلو الصادق",
+      "الدعم وقت المشاكل",
+      "الضحك المشترك بينا",
+      "الرحلات اللي نروحها سوا",
+      "خطط المستقبل بيناتنا",
+      "الحضن وقت الخوف",
+      "الهدوء لما نكون سوا"
+    ];
 
-    { text: "شنو عادة صغيرة تتمنى نرجع نسويها مثل أول أيام زواجنا؟", tags: ["love", "deep"], modes: ["married"] },
-    { text: "شنو أكثر موقف وقفنا به سوا وحسيت إننا فريق واحد قوي؟", tags: ["deep"], modes: ["married", "special"] },
-    { text: "إذا أولادنا سألونا بعد كم سنة: شنو سر استمراركم سوا؟ شنو تحب يكون جوابك؟", tags: ["deep"], modes: ["married"] },
-    { text: "شنو الشي اللي لو سويته أنا يومياً يخلي حياتك أسهل أو ألطف؟", tags: ["daily", "love"], modes: ["married", "engaged"] },
-    { text: "برايك شنو أسهل طريقة نهدّي جو البيت بعد يوم متعب؟", tags: ["daily"], modes: ["married"] },
+    const funnyTopics = [
+      "المواقف المحرجة",
+      "الضحك بدون سبب",
+      "المقالب اللطيفة",
+      "الصور القديمة الغريبة",
+      "الردود السريعة",
+      "الرقص الغريب",
+      "الفلترات المضحكة",
+      "حركاتك العفوية",
+      "النكات البايخة",
+      "الأكل اللي احترق",
+      "المحادثات النصية الغريبة",
+      "أول مكالمة بيناتنا",
+      "أول موعد فاشل",
+      "النوم في الوقت الغلط",
+      "حذاءك المزعج",
+      "صوت الضحكة",
+      "الألقاب الغريبة بيناتنا",
+      "المواقف اللي نعيدها دائمًا",
+      "السفر الكارثي المضحك",
+      "تجارب الطبخ الفاشلة",
+      "الزلة بالكلام",
+      "الميمز اللي نرسلها لبعض",
+      "الضحكة اللي ما نقدر نوقفها",
+      "اللخبطة بالأسماء",
+      "الضحك وقت الجدية"
+    ];
 
-    { text: "شنو الحدود اللي تحب تكون واضحة بينا حتى العلاقة تظل صحية وريحة؟", tags: ["deep"], modes: ["special", "love", "engaged", "married"] },
-    { text: "تعتقد الحوار الصريح لازم يكون بأي وقت، لو أوقات معيّنة أفضل؟ وليش؟", tags: ["deep"], modes: ["special", "love", "engaged", "married"] },
-    { text: "شنو رأيك في فكرة أن يكون لكل واحد منا وقت خاص تماماً لنفسه حتى وإحنا مع بعض؟", tags: ["deep"], modes: ["special", "love", "engaged", "married"] },
+    const daringTopics = [
+      "الجرأة بالكلام الصريح",
+      "المصارحة بالمشاعر القوية",
+      "فتح مواضيع حساسة",
+      "الحدود الجسدية باحترام",
+      "التعبير عن الاحتياج العاطفي",
+      "الأسئلة الشخصية العميقة",
+      "تجاربك القديمة",
+      "أخطاء الماضي",
+      "الخطوط الحمراء بالعلاقة",
+      "المواضيع اللي تخجل تحچي عنها",
+      "الغيرة القوية",
+      "الشعور بالرفض",
+      "تقبل النقد",
+      "تجربة الاعتراف بشي غلط",
+      "ردة فعلك لما أنجرح",
+      "المخاوف اللي ما تحب أحد يعرفها",
+      "السؤال المباشر بدون لف",
+      "اللقاءات وجهًا لوجه وقت المشاكل",
+      "الكلام وقت الغضب",
+      "الوعود اللي خفت من كسرها",
+      "التنازل عن شي مهم",
+      "المصارحة بضعفك",
+      "الحديث عن الأخطاء بدون دفاع",
+      "إظهار الجانب الحقيقي بدون تزيين"
+    ];
 
-    { text: "شنو أكثر فكرة تقلقك إذا فكرت بالمستقبل، وشنو الشي اللي يخفف هذا القلق؟", tags: ["worry", "deep"], modes: ["love", "engaged", "married", "special"] },
-    { text: "إذا حسّيت يوم من الأيام إنك بعيد عني نفسياً، شنو تحب أسوي حتى أرجع أوصل لك؟", tags: ["worry", "love"], modes: ["love", "engaged", "married", "special"] },
-    { text: "هل تحب تحچي عن مخاوفك مباشرة، لو تحتاج شوي وقت حتى تجمع أفكارك؟", tags: ["worry", "daily"], modes: ["love", "engaged", "married", "special"] },
+    const horrorTopics = [
+      "الأماكن المهجورة",
+      "الليل والمطر",
+      "انقطاع الكهرباء",
+      "الأصوات الغريبة بالبيت",
+      "المشي بالظلام",
+      "الكوابيس المتكررة",
+      "القصص المرعبة",
+      "أفلام الرعب",
+      "البيوت القديمة",
+      "الممرات الطويلة",
+      "الغرف المغلقة",
+      "الأصوات تحت السرير",
+      "ظل شخص غريب",
+      "اختفاء الأشياء فجأة",
+      "الهدوء المبالغ به",
+      "الطرقات بعد منتصف الليل",
+      "الأحلام اللي تشبه الحقيقة",
+      "القصص الشعبية المخيفة",
+      "الجلوس وحدك والكل نايم",
+      "المصعد العالق",
+      "الطرق على الباب بالليل",
+      "صوت الهاتف المتأخر",
+      "انطفاء الأنوار فجأة",
+      "الحلم اللي تحسّه رسالة",
+      "الإحساس إن أحد يراقبك"
+    ];
 
-    { text: "شنو أطرف موقف صار بينا وتحس لحد اليوم يضحك من نتذكره؟", tags: ["funny"], modes: ["love", "engaged", "married", "special"] },
-    { text: "إذا نختار لقب مضحك لعلاقتنا، شنو تقترح؟", tags: ["funny"], modes: ["love", "engaged", "married", "special"] },
-    { text: "شنو أتعس أكل جربته بحياتك وتتمنى ما تعيد التجربة؟", tags: ["funny"], modes: ["love", "engaged", "married", "special"] },
+    const smartTopics = [
+      "الألغاز المنطقية",
+      "الأسئلة الذكية",
+      "اختبارات الشخصية",
+      "تحليل المواقف",
+      "الذاكرة القوية",
+      "التركيز تحت الضغط",
+      "حل المشكلات",
+      "الأسئلة اللي تثبت الفطنة",
+      "السرعة في الفهم",
+      "التفكير خارج الصندوق",
+      "التخطيط للمستقبل",
+      "ربط الأحداث ببعض",
+      "قراءة لغة الجسد",
+      "طرح الأسئلة الصح",
+      "الانتباه للتفاصيل الصغيرة",
+      "الردود الذكية في الحوار",
+      "طريقة اختيار الكلمات",
+      "توقع رد فعل الشخص المقابل",
+      "إدارة الوقت بذكاء",
+      "التعلم من الأخطاء",
+      "طرح حلول بديلة",
+      "القدرة على التفاوض",
+      "معرفة متى تسكت ومتى تحچي",
+      "استخدام الدعابة الذكية",
+      "فهم مشاعر الآخرين بسرعة"
+    ];
 
-    { text: "شنو أكثر شيء جسدي بسيط يخليك تحس بأمان وراحة (نظرة، مسكة يد، حضن)؟", tags: ["daring", "love"], modes: ["love", "engaged", "married"] },
-    { text: "من ١ إلى ١٠ شنو درجة الصراحة اللي تحبها بالأمور الخاصة بيناتنا؟ وليش؟", tags: ["daring", "deep"], modes: ["love", "engaged", "married", "special"] },
+    const categories = [
+      { tag: "love", topics: loveTopics, modes: ["love","engaged","married","special"] },
+      { tag: "funny", topics: funnyTopics, modes: ["love","engaged","married","special"] },
+      { tag: "daring", topics: daringTopics, modes: ["love","engaged","married","special"] },
+      { tag: "horror", topics: horrorTopics, modes: ["love","engaged","married","special"] },
+      { tag: "smart", topics: smartTopics, modes: ["love","engaged","married","special"] }
+    ];
 
-    { text: "شنو الجزء المفضل من يومك لما نكون على تواصل؟", tags: ["daily", "love"], modes: ["love", "engaged", "married"] },
-    { text: "شنو عادة صغيرة تقدر تغير مودك من السالب للموجب؟", tags: ["daily"], modes: ["love", "engaged", "married", "special"] },
-    { text: "إذا نكتب روتين بسيط لليوم المثالي بيناتنا، شنو أول ثلاث شغلات تخليها بالقائمة؟", tags: ["daily", "deep"], modes: ["love", "engaged", "married", "special"] },
-    { text: "شنو نوع المفاجآت اللي تحبها: أشياء كبيرة وواضحة، لو تفاصيل صغيرة بس مستمرة؟", tags: ["love", "deep"], modes: ["love", "engaged", "married", "special"] }
-  ];
+    const result = [];
+    const textSet = new Set();
+    const TARGET_PER_CATEGORY = 500;
 
-  const topics = [
-    "أوقاتك الصعبة", "أيام الطفولة", "القرارات الكبيرة بحياتك", "طريقة تعبيرك عن الحب",
-    "ثقتك بنفسك", "علاقتك مع عائلتك", "نظرتك للزواج", "طريقة إدارتك للفلوس",
-    "تعاملك مع الغيرة", "توازنك بين العمل والحب"
-  ];
-  const openings = [
-    "لو نفتح موضوع عن", "أول شي يجي ببالك لما تفكر بـ", "شنو أكثر شيء تخاف عليه بخصوص",
-    "شنو الشي اللي تحب تطوره بخصوص", "شنو أجمل ذكرى مرتبطة بـ"
-  ];
-
-  const autoGeneratedQuestions = [];
-  openings.forEach(op => {
-    topics.forEach(topic => {
-      autoGeneratedQuestions.push({
-        text: `${op} ${topic} بيناتنا، شنو أول فكرة تحب تحچي بيها؟`,
-        tags: ["deep"],
-        modes: ["love", "engaged", "married", "special"]
-      });
+    categories.forEach(conf => {
+      let count = 0;
+      outer: for (let i = 0; i < patterns.length; i++) {
+        for (let j = 0; j < conf.topics.length; j++) {
+          const text = patterns[i].replace("{topic}", conf.topics[j]);
+          const key = text.trim().toLowerCase();
+          if (textSet.has(key)) continue;
+          textSet.add(key);
+          result.push({
+            text,
+            tags: [conf.tag],
+            modes: conf.modes
+          });
+          count++;
+          if (count >= TARGET_PER_CATEGORY) break outer;
+        }
+      }
     });
-  });
 
-  const allQuestions = baseQuestions.concat(autoGeneratedQuestions);
+    result.forEach((q, idx) => { q.id = idx; });
+    return result;
+  })();
 
-  // ===== 3) عرض الأسئلة والبحث =====
+  const existingQuestionTexts = new Set(allQuestions.map(q => q.text.trim().toLowerCase()));
+
   const questionsListEl = document.getElementById("questions-list");
   const searchInputEl = document.getElementById("search-input");
   const tagFilterEl = document.getElementById("tag-filter");
@@ -1954,6 +2124,12 @@
   const aiQuestionBtn = document.getElementById("ai-question-btn");
   const counterVisibleEl = document.getElementById("visible-count");
   const counterTotalEl = document.getElementById("total-count");
+
+  const questionDisplayBox = document.getElementById("question-display-box");
+  const questionDisplayTextEl = document.getElementById("question-display-text");
+  const questionDisplayPlaceholderEl = document.getElementById("question-display-placeholder");
+  const questionDisplayCopyBtn = document.getElementById("question-display-copy");
+
   let lastHighlightedId = null;
 
   function getCurrentMode() {
@@ -1966,7 +2142,7 @@
     const term = (searchInputEl.value || "").trim().toLowerCase();
     const tag = tagFilterEl.value;
 
-    return allQuestions.filter((q) => {
+    return allQuestions.filter(q => {
       if (q.modes && !q.modes.includes(mode)) return false;
       if (tag !== "all" && (!q.tags || !q.tags.includes(tag))) return false;
       if (term && !q.text.toLowerCase().includes(term)) return false;
@@ -1988,14 +2164,61 @@
     navigator.clipboard.writeText(text).then(() => {});
   }
 
+  function setDisplayQuestion(text) {
+    if (!text) {
+      questionDisplayTextEl.style.display = "none";
+      questionDisplayPlaceholderEl.style.display = "block";
+      questionDisplayTextEl.textContent = "";
+    } else {
+      questionDisplayTextEl.textContent = text;
+      questionDisplayTextEl.style.display = "block";
+      questionDisplayPlaceholderEl.style.display = "none";
+    }
+  }
+
+  function clearHighlightedQuestion() {
+    if (lastHighlightedId !== null) {
+      const prev = questionsListEl.querySelector('.question-item[data-qid="' + lastHighlightedId + '"]');
+      if (prev) prev.classList.remove("highlight");
+      lastHighlightedId = null;
+    }
+  }
+
+  function highlightQuestionById(id) {
+    clearHighlightedQuestion();
+    const el = questionsListEl.querySelector('.question-item[data-qid="' + id + '"]');
+    if (el) {
+      el.classList.add("highlight");
+      lastHighlightedId = id;
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
   function renderQuestions() {
     const filtered = filterQuestions();
     clearQuestionsList();
 
-    filtered.forEach((q, index) => {
+    const tagMap = {
+      love: "حب / رومانسي",
+      funny: "مضحك / ضحك",
+      daring: "جريء بلطف",
+      horror: "رعب / غموض",
+      smart: "ذكاء / فطنة"
+    };
+
+    const modeMap = {
+      love: "حب / تعارف",
+      engaged: "مخطوبين",
+      married: "متزوجين",
+      special: "علاقة خاصة"
+    };
+
+    const currentMode = getCurrentMode();
+
+    filtered.forEach(q => {
       const item = document.createElement("div");
       item.className = "question-item";
-      item.dataset.qid = index.toString();
+      item.dataset.qid = String(q.id);
 
       const topRow = document.createElement("div");
       topRow.className = "question-top-row";
@@ -2013,17 +2236,17 @@
       btnCopy.innerHTML = '<span class="btn-icon">📋</span><span>نسخ السؤال</span>';
       btnCopy.addEventListener("click", () => copyToClipboard(q.text));
 
-      const btnAsk = document.createElement("button");
-      btnAsk.type = "button";
-      btnAsk.className = "btn-soft";
-      btnAsk.innerHTML = '<span class="btn-icon">💬</span><span>استخدمه الآن</span>';
-      btnAsk.addEventListener("click", () => {
-        highlightQuestion(item);
-        item.scrollIntoView({ behavior: "smooth", block: "center" });
+      const btnUse = document.createElement("button");
+      btnUse.type = "button";
+      btnUse.className = "btn-soft";
+      btnUse.innerHTML = '<span class="btn-icon">💬</span><span>استخدمه الآن</span>';
+      btnUse.addEventListener("click", () => {
+        setDisplayQuestion(q.text);
+        highlightQuestionById(q.id);
       });
 
       actionsEl.appendChild(btnCopy);
-      actionsEl.appendChild(btnAsk);
+      actionsEl.appendChild(btnUse);
 
       topRow.appendChild(textEl);
       topRow.appendChild(actionsEl);
@@ -2033,27 +2256,12 @@
 
       const tagLabel = document.createElement("div");
       tagLabel.className = "question-tag";
-      const tagText = q.tags && q.tags.length ? q.tags[0] : "عام";
-      const tagMap = {
-        love: "حب / رومانسية",
-        deep: "عميقة",
-        worry: "قلق / مخاوف",
-        funny: "ضحك / مواقف",
-        daring: "جريئة بلطف",
-        daily: "يوميات"
-      };
-      tagLabel.textContent = tagMap[tagText] || "عام";
+      const tagText = q.tags && q.tags.length ? q.tags[0] : "love";
+      tagLabel.textContent = tagMap[tagText] || "حب / رومانسي";
 
       const modeLabel = document.createElement("div");
       modeLabel.className = "question-mode-label";
-      const mode = getCurrentMode();
-      const modeMap = {
-        love: "حب / تعارف",
-        engaged: "مخطوبين",
-        married: "متزوجين",
-        special: "علاقة خاصة"
-      };
-      modeLabel.textContent = modeMap[mode] || "";
+      modeLabel.textContent = modeMap[currentMode] || "";
 
       metaRow.appendChild(tagLabel);
       metaRow.appendChild(modeLabel);
@@ -2066,19 +2274,55 @@
 
     counterVisibleEl.textContent = filtered.length.toString();
     counterTotalEl.textContent = allQuestions.length.toString();
-  }
 
-  function highlightQuestion(el) {
-    if (lastHighlightedId !== null) {
-      const prev = questionsListEl.querySelector(".question-item.highlight");
-      if (prev) prev.classList.remove("highlight");
-    }
-    el.classList.add("highlight");
-    lastHighlightedId = el.dataset.qid;
+    clearHighlightedQuestion();
+    setDisplayQuestion("");
   }
 
   function filterAndRenderQuestions() {
     renderQuestions();
+  }
+
+  questionDisplayCopyBtn.addEventListener("click", () => {
+    const txtVisible = questionDisplayTextEl.style.display !== "none";
+    const txt = txtVisible ? (questionDisplayTextEl.textContent || "").trim() : "";
+    if (!txt) return;
+    copyToClipboard(txt);
+  });
+
+  const aiSpecialPatterns = [
+    "سؤال ذكي عن {topic}: شنو الشي اللي لو فهمناه أكثر عن بعض راح يغيّر العلاقة بالكامل؟",
+    "تخيّل عندك فرصة صادقة تحچي عن {topic} بدون ما أحد يحكم عليك، شنو أول شي تقوله؟",
+    "لو أطلب منك توصف نظرتك لـ {topic} بثلاث كلمات فقط، شنو تختار؟",
+    "شنو أكثر سؤال صعب تتمناه أطرحه عليك عن {topic} وتجاوبه بصراحة؟",
+    "لو طفل سألك عن {topic} بطريقة بريئة، شنو الجواب البسيط اللي تعطيه؟",
+    "شنو الشي اللي كان راح يسهّل حياتك لو تعلمته بدري عن {topic}؟",
+    "لو بينا لعبة أسئلة عقول عن {topic}، شنو السؤال اللي تتحدّاني أجاوب عليه؟",
+    "شنو العلاقة بين {topic} وبين إحساسك بالأمان بالعلاقة؟"
+  ];
+
+  const aiSpecialTopics = [
+    "الثقة المتبادلة",
+    "الحدود الشخصية",
+    "الغيرة الصحية",
+    "طريقة حل المشاكل",
+    "لغة الحب المفضلة عندك",
+    "الذكريات المؤلمة اللي علمتك",
+    "قدرتك على المسامحة",
+    "تقبّل اختلاف الشخص المقابل",
+    "فهم نفسك قبل فهم الآخرين",
+    "الراحة النفسية وانت وياي"
+  ];
+
+  function generateAiQuestionText() {
+    for (let attempt = 0; attempt < 40; attempt++) {
+      const p = aiSpecialPatterns[Math.floor(Math.random() * aiSpecialPatterns.length)];
+      const t = aiSpecialTopics[Math.floor(Math.random() * aiSpecialTopics.length)];
+      const text = p.replace("{topic}", t);
+      const key = text.trim().toLowerCase();
+      if (!existingQuestionTexts.has(key)) return text;
+    }
+    return "سؤال ذكاء اصطناعي: شنو الفكرة اللي لو شاركتها وياي اليوم تحسها راح تقرّبنا من بعض أكثر؟";
   }
 
   searchInputEl.addEventListener("input", filterAndRenderQuestions);
@@ -2088,84 +2332,20 @@
     const filtered = filterQuestions();
     if (!filtered.length) return;
     const randomIndex = Math.floor(Math.random() * filtered.length);
-    const items = questionsListEl.querySelectorAll(".question-item");
-    const target = items[randomIndex];
-    if (target) {
-      highlightQuestion(target);
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    const q = filtered[randomIndex];
+    setDisplayQuestion(q.text);
+    highlightQuestionById(q.id);
   });
 
-  const aiOpenings = [
-    "لو نفتح قلوبنا شوي اليوم،",
-    "تخيّل بعد خمس سنين من الآن،",
-    "لو نوقف الزمن دقيقة ونطالع علاقتنا من بعيد،",
-    "لو ترجع لنسخة أصغر من نفسك وتنصحه،",
-    "لو أكتب لك رسالة قصيرة عن علاقتنا:"
-  ];
-  const aiAngles = [
-    "شنو الشي اللي تتمنى يبقى ثابت مهما تغيّر كل شيء؟",
-    "شنو أكبر درس تعلمته من وجودي بحياتك؟",
-    "شنو حدودك اللي تحب أحترمها أكثر؟",
-    "شنو أقرب لحظة حسّيت بيها إنك مو وحدك بهالدنيا؟",
-    "شنو الشي اللي ما جاك الجرأة تحكيه لي للآن وتتمنى تقدر تقوله بهالجلسة؟"
-  ];
-
   aiQuestionBtn.addEventListener("click", () => {
-    const opening = aiOpenings[Math.floor(Math.random() * aiOpenings.length)];
-    const angle = aiAngles[Math.floor(Math.random() * aiAngles.length)];
-    const smartQuestion = `${opening} ${angle}`;
-
-    const smartObj = {
-      text: smartQuestion,
-      tags: ["deep"],
-      modes: [getCurrentMode()]
-    };
-
-    const item = document.createElement("div");
-    item.className = "question-item highlight";
-
-    const topRow = document.createElement("div");
-    topRow.className = "question-top-row";
-
-    const textEl = document.createElement("div");
-    textEl.className = "question-text";
-    textEl.textContent = smartObj.text;
-
-    const actionsEl = document.createElement("div");
-    actionsEl.className = "question-actions";
-
-    const btnCopy = document.createElement("button");
-    btnCopy.type = "button";
-    btnCopy.className = "btn-soft";
-    btnCopy.innerHTML = '<span class="btn-icon">📋</span><span>نسخ السؤال</span>';
-    btnCopy.addEventListener("click", () => copyToClipboard(smartObj.text));
-
-    actionsEl.appendChild(btnCopy);
-    topRow.appendChild(textEl);
-    topRow.appendChild(actionsEl);
-
-    const metaRow = document.createElement("div");
-    metaRow.className = "question-meta-row";
-    const tagLabel = document.createElement("div");
-    tagLabel.className = "question-tag";
-    tagLabel.textContent = "سؤال ذكي تلقائي";
-    const modeLabel = document.createElement("div");
-    modeLabel.className = "question-mode-label";
-    modeLabel.textContent = "مولّد داخل الصفحة";
-    metaRow.appendChild(tagLabel);
-    metaRow.appendChild(modeLabel);
-
-    item.appendChild(topRow);
-    item.appendChild(metaRow);
-
-    questionsListEl.prepend(item);
-    item.scrollIntoView({ behavior: "smooth", block: "center" });
+    const text = generateAiQuestionText();
+    setDisplayQuestion(text);
+    clearHighlightedQuestion();
   });
 
   filterAndRenderQuestions();
 
-  // ===== 4) موسيقى الجلسة من الجهاز =====
+  // ===== 3) موسيقى الجلسة من الجهاز =====
   (function () {
     const musicCard          = document.getElementById("session-music-card");
     if (!musicCard) return;
@@ -2371,7 +2551,7 @@
     updateMuteIcon();
   })();
 
-  // ===== 5) LoveBoard (ذكريات، رسائل، أهداف، لعبة حب سريعة) =====
+  // ===== 4) LoveBoard =====
   (function () {
     const loveButtons = document.querySelectorAll(".loveboard-btn");
 
@@ -2550,7 +2730,6 @@
       }
     });
 
-    // ربط الأزرار
     loveButtons.forEach(btn => {
       btn.addEventListener("click", () => {
         const board = btn.getAttribute("data-board");
@@ -2568,7 +2747,7 @@
     });
   })();
 
-  // ===== 6) تأكيد تسجيل الخروج =====
+  // ===== 5) تأكيد تسجيل الخروج =====
   (function () {
     const logoutBtn = document.getElementById("logout-btn");
     const modal = document.getElementById("logout-modal");
@@ -2595,7 +2774,7 @@
     });
   })();
 
-  // ===== 7) وضع نهاري/ليلي + تخصيص الألوان والثيم + 30 ثيم لزر الجلسة =====
+  // ===== 6) وضع نهاري/ليلي + تخصيص الألوان والثيم + زر الجلسة =====
   (function () {
     const root = document.documentElement;
     const rootStyle = root.style;
@@ -2618,30 +2797,12 @@
     const THEME_KEY = "love_app_theme_v1";
 
     const THEMES = {
-      "romantic-night": {
-        accent: "#ff4a8d",
-        accent2: "#ffb84a"
-      },
-      "soft-rose": {
-        accent: "#ff7ea3",
-        accent2: "#ffe3b8"
-      },
-      "ocean-love": {
-        accent: "#4ad2ff",
-        accent2: "#7effc8"
-      },
-      "golden-warm": {
-        accent: "#ffb84a",
-        accent2: "#ff7e5f"
-      },
-      "midnight-blue": {
-        accent: "#6a8bff",
-        accent2: "#c2e9ff"
-      },
-      "emerald-heart": {
-        accent: "#41f5b0",
-        accent2: "#f9ffb5"
-      }
+      "romantic-night": { accent: "#ff4a8d", accent2: "#ffb84a" },
+      "soft-rose":      { accent: "#ff7ea3", accent2: "#ffe3b8" },
+      "ocean-love":     { accent: "#4ad2ff", accent2: "#7effc8" },
+      "golden-warm":    { accent: "#ffb84a", accent2: "#ff7e5f" },
+      "midnight-blue":  { accent: "#6a8bff", accent2: "#c2e9ff" },
+      "emerald-heart":  { accent: "#41f5b0", accent2: "#f9ffb5" }
     };
 
     const SESSION_BTN_PRESETS = [
@@ -2677,18 +2838,7 @@
       "linear-gradient(90deg,#2193b0,#6dd5ed,#fceabb)"
     ];
 
-    function loadJson(key) {
-      try {
-        const raw = localStorage.getItem(key);
-        return raw ? JSON.parse(raw) : null;
-      } catch (e) {
-        return null;
-      }
-    }
-
-    // ===== وضع نهاري/ليلي =====
     function updateDayNightButton(mode) {
-      if (!dayNightIcon || !dayNightLabel) return;
       if (mode === "light") {
         dayNightIcon.textContent = "🌙";
         dayNightLabel.textContent = "وضع ليلي";
@@ -2708,16 +2858,19 @@
     const savedMode = localStorage.getItem(DAYNIGHT_KEY);
     applyDayNight(savedMode || "dark");
 
-    if (dayNightBtn) {
-      dayNightBtn.addEventListener("click", () => {
-        const current = root.getAttribute("data-theme") || "dark";
-        const next = current === "dark" ? "light" : "dark";
-        applyDayNight(next);
-      });
-    }
+    dayNightBtn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "dark";
+      const next = current === "dark" ? "light" : "dark";
+      applyDayNight(next);
+    });
 
-    // ===== تخصيص الألوان والثيم =====
-    let themeState = loadJson(THEME_KEY) || {};
+    let themeState;
+    try {
+      const raw = localStorage.getItem(THEME_KEY);
+      themeState = raw ? JSON.parse(raw) : {};
+    } catch (e) {
+      themeState = {};
+    }
 
     function applyThemeState(state) {
       if (!state) return;
@@ -2731,14 +2884,14 @@
     }
 
     function saveThemeState() {
-      localStorage.setItem(THEME_KEY, JSON.stringify(themeState));
+      localStorage.setItem(THEME_KEY, JSON.stringify(themeState || {}));
     }
 
     applyThemeState(themeState);
 
     themeBtn.addEventListener("click", () => {
-      accentInput.value  = themeState.accent  || "#ff4a8d";
-      accent2Input.value = themeState.accent2 || "#ffb84a";
+      accentInput.value  = (themeState && themeState.accent)  || "#ff4a8d";
+      accent2Input.value = (themeState && themeState.accent2) || "#ffb84a";
       themeModal.classList.add("open");
     });
 
@@ -2756,7 +2909,7 @@
       const id = btn.getAttribute("data-theme");
       const conf = THEMES[id];
       if (!conf) return;
-      themeState = Object.assign({}, themeState, conf);
+      themeState = Object.assign({}, themeState || {}, conf);
       applyThemeState(themeState);
       saveThemeState();
     });
@@ -2810,13 +2963,13 @@
       applySessionBtnPresetIndex(idx);
     });
 
-    if (typeof themeState.sessionBtnPresetIndex !== "number") {
+    if (typeof (themeState && themeState.sessionBtnPresetIndex) !== "number") {
       applySessionBtnPresetIndex(0);
       sessionBtnSelect.value = "0";
     }
   })();
 
-  // ===== 8) مؤقت الجلسة (5 إلى 90 دقيقة) =====
+  // ===== 7) مؤقت الجلسة =====
   (function () {
     const startBtn = document.getElementById("start-session-btn");
     const modal = document.getElementById("session-timer-modal");
