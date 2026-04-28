@@ -1,9 +1,34 @@
+بالتأكيد! لقد قمت بتعديل الكود بالكامل لجعله تجربة مخصصة ومبهرة لـ "مهدي وبنين"، مع التركيز على جعل شاشة الاستقبال "خرافية" ومميزة في كل مرة تفتح فيها.
+
+لقد قمت بإجراء التعديلات التالية:
+
+1.  **استقبال خرافي ومميز (شاشة الدخول):**
+    *   **خلفية متحركة:** بدلاً من الخلفية الثابتة، أضفت خلفية متحركة من الجسيمات المتوهجة التي تتصل ببعضها البعض (تأثير الكوكبة أو Constellation). هذا يعطي إحساساً بالفخامة والعمق، وكأنكم في عالمكم الخاص.
+    *   **دخول احترافي:** صندوق تسجيل الدخول لم يعد يظهر فجأة، بل يظهر الآن بحركة دخول ناعمة وأنيقة من الأسفل للأعلى مع تلاشي (Fade-in).
+    *   **عنوان متوهج:** عنوان "جلسة مهدي و بنين" أصبح له توهج خفيف يجعله أكثر بروزاً وجمالاً.
+
+2.  **تخصيص كامل لمهدي وبنين:**
+    *   **أسماء افتراضية:** حقول الإدخال أصبحت تحتوي على "مهدي" و "بنين" كأسماء افتراضية. هذا يعني أنه يمكنكم **الضغط على زر البدء مباشرة** دون الحاجة للكتابة في كل مرة.
+    *   **تغيير العناوين:** تم تغيير كل العناوين العامة مثل "جلسة حب" إلى "جلسة مهدي و بنين" أو ما يناسبها لجعل التطبيق خاصاً بكم.
+    *   **زر بدء الجلسة:** تم تغيير نص الزر الرئيسي ليصبح "مهدي وبنين: بدء الجلسة" ليعطي إحساساً فورياً بالملكية.
+
+3.  **لمسات احترافية إضافية:**
+    *   تحسينات طفيفة على بعض النصوص لتكون أكثر دفئاً وتخصيصاً.
+    *   الكود الجديد منظم بالكامل وجاهز للنسخ واللصق.
+
+**النتيجة النهائية هي واجهة ترحيبية ديناميكية وفاخرة، وتجربة استخدام تشعركم بأن هذا التطبيق صُنع خصيصاً لكما.**
+
+### الكود الكامل والمعدّل
+
+انسخ هذا الكود بالكامل واستبدله بالكود القديم لديك.
+
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>جلسة حب اليوم | Love Session</title>
+  <title>جلسة مهدي و بنين | Love Session</title>
   <style>
     :root {
       --bg-main: radial-gradient(circle at top left, #17132e 0, #050409 45%, #020108 100%);
@@ -73,6 +98,15 @@
       background: var(--bg-main);
       color: var(--text-main);
       direction: rtl;
+    }
+    
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
 
     .app-shell {
@@ -1410,17 +1444,30 @@
       width: 100%;
       box-shadow: var(--shadow-soft);
       backdrop-filter: blur(16px);
+      /* Animation */
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s 0.3s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     [data-theme="light"] .login-box {
-      background: #fdf7ff;
+      background: rgba(253, 247, 255, 0.95);
       border-color: rgba(91, 60, 140, 0.24);
     }
 
     .login-title {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 800;
       margin-bottom: 0.35rem;
+      color: var(--text-main);
+      text-shadow: 0 0 12px rgba(255, 159, 74, 0.4);
     }
 
     .login-subtitle {
@@ -1588,24 +1635,25 @@
   </style>
 </head>
 <body>
+<canvas id="particles-js"></canvas>
 
 <!-- شاشة تسجيل الدخول -->
 <div id="login-view" class="login-view">
   <div class="login-container">
     <div class="login-box">
-      <div class="login-title">جلسة حب ❤️</div>
+      <div class="login-title">جلسة مهدي و بنين ❤️</div>
       <div class="login-subtitle">
-        اكتبوا أسمائكم وابدأوا جلسة أسئلة، موسيقى وذكريات مخصصة لكم أنتَ وشريكتك فقط.
+        مرحباً بكما في عالمكما الخاص. جلسة أسئلة، موسيقى وذكريات مخصصة لكما فقط.
       </div>
       <div class="input-group">
-        <label>اسمك (الشريك الأول)</label>
-        <input type="text" id="p1-name" class="custom-input" placeholder="مثلاً: مهدي">
+        <label>الشريك الأول</label>
+        <input type="text" id="p1-name" class="custom-input" value="مهدي">
       </div>
       <div class="input-group">
-        <label>اسم الشريك (الشريك الثاني)</label>
-        <input type="text" id="p2-name" class="custom-input" placeholder="مثلاً: زينب">
+        <label>الشريك الثاني</label>
+        <input type="text" id="p2-name" class="custom-input" value="بنين">
       </div>
-      <button type="button" class="btn-login" onclick="handleSessionLogin()">ابدأ جلسة الحب الآن</button>
+      <button type="button" class="btn-login" onclick="handleSessionLogin()">ابدأ الجلسة الآن</button>
     </div>
   </div>
 </div>
@@ -1617,15 +1665,15 @@
       <div class="logo-block">
         <div class="logo-dot"></div>
         <div>
-          <div class="logo-text-main">جلسة حب اليوم</div>
+          <div class="logo-text-main" id="app-title">جلسة مهدي و بنين</div>
           <div class="logo-text-sub">أسئلة عميقة، أجواء هادئة، وموسيقى تناسب علاقتكم.</div>
           <div class="logo-text-sub" id="names-tag" style="margin-top:2px;"></div>
         </div>
       </div>
       <div class="top-bar-right">
         <button class="main-session-btn" id="start-session-btn" type="button">
-          <span>ابدأ جلسة حب اليوم</span>
-          <div class="main-session-meta">مدة مقترحة: 30 - 45 دقيقة · يفضل إطفاء الإشعارات أثناء الجلسة</div>
+          <span>مهدي وبنين: بدء الجلسة</span>
+          <div class="main-session-meta">مدة مقترحة: 30 - 45 دقيقة · يفضل إطفاء الإشعارات</div>
         </button>
         <div class="top-bar-small-buttons">
           <button class="theme-toggle-btn" id="daynight-btn" type="button">
@@ -1829,7 +1877,7 @@
   <div class="modal">
     <div class="modal-title">تأكيد تسجيل الخروج</div>
     <div class="modal-body">
-      هل أنت متأكد من إنك تريد إنهاء جلسة الحب الحالية؟<br>
+      هل أنت متأكد من أنك تريد إنهاء الجلسة الحالية؟<br>
       سيتم مسح حالة الجلسة والتفضيلات المؤقتة، ولا يتم حفظ أي بيانات شخصية على خادم.
     </div>
     <div class="modal-actions">
@@ -2026,7 +2074,7 @@
       </div>
       <button class="btn-sm" id="theme-random-rgb" type="button">توليد ألوان RGB عشوائية</button>
 
-      <div class="theme-section-title" style="margin-top:0.8rem;">ألوان زر "جلسة حب اليوم"</div>
+      <div class="theme-section-title" style="margin-top:0.8rem;">ألوان زر "بدء الجلسة"</div>
       <select class="theme-select" id="session-btn-theme-select">
         <option value="0">غروب رومانسي</option>
         <option value="1">ليلة بنفسجية</option>
@@ -2074,6 +2122,86 @@
 <div id="toast-container" class="toast-container"></div>
 
 <script>
+  // ===== Particle background for login screen =====
+  (function() {
+    const canvas = document.getElementById('particles-js');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    
+    function Particle(x, y) {
+        this.x = x;
+        this.y = y;
+        this.vx = Math.random() * 0.4 - 0.2;
+        this.vy = Math.random() * 0.4 - 0.2;
+        this.radius = Math.random() * 1.5 + 0.5;
+    }
+    
+    Particle.prototype.update = function() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    };
+
+    Particle.prototype.draw = function() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.fill();
+    };
+
+    function createParticles() {
+        particles = [];
+        const particleCount = Math.floor(canvas.width * canvas.height / 15000);
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+        }
+    }
+
+    function connectParticles() {
+        const maxDist = 120;
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dist = Math.sqrt(Math.pow(particles[i].x - particles[j].x, 2) + Math.pow(particles[i].y - particles[j].y, 2));
+                if (dist < maxDist) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${1 - dist / maxDist})`;
+                    ctx.lineWidth = 0.3;
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        connectParticles();
+        requestAnimationFrame(animate);
+    }
+    
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        createParticles();
+    });
+
+    resizeCanvas();
+    createParticles();
+    animate();
+  })();
+
   // ===== Utilities: Toast + Typewriter =====
   function showToast(message, type) {
     const container = document.getElementById("toast-container");
@@ -3163,6 +3291,8 @@
 
     startBtn.addEventListener("click", openModal);
 
+    range.addEventListener("input", updateRangeLabel);
+    
     cancelBtn.addEventListener("click", () => {
       closeModal();
     });
@@ -3197,16 +3327,22 @@
 
   // ===== 8) منطق تسجيل الدخول ودمجه مع التطبيق =====
   (function () {
-    const LOGIN_KEY = "love_session_users";
+    const LOGIN_KEY = "love_session_users_mahdi_banin";
     const loginView = document.getElementById("login-view");
     const appView = document.getElementById("app-view");
     const p1Input = document.getElementById("p1-name");
     const p2Input = document.getElementById("p2-name");
     const namesTag = document.getElementById("names-tag");
+    const appTitle = document.getElementById("app-title");
 
     function applyNames(names) {
-      if (namesTag && names && names.name1 && names.name2) {
-        namesTag.textContent = "جلسة بين " + names.name1 + " ❤ " + names.name2;
+      if (names && names.name1 && names.name2) {
+        if (namesTag) {
+            namesTag.innerHTML = `جلسة بين <strong>${names.name1}</strong> ❤️ <strong>${names.name2}</strong>`;
+        }
+        if(appTitle){
+            appTitle.textContent = `جلسة ${names.name1} و ${names.name2}`;
+        }
       }
     }
 
@@ -3236,17 +3372,14 @@
     }
 
     window.handleSessionLogin = function () {
-      const name1 = (p1Input.value || "").trim();
-      const name2 = (p2Input.value || "").trim();
-      if (!name1 || !name2) {
-        showToast("اكتب اسمك واسم شريكك قبل بدء الجلسة.", "error");
-        return;
-      }
+      const name1 = (p1Input.value || "مهدي").trim();
+      const name2 = (p2Input.value || "بنين").trim();
+
       const data = { name1, name2 };
       localStorage.setItem(LOGIN_KEY, JSON.stringify(data));
       applyNames(data);
       showApp();
-      showToast("أهلاً " + name1 + " و " + name2 + " 💗", "success");
+      showToast(`أهلاً بكما ${name1} و ${name2} في جلستكما الخاصة 💗`, "success");
     };
 
     loadState();
@@ -3254,3 +3387,4 @@
 </script>
 </body>
 </html>
+```
